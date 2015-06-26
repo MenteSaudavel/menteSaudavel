@@ -43,7 +43,19 @@
 				</tr>
 				
 				<tr>
-					<td> Convênio </td> <td> <input type="text" name="convenio" required value="${paciente.idConvenio }"> </td>
+					<td> Convênio </td> 
+					
+				<td>
+					<select name="idConvenio">
+						<c:forEach var="convenio" items="${lista}">	
+								
+							<option></option>
+							<option value="${convenio.id }">${convenio.nome }</option>
+								
+						</c:forEach>	
+					</select>	
+				</td>
+								
 				</tr>
 				
 				<tr>

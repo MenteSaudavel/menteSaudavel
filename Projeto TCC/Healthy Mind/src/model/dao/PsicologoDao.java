@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.vo.Convenio;
 import model.vo.Psicologo;
 
 public class PsicologoDao {

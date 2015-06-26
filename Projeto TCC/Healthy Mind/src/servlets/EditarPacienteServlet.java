@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.vo.Convenio;
 import model.vo.Paciente;
+import control.ConvenioControl;
 import control.PacienteControl;
 
 /**
@@ -38,6 +41,12 @@ public class EditarPacienteServlet extends HttpServlet {
 		
 		Paciente paciente = pacienteControl.buscarPaciente(id);
 		
+		ConvenioControl convenioControl = new ConvenioControl();
+		
+		List<Convenio> lista = convenioControl.listarConvenios();
+		
+		request.setAttribute("lista", lista);
+		
 		if(paciente != null){
 			request.setAttribute("paciente", paciente);
 			request.getRequestDispatcher("editarPaciente.jsp").forward(request, response);
@@ -62,8 +71,13 @@ public class EditarPacienteServlet extends HttpServlet {
 		
 		 PacienteControl pacienteControl = new PacienteControl();
 		 
-		 pacienteControl.editar(nome, telefone, numeroCarteirinha, cpf, idConvenio, id);
-		 request.setAttribute("msg", "Editado com sucesso!");
+		 boolean ok = pacienteControl.editarPaciente(nome, telefone, numeroCarteirinha, cpf, idConvenio, id);
+		 
+		 if(ok){
+			 request.setAttribute("msg", "Editado com sucesso!");
+		 } else{
+			 request.setAttribute("msg", "Erro ao editar, verifique os campos e tente novamente.");
+		 }
 		 
 		 request.setAttribute("listaPaciente", pacienteControl.listarPaciente());
 		 

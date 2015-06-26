@@ -44,7 +44,7 @@
 				<td> ${paciente.cpf } </td>
 				<td> ${paciente.idConvenio } </td>
 				<td> <a href="editarPacienteServlet?id=${paciente.id }"> Editar </a> </td>
-				<td> <a href="apagarPacienteServlet?id${paciente.id }"> Apagar </a> </td>
+				<td> <a href="apagarPacienteServlet?id=${paciente.id }"> Apagar </a> </td>
 			</tr>
 		</c:forEach>
 	</table>

@@ -34,7 +34,7 @@ public class PacienteControl {
 		
 	}
 	
-	public boolean editar(String nome, String telefone, String numeroCarteirinha, String cpf, String idConvenio, String id){
+	public boolean editarPaciente(String nome, String telefone, String numeroCarteirinha, String cpf, String idConvenio, String id){
 		
 		int idConvertido;
 		int idConvenioConvertido;

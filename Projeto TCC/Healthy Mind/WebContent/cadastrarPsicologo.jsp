@@ -6,11 +6,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+
 <title>Insert title here</title>
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
+<div class="alert alert-danger" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+  Enter a valid email address
+</div>
 
-	<ul>
+	<ul class="navbar navbar-default" role="navbar">
 		<li><a href="inicioServlet"> Inicio </a></li>
 		<li><a href="cadastrarPacienteServlet"> Cadastrar Paciente </a></li>
 		<li><a href="cadastrarPsicologoServlet"> Cadastrar Psicólogo</a></li>
@@ -38,14 +47,14 @@
 				<td>Convênio</td>
 				
 				<td>
+				<select name="idConvenio">
 					<c:forEach var="convenio" items="${lista}">	
-						<select name="idConvenio">
 								
 							<option></option>
 							<option value="${convenio.id }">${convenio.nome }</option>
 								
-						</select>		
 					</c:forEach>	
+					</select>	
 				</td>
 					
 			</tr>

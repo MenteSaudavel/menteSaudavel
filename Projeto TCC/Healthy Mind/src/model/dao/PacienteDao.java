@@ -19,16 +19,16 @@ public class PacienteDao {
 
 	public void cadastrarPaciente(Paciente paciente) {
 
-		String sql = "insert into paciente (nome, telefone, numeroCarteirinha, cpf, idConvenio) values (?,?,?,?,?,?,?,?,?,?);";
+		String sql = "insert into paciente (nome, telefone, numeroCarteirinha, cpf, idConvenio) values (?,?,?,?,?);";
 
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			
 			stmt.setString(1, paciente.getNome());
-			stmt.setString(7, paciente.getTelefone());
-			stmt.setString(8, paciente.getNumeroCarteirinha());
-			stmt.setString(9, paciente.getCpf());
-			stmt.setInt(10, paciente.getIdConvenio());
+			stmt.setString(2, paciente.getTelefone());
+			stmt.setString(3, paciente.getNumeroCarteirinha());
+			stmt.setString(4, paciente.getCpf());
+			stmt.setInt(5, paciente.getIdConvenio());
 			
 			stmt.execute();
 			stmt.close();
@@ -48,11 +48,11 @@ public class PacienteDao {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			
 			stmt.setString(1, paciente.getNome());
-			stmt.setString(7, paciente.getTelefone());
-			stmt.setString(8, paciente.getNumeroCarteirinha());
-			stmt.setString(9, paciente.getCpf());
-			stmt.setInt(10, paciente.getIdConvenio());
-			stmt.setInt(11, paciente.getId());
+			stmt.setString(2, paciente.getTelefone());
+			stmt.setString(3, paciente.getNumeroCarteirinha());
+			stmt.setString(4, paciente.getCpf());
+			stmt.setInt(5, paciente.getIdConvenio());
+			stmt.setInt(6, paciente.getId());
 			
 			stmt.execute();
 			stmt.close();
@@ -148,6 +148,7 @@ public class PacienteDao {
 			paciente.setNumeroCarteirinha(rs.getString("numeroCarteirinha"));
 			paciente.setCpf(rs.getString("cpf"));
 			paciente.setIdConvenio(rs.getInt("idConvenio"));
+			paciente.setId(rs.getInt("idPaciente"));
 			
 			stmt.close();
 			
@@ -161,7 +162,7 @@ public class PacienteDao {
 	
 	public void apagarPaciente(Paciente paciente){
 		
-		String sql = "delete from paciente where idPaciente=?;";
+		String sql = "delete from paciente where idPaciente=?";
 		
 		PreparedStatement stmt;
 		

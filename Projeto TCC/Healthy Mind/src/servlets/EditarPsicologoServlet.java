@@ -1,7 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.vo.Convenio;
 import model.vo.Psicologo;
+import control.ConvenioControl;
 import control.PsicologoControl;
 
 /**
@@ -39,6 +41,12 @@ public class EditarPsicologoServlet extends HttpServlet {
 		
 		Psicologo psicologo = psicologoControl.buscarPsicologo(id);
 		
+		ConvenioControl convenioControl = new ConvenioControl();
+		
+		List<Convenio> lista = convenioControl.listarConvenios();
+		
+		request.setAttribute("lista", lista);
+		
 		if(psicologo != null){
 			request.setAttribute("psicologo", psicologo);
 			request.getRequestDispatcher("editarPsicologo.jsp").forward(request, response);
@@ -62,8 +70,12 @@ public class EditarPsicologoServlet extends HttpServlet {
 		
 		PsicologoControl psicologoControl = new PsicologoControl();
 		
-		psicologoControl.editarPsicologo(nome, telefoneConsultorio, idConvenio, crp, id);
-		request.setAttribute("msg", "Editado com sucesso!");
+		boolean ok = psicologoControl.editarPsicologo(nome, telefoneConsultorio, idConvenio, crp, id);
+		if(ok){
+			request.setAttribute("msg", "Editado com sucesso!");
+		} else{
+			request.setAttribute("msg", "Erro ao editar, verifique os campos e tente novamente.");
+		}
 		
 		request.setAttribute("listaPsicologo", psicologoControl.listarPsicologo());
 		

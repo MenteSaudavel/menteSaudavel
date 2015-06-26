@@ -42,14 +42,14 @@
 				<td>Convênio</td>
 				
 				<td>
-					<c:forEach var="convenio" items="${lista}">
-		
-								<select name="idConvenio" id="convenio">
-									<option></option>
-									<option value="${convenio.id }">${convenio.nome }</option>
-								</select>
-		
-					</c:forEach>				
+					<select name="idConvenio">
+						<c:forEach var="convenio" items="${lista}">	
+								
+							<option></option>
+							<option value="${convenio.id }">${convenio.nome }</option>
+								
+						</c:forEach>	
+					</select>	
 				</td>
 			</tr>
 			
@@ -59,7 +59,7 @@
 			</tr>
 
 			<tr>
-				<td><input type="submit" value="Editar" required ></td>
+				<td><input type="submit" value="Editar"></td>
 			</tr>
 
 		</table>
