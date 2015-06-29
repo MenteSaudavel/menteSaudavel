@@ -74,9 +74,9 @@ public class EditarPacienteServlet extends HttpServlet {
 		 boolean ok = pacienteControl.editarPaciente(nome, telefone, numeroCarteirinha, cpf, idConvenio, id);
 		 
 		 if(ok){
-			 request.setAttribute("msg", "Editado com sucesso!");
+			 request.setAttribute("editado", ok);
 		 } else{
-			 request.setAttribute("msg", "Erro ao editar, verifique os campos e tente novamente.");
+			 request.setAttribute("editado", "Erro ao editar, verifique os campos e tente novamente.");
 		 }
 		 
 		 request.setAttribute("listaPaciente", pacienteControl.listarPaciente());

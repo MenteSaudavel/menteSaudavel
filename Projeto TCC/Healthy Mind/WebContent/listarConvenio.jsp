@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Pesquisar Psicólogo</title>
+<title>Lista de convênios</title>
 
 <link rel="stylesheet" href="css/bootstrap.min.css">
 
 </head>
 <body>
-	
+
 <nav class="navbar navbar-inverse navbar-static-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -49,33 +52,38 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
-		<div class="row">
-		  <div class="col-lg-4">
-		  	<form method="post" action="pesquisarPsicologoServlet">
-			<div class="input-group">
-		      <input type="text" class="form-control" placeholder="Nome do Psicólogo" name="nomePesquisaPsicologo" required>
-		      <span class="input-group-btn">
-		        <button class="btn btn-default" type="submit">Pesquisar</button>
-		      </span>
-		    </div><!-- /input-group -->
-		    </form>
-		  </div><!-- /.col-lg-6 -->
-		</div><!-- /.row -->
+	<div class="panel panel-info">
 	
-		<!--  <div>
+		<div class="panel-heading"><a class="glyphicon glyphicon-list-alt"></a> Lista de Convênios </div>
 		
-			<form method="post" action="pesquisarPsicologoServlet">
+		<table class="table">
+		
+			<tr>
+				<td><b>Nome do Convênio</b></td>
+				<td><b>Editar</b></td>
+				<td><b>Apagar</b></td>
+			</tr>
 			
-				<table>
-					<tr>
-						<td> Nome do Psicólogo: </td> <td> <input type="text" name="nomePesquisaPsicologo" required> </td> <td> <input type="submit" value="Pesquisar"> </td>
-					</tr>
-				</table>
-			</form>
+			<c:if test="${empty listaConvenio }">
+				<tr>
+					<td colspan="7" class="alert alert-danger"> Convênio Não Encontrado! </td>
+				</tr>
+			</c:if>
 			
-		</div> -->
-		${msg}
+			<c:forEach var="convenio" items="${listaConvenio}">
+				<tr>
+					<td>${convenio.nome }</td>
+					<td> <a href="editarConvenioServlet?id=${convenio.id }" class="glyphicon glyphicon-pencil"></a> </td>
+					<td> <a href="apagarConvenioServlet?id=${convenio.id }" class="glyphicon glyphicon-trash"> </a> </td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
 	
+	 <c:if test="${apagado == true }"> <div class="alert alert-success" role="alert"> Convênio apagado com sucesso! </div> </c:if>
+	 <c:if test="${apagado == false }"> <div class="alert alert-danger" role="alert"> Erro ao apagar convênio! </div> </c:if>
+	 <c:if test="${editado == true }"> <div class="alert alert-success" role="alert"> Convênio editado com sucesso! </div> </c:if>
+	 <c:if test="${editado == false }"> <div class="alert alert-danger" role="alert"> Erro ao editar convênio! </div> </c:if>
+
 </body>
 </html>

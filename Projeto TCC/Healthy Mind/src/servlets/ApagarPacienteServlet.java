@@ -40,9 +40,9 @@ public class ApagarPacienteServlet extends HttpServlet {
 		boolean ok = pacienteControl.apagarPaciente(id);
 		
 		if(ok){
-			request.setAttribute("msg", "Paciente apagado com sucesso!");
+			request.setAttribute("apagado", ok);
 		} else{
-			request.setAttribute("msg", "Ocorreu um erro ao apagar, por favor tente novamente.");
+			request.setAttribute("apagado", "Ocorreu um erro ao apagar, por favor tente novamente.");
 		}
 		
 		List<Paciente> lista = pacienteControl.listarPaciente();

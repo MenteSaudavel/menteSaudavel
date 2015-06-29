@@ -8,71 +8,86 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 
-<title>Insert title here</title>
+<title>Cadastrar Psicólogo</title>
 
 <link rel="stylesheet" href="css/bootstrap.min.css">
+
 </head>
 <body>
-<div class="alert alert-danger" role="alert">
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span>
-  Enter a valid email address
-</div>
+<nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand">Mente Saudável</a>
+    </div>
 
-	<ul class="navbar navbar-default" role="navbar">
-		<li><a href="inicioServlet"> Inicio </a></li>
-		<li><a href="cadastrarPacienteServlet"> Cadastrar Paciente </a></li>
-		<li><a href="cadastrarPsicologoServlet"> Cadastrar Psicólogo</a></li>
-		<li><a href="agendarConsultaServlet"> Agendar Consulta </a></li>
-		<li> <a href="pesquisarPsicologoServlet"> Pesquisar Psicólogo </a> </li>
-		<li> <a href="pesquisarPacienteServlet"> Pesquisar Paciente </a> </li>
-	</ul>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="inicioServlet"> <span class="glyphicon glyphicon-home"> </span> <span class="sr-only">(current)</span></a></li>
+        <li><a href="cadastrarPacienteServlet">Cadastrar Paciente</a></li>
+        <li><a href="cadastrarPsicologoServlet">Cadastrar Psicólogo</a></li>
+        <li><a href="pesquisarPacienteServlet">Pesquisar Paciente</a></li>
+        <li><a href="pesquisarPsicologoServlet">Pesquisar Psicólogo</a></li>
+        <li><a href="listarConvenioServlet">Convênios</a></li>
+        <li><a href="cadastrarConvenioServlet">Cadastrar Convênio</a></li>
+        
+        
+        <!--   <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pesquisar <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="pesquisarPacienteServlet">Pesquisar Paciente</a></li>
+            <li><a href="pesquisarPsicologoServlet">Pesquisar Psicólogo</a></li>
+          </ul>
+        </li> -->
+        
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 
-	<form method="post" action="cadastrarPsicologoServlet">
+	<form method="post" action="cadastrarPsicologoServlet" class="form-horizontal">
 
-		<table>
-
-			<tr>
-				<td>Nome do Psicólogo</td>
-				<td><input type="text" name="nome" required></td>
-			</tr>
-
-			<tr>
-				<td>Telefone do Consultório</td>
-				<td><input type="text" name="telefoneConsultorio" required>
-				</td>
-			</tr>
-		
-			<tr>
-				<td>Convênio</td>
-				
-				<td>
-				<select name="idConvenio">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Nome do Psicólogo</label>
+				<div class="col-sm-5"><input type="text" name="nome" required class="form-control"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Telefone do Consultório</label>
+				<div class="col-sm-5"><input type="text" name="telefoneConsultorio" required class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Convênio</label>
+				<div class="col-sm-5">
+				<select name="idConvenio" class="form-control">
+					<option></option>
 					<c:forEach var="convenio" items="${lista}">	
-								
-							<option></option>
 							<option value="${convenio.id }">${convenio.nome }</option>
-								
 					</c:forEach>	
 					</select>	
-				</td>
-					
-			</tr>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Número do CRP</label>
+				<div class="col-sm-5"><input type="text" name="crp" required class="form-control"></div>
+			</div>
 			
-			<tr>
-				<td>Número do CRP</td>
-				<td><input type="text" name="crp" required></td>
-			</tr>
-
-			<tr>
-				<td><input type="submit" value="Cadastrar" required></td>
-			</tr>
-
-		</table>
+			<div class="form-group">
+				<div class="col-sm-7 control-label"> <input type="submit" value="Cadastrar" class="btn btn-success"> </div>
+			</div>
 
 	</form>
 
-	<c:if test="${cadastrado == true }"> Psicólogo cadastrado com sucesso! </c:if>
-
+	<c:if test="${cadastrado == true }"><div class="alert alert-success"> Psicólogo cadastrado com sucesso!</div> </c:if>
+	<c:if test="${cadastrado == false }"><div class="alert alert-danger">Erro ao cadastrar psicólogo!</div> </c:if>
+	
 </body>
 </html>

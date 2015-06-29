@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Pesquisar Psicólogo</title>
+<title>Editar convênio</title>
 
-<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap.css">
 
 </head>
 <body>
@@ -49,33 +49,26 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
-		<div class="row">
-		  <div class="col-lg-4">
-		  	<form method="post" action="pesquisarPsicologoServlet">
-			<div class="input-group">
-		      <input type="text" class="form-control" placeholder="Nome do Psicólogo" name="nomePesquisaPsicologo" required>
-		      <span class="input-group-btn">
-		        <button class="btn btn-default" type="submit">Pesquisar</button>
-		      </span>
-		    </div><!-- /input-group -->
-		    </form>
-		  </div><!-- /.col-lg-6 -->
-		</div><!-- /.row -->
 	
-		<!--  <div>
+	<form action="editarConvenioServlet" method="post" class="form-horizontal">
 		
-			<form method="post" action="pesquisarPsicologoServlet">
+		<input type="hidden" name="id" value="${convenio.id }">
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Nome do convênio</label>
 			
-				<table>
-					<tr>
-						<td> Nome do Psicólogo: </td> <td> <input type="text" name="nomePesquisaPsicologo" required> </td> <td> <input type="submit" value="Pesquisar"> </td>
-					</tr>
-				</table>
-			</form>
-			
-		</div> -->
-		${msg}
+			<div class="col-sm-5">
+				<input type="text" name="nome" required class="form-control" value="${convenio.nome }">
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="col-sm-7 control-label">
+				<input type="submit" value="Editar" class="btn btn-success">
+			</div>
+		</div>
+	
+	</form>
 	
 </body>
 </html>

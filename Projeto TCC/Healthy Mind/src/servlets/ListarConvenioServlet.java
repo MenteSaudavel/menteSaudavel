@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.vo.Psicologo;
-import control.PsicologoControl;
+import model.vo.Convenio;
+import control.ConvenioControl;
 
 /**
- * Servlet implementation class ApagarPsicologoServlet
+ * Servlet implementation class ListarConvenioServlet
  */
-@WebServlet("/apagarPsicologoServlet")
-public class ApagarPsicologoServlet extends HttpServlet {
+@WebServlet("/listarConvenioServlet")
+public class ListarConvenioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ApagarPsicologoServlet() {
+    public ListarConvenioServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,23 +33,13 @@ public class ApagarPsicologoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String id = request.getParameter("id");
+		ConvenioControl convenioControl = new ConvenioControl();
 		
-		PsicologoControl psicologoControl = new PsicologoControl();
+		List<Convenio> lista = convenioControl.listarConvenios();
 		
-		boolean ok = psicologoControl.apagarPsicologo(id);
+		request.setAttribute("listaConvenio", lista);
 		
-		if(ok){
-			request.setAttribute("apagado", ok);
-		} else{
-			request.setAttribute("msg", "Ocorreu um erro ao apagar, por favor tente novamente.");
-		}
-		
-		List<Psicologo> lista = psicologoControl.listarPsicologo();
-		
-		request.setAttribute("listaPsicologo", lista);
-		
-		request.getRequestDispatcher("listarPsicologo.jsp").forward(request, response);
+		request.getRequestDispatcher("listarConvenio.jsp").forward(request, response);
 	}
 
 	/**

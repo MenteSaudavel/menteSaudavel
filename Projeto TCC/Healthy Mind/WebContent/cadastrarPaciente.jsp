@@ -7,66 +7,90 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Cadastrar Paciente</title>
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
 </head>
 <body>
 
-	<ul>
-		<li> <a href="inicioServlet"> Inicio </a> </li>
-		<li><a href="cadastrarPacienteServlet"> Cadastrar Paciente </a></li>
-		<li><a href="cadastrarPsicologoServlet"> Cadastrar Psicólogo </a></li>
-		<li> <a href="agendarConsultaServlet"> Agendar Consulta </a> </li>
-		<li> <a href="pesquisarPsicologoServlet"> Pesquisar Psicólogo </a> </li>
-		<li> <a href="pesquisarPacienteServlet"> Pesquisar Paciente </a> </li>
-	</ul>
+<nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand">Mente Saudável</a>
+    </div>
 
-	<div>
-		<form method="post" action="cadastrarPacienteServlet">
-			<table>
-				<tr> 
-					<td>Preencha as informações do paciente</td> 
-				</tr>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="inicioServlet"> <span class="glyphicon glyphicon-home"> </span> <span class="sr-only">(current)</span></a></li>
+        <li><a href="cadastrarPacienteServlet">Cadastrar Paciente</a></li>
+        <li><a href="cadastrarPsicologoServlet">Cadastrar Psicólogo</a></li>
+        <li><a href="pesquisarPacienteServlet">Pesquisar Paciente</a></li>
+        <li><a href="pesquisarPsicologoServlet">Pesquisar Psicólogo</a></li>
+        <li><a href="listarConvenioServlet">Convênios</a></li>
+        <li><a href="cadastrarConvenioServlet">Cadastrar Convênio</a></li>
+        
+        
+        <!--   <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pesquisar <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="pesquisarPacienteServlet">Pesquisar Paciente</a></li>
+            <li><a href="pesquisarPsicologoServlet">Pesquisar Psicólogo</a></li>
+          </ul>
+        </li> -->
+        
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+	
+		<form method="post" action="cadastrarPacienteServlet" class="form-horizontal">
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label"> Nome do paciente </label> <div class="col-sm-5"> <input type="text" name="nome" required class="form-control"> </div>
+				</div>
 				
-				<tr>
-					<td> Nome do paciente </td> <td> <input type="text" name="nome" required> </td>
-				</tr>
+				<div class="form-group">
+					<label class="col-sm-2 control-label"> Telefone </label> <div class="col-sm-5"> <input type="text" name="telefone" required class="form-control"> </div>
+				</div>
 				
-				<tr>
-					<td> Telefone </td> <td> <input type="text" name="telefone" required> </td>
-				</tr>
+				<div class="form-group">
+					<label class="col-sm-2 control-label"> CPF </label> <div class="col-sm-5"> <input type="text" name="cpf" required class="form-control"> </div>
+				</div>
 				
-				<tr>
-					<td> CPF </td> <td> <input type="text" name="cpf" required> </td>
-				</tr>
-				
-				<tr>
-					<td> Convênio </td>
-					
-				<td>
-					<select name="idConvenio">
-						<c:forEach var="convenio" items="${lista}">	
-								
+				<div class="form-group">
+					<label class="col-sm-2 control-label"> Convênio </label>
+					<div class="col-sm-5">
+						<select name="idConvenio" class="form-control">
 							<option></option>
-							<option value="${convenio.id }">${convenio.nome }</option>
+							<c:forEach var="convenio" items="${lista}">	
+									
 								
-						</c:forEach>	
-					</select>	
-				</td>
-				</tr>
+								<option value="${convenio.id }">${convenio.nome }</option>
+									
+							</c:forEach>	
+						</select> 	
+					</div>
+				</div>
 				
-				<tr>
-					<td> Número da carteirinha do convênio </td> <td> <input type="text" name="numeroCarteirinha" required> </td>
-				</tr>
+				<div class="form-group">
+					<label class="col-sm-2 control-label"> Número da carteirinha do convênio </label> <div class="col-sm-5"> <input type="text" name="numeroCarteirinha" required class="form-control"> </div>
+				</div>
 				
-				<tr>
-					<td> <input type="submit" value="Cadastrar"> </td>
-				</tr>
-				
-			</table>
+				<div class="form-group">
+					<div class="col-sm-7 control-label"> <input type="submit" value="Cadastrar" class="btn btn-success"> </div>
+				</div>
 		</form>
 		
-		<c:if test="${cadastrado == true }"> Paciente cadastrado com sucesso! </c:if>
-		
-	</div>
+		<c:if test="${cadastrado == true }"> <div class="alert alert-success" role="alert"> Paciente cadastrado com sucesso!</div> </c:if>
 
 </body>
 </html>
