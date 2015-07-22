@@ -2,10 +2,7 @@ package control;
 
 import java.util.List;
 
-import model.dao.PacienteDao;
 import model.dao.PsicologoDao;
-import model.vo.Convenio;
-import model.vo.Paciente;
 import model.vo.Psicologo;
 
 public class PsicologoControl {

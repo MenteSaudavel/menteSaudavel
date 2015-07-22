@@ -15,7 +15,10 @@ public class PsicologoDao {
 	public PsicologoDao() {
 		this.conexao = new FabricaConexoes().getConexao();
 	}
-	
+	/**
+	 * Método para cadastrar Psicólogo
+	 * @param psicologo
+	 */
 	public void cadastrarPsicologo(Psicologo psicologo){
 		
 		String sql = "insert into psicologo (nome, telefoneConsultorio, idConvenio, crp) values (?,?,?,?);";

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.vo.Convenio;
 import model.vo.Paciente;
 
 public class PacienteDao {
@@ -28,7 +29,7 @@ public class PacienteDao {
 			stmt.setString(2, paciente.getTelefone());
 			stmt.setString(3, paciente.getNumeroCarteirinha());
 			stmt.setString(4, paciente.getCpf());
-			stmt.setInt(5, paciente.getIdConvenio());
+			stmt.setInt(5, paciente.getConvenio().getId());
 			
 			stmt.execute();
 			stmt.close();
@@ -51,7 +52,7 @@ public class PacienteDao {
 			stmt.setString(2, paciente.getTelefone());
 			stmt.setString(3, paciente.getNumeroCarteirinha());
 			stmt.setString(4, paciente.getCpf());
-			stmt.setInt(5, paciente.getIdConvenio());
+			stmt.setInt(5, paciente.getConvenio().getId());
 			stmt.setInt(6, paciente.getId());
 			
 			stmt.execute();
@@ -76,16 +77,19 @@ public class PacienteDao {
 			stmt.setString(1, "%"+nome+"%");
 			
 			ResultSet rs = stmt.executeQuery();
+			ConvenioDao convenioDao = new ConvenioDao();
 			
 			while(rs.next()){
 				Paciente p = new Paciente();
+				Convenio c = convenioDao.buscarConvenio(rs.getInt("idConvenio"));
 				
 				p.setId(rs.getInt("idPaciente"));
 				p.setNome(rs.getString("nome"));
 				p.setTelefone(rs.getString("telefone"));
 				p.setNumeroCarteirinha(rs.getString("numeroCarteirinha"));
 				p.setCpf(rs.getString("cpf"));
-				p.setIdConvenio(rs.getInt("idConvenio"));
+				p.setConvenio(c);
+
 				
 				lista.add(p);
 			}
@@ -108,17 +112,22 @@ public class PacienteDao {
 			
 			ResultSet rs = stmt.executeQuery();
 			
+			ConvenioDao convenioDao = new ConvenioDao();
+			
 			while(rs.next()){
 				Paciente p = new Paciente();
+				Convenio c = convenioDao.buscarConvenio(rs.getInt("idConvenio"));
 				
 				p.setId(rs.getInt("idPaciente"));
 				p.setNome(rs.getString("nome"));
 				p.setTelefone(rs.getString("telefone"));
 				p.setNumeroCarteirinha(rs.getString("numeroCarteirinha"));
 				p.setCpf(rs.getString("cpf"));
-				p.setIdConvenio(rs.getInt("idConvenio"));
 				
-				lista.add(p);
+				p.setConvenio(c);
+				
+				lista.add(p); 
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -141,13 +150,16 @@ public class PacienteDao {
 			
 			ResultSet rs = stmt.executeQuery();
 			
+			ConvenioDao convenioDao = new ConvenioDao();
+			
 			rs.next();
+			Convenio c = convenioDao.buscarConvenio(rs.getInt("idConvenio"));
 			
 			paciente.setNome(rs.getString("nome"));
 			paciente.setTelefone(rs.getString("telefone"));
 			paciente.setNumeroCarteirinha(rs.getString("numeroCarteirinha"));
 			paciente.setCpf(rs.getString("cpf"));
-			paciente.setIdConvenio(rs.getInt("idConvenio"));
+			paciente.setConvenio(c);
 			paciente.setId(rs.getInt("idPaciente"));
 			
 			stmt.close();

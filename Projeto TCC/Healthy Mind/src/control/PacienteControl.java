@@ -3,6 +3,7 @@ package control;
 import java.util.List;
 
 import model.dao.PacienteDao;
+import model.vo.Convenio;
 import model.vo.Paciente;
 
 public class PacienteControl {
@@ -25,7 +26,10 @@ public class PacienteControl {
 		paciente.setTelefone(telefone);
 		paciente.setNumeroCarteirinha(numeroCarteirinha);
 		paciente.setCpf(cpf);
-		paciente.setIdConvenio(idConvenioConvertido);
+		
+		Convenio convenio = new Convenio();
+		convenio.setId(idConvenioConvertido);
+		paciente.setConvenio(convenio);
 		
 		PacienteDao pacienteDao = new PacienteDao();
 		pacienteDao.cadastrarPaciente(paciente);
@@ -50,7 +54,11 @@ public class PacienteControl {
 			paciente.setTelefone(telefone);
 			paciente.setNumeroCarteirinha(numeroCarteirinha);
 			paciente.setCpf(cpf);
-			paciente.setIdConvenio(idConvenioConvertido);
+			
+			Convenio convenio = new Convenio();
+			convenio.setId(idConvenioConvertido);
+			paciente.setConvenio(convenio);
+			
 			paciente.setId(idConvertido);
 			
 			PacienteDao pacienteDao = new PacienteDao();

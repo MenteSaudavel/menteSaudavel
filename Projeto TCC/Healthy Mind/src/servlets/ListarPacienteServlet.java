@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.vo.Convenio;
 import model.vo.Paciente;
+import control.ConvenioControl;
 import control.PacienteControl;
 
 /**
@@ -38,6 +40,12 @@ public class ListarPacienteServlet extends HttpServlet {
 		List<Paciente> lista = pacienteControl.listarPaciente();
 		
 		request.setAttribute("listaPaciente", lista);
+		
+		ConvenioControl convenioControl = new ConvenioControl();
+		
+		List<Convenio> listac = convenioControl.listarConvenios();
+		
+		request.setAttribute("listac", listac);
 		
 		request.getRequestDispatcher("listarPaciente.jsp").forward(request, response);
 

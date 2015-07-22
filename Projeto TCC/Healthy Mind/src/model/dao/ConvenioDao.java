@@ -44,36 +44,6 @@ public class ConvenioDao {
 		return lista;
 	}
 	
-	public List<Convenio> listarConvenioPaciente(){
-		List<Convenio> lista = new ArrayList<Convenio>();
-		
-		String sql = ;
-		
-		try {
-			PreparedStatement stmt = conexao.prepareStatement(sql);
-			
-			ResultSet rs = stmt.executeQuery();
-			
-			while(rs.next()){
-				
-				Convenio c = new Convenio();
-				
-				c.setId(rs.getInt("id"));
-				c.setNome(rs.getString("nome"));
-				
-				lista.add(c);
-			}
-			
-			stmt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return lista;
-		
-	}
-	
 	public void cadastrarConvenio(Convenio convenio){
 		String sql = "insert into convenio(nome) values (?);";
 		

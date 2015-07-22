@@ -8,7 +8,7 @@ public class FabricaConexoes {
 	
 	public Connection getConexao(){
 		 
-		String url = "jdbc:mysql://localhost/mind";
+		String url = "jdbc:mysql://localhost/mentesaudavel";
 		String user = "root";
 		String password = "123456";
 		

@@ -7,7 +7,7 @@ public class Paciente {
 	private String telefone;
 	private String numeroCarteirinha;
 	private String cpf;
-	private int idConvenio;
+	private Convenio Convenio;
 	
 	public String getNome() {
 		return nome;
@@ -49,13 +49,15 @@ public class Paciente {
 		this.id = id;
 	}
 
-	public int getIdConvenio() {
-		return idConvenio;
+	public Convenio getConvenio() {
+		return Convenio;
 	}
 
-	public void setIdConvenio(int idConvenio) {
-		this.idConvenio = idConvenio;
+	public void setConvenio(Convenio convenio) {
+		Convenio = convenio;
 	}
+
+
 	
 	
 
