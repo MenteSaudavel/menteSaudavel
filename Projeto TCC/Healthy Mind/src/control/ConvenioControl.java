@@ -15,11 +15,18 @@ public class ConvenioControl {
 		return lista;
 	}
 	
-	public boolean cadastrarConvenio(String nome){
+	public boolean cadastrarConvenio(String nome, String presidente, String cnpj, String telefoneConvenio, String enderecoConvenio, String cep, String cidadeConvenio, String uf){
 		
 		Convenio convenio = new Convenio();
 		
 		convenio.setNome(nome);
+		convenio.setPresidente(presidente);
+		convenio.setCnpj(cnpj);
+		convenio.setTelefoneConvenio(telefoneConvenio);
+		convenio.setEnderecoConvenio(enderecoConvenio);
+		convenio.setCep(cep);
+		convenio.setCidadeConvenio(cidadeConvenio);
+		convenio.setUf(uf);
 		
 		ConvenioDao convenioDao = new ConvenioDao();
 		convenioDao.cadastrarConvenio(convenio);
@@ -27,7 +34,7 @@ public class ConvenioControl {
 		return true;
 	}
 	
-	public boolean editar(String nome, String id){
+	public boolean editar(String nome, String presidente, String cnpj, String telefoneConvenio, String enderecoConvenio, String cep, String cidadeConvenio, String uf, String id){
 		
 		int idConvertido;
 		
@@ -37,12 +44,21 @@ public class ConvenioControl {
 			Convenio convenio = new Convenio();
 			
 			convenio.setNome(nome);
+			convenio.setPresidente(presidente);
+			convenio.setCnpj(cnpj);
+			convenio.setTelefoneConvenio(telefoneConvenio);
+			convenio.setEnderecoConvenio(enderecoConvenio);
+			convenio.setCep(cep);
+			convenio.setCidadeConvenio(cidadeConvenio);
+			convenio.setUf(uf);
+			
 			convenio.setId(idConvertido);
 			
 			ConvenioDao convenioDao = new ConvenioDao();
 			convenioDao.editarConvenio(convenio);
 			
 			return true;
+			
 		} catch(NumberFormatException e){
 			return false;
 		}

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.vo.Convenio;
 import model.vo.Psicologo;
 
 public class PsicologoDao {
@@ -21,7 +22,7 @@ public class PsicologoDao {
 	 */
 	public void cadastrarPsicologo(Psicologo psicologo){
 		
-		String sql = "insert into psicologo (nome, telefoneConsultorio, idConvenio, crp) values (?,?,?,?);";
+		String sql = "insert into psicologo (nome, telefoneConsultorio, idConvenio, crp, email) values (?,?,?,?,?);";
 		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -29,9 +30,10 @@ public class PsicologoDao {
 			stmt.setString(1, psicologo.getNome());
 			stmt.setString(2, psicologo.getTelefoneConsultorio());
 			
-			stmt.setInt(3, psicologo.getIdConvenio());
+			stmt.setInt(3, psicologo.getConvenio().getId());
 			
 			stmt.setString(4, psicologo.getCrp());
+			stmt.setString(5, psicologo.getEmail());
 			
 			stmt.execute();
 			stmt.close();
@@ -50,7 +52,7 @@ public class PsicologoDao {
 			
 			stmt.setString(1, psicologo.getNome());
 			stmt.setString(2, psicologo.getTelefoneConsultorio());
-			stmt.setInt(3, psicologo.getIdConvenio());
+			stmt.setInt(3, psicologo.getConvenio().getId());
 			stmt.setString(4, psicologo.getCrp());
 			stmt.setInt(5, psicologo.getId());
 
@@ -74,15 +76,17 @@ public class PsicologoDao {
 			stmt.setString(1, "%"+nome+"%");
 			
 			ResultSet rs = stmt.executeQuery();
+			ConvenioDao convenioDao = new ConvenioDao();
 			
 			while(rs.next()){
 				
 				Psicologo p = new Psicologo();
+				Convenio c = convenioDao.buscarConvenio(rs.getInt("idConvenio"));
 				
 				p.setId(rs.getInt("idPsicologo"));
 				p.setNome(rs.getString("nome"));
 				p.setTelefoneConsultorio(rs.getString("telefoneConsultorio"));
-				p.setIdConvenio(rs.getInt("idConvenio"));
+				p.setConvenio(c);
 				p.setCrp(rs.getString("crp"));
 				
 				lista.add(p);
@@ -107,15 +111,17 @@ public class PsicologoDao {
 			
 			
 			ResultSet rs = stmt.executeQuery();
+			ConvenioDao convenioDao = new ConvenioDao();
 			
 			while(rs.next()){
 				
 				Psicologo p = new Psicologo();
+				Convenio c = convenioDao.buscarConvenio(rs.getInt("idConvenio"));
 				
 				p.setId(rs.getInt("idPsicologo"));
 				p.setNome(rs.getString("nome"));
 				p.setTelefoneConsultorio(rs.getString("telefoneConsultorio"));
-				p.setIdConvenio(rs.getInt("idConvenio"));
+				p.setConvenio(c);
 				p.setCrp(rs.getString("crp"));
 				
 				lista.add(p);
@@ -141,12 +147,14 @@ public class PsicologoDao {
 			stmt.setInt(1, id);
 			
 			ResultSet rs = stmt.executeQuery();
+			ConvenioDao convenioDao = new ConvenioDao();
 			
 			rs.next();
+			Convenio c = convenioDao.buscarConvenio(rs.getInt("idConvenio"));
 			
 			psicologo.setNome(rs.getString("nome"));
 			psicologo.setTelefoneConsultorio(rs.getString("telefoneConsultorio"));
-			psicologo.setIdConvenio(rs.getInt("idConvenio"));
+			psicologo.setConvenio(c);
 			psicologo.setCrp(rs.getString("crp"));
 			psicologo.setId(rs.getInt("idPsicologo"));
 			

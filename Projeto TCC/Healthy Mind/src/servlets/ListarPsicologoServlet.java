@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.vo.Psicologo;
+import model.vo.Usuario;
 import control.PsicologoControl;
 
 /**
@@ -33,13 +35,23 @@ public class ListarPsicologoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		HttpSession session = request.getSession();
+
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+
+		if (usuario != null) {
+			request.setAttribute("usuario", usuario);
+		
 		PsicologoControl psicologoControl = new PsicologoControl();
 		
 		List<Psicologo> lista = psicologoControl.listarPsicologo();
 		
 		request.setAttribute("listaPsicologo", lista);
 		
-		request.getRequestDispatcher("listarPsicologo.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/administrador/listarPsicologo.jsp").forward(request, response);
+		} else {
+			response.sendRedirect("loginServlet");
+		}
 	}
 
 	/**

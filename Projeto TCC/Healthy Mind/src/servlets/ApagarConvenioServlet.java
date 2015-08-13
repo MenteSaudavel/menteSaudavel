@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.vo.Convenio;
+import model.vo.Usuario;
 import control.ConvenioControl;
 
 /**
@@ -33,23 +35,33 @@ public class ApagarConvenioServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String id = request.getParameter("id");
+		HttpSession session = request.getSession();
 		
-		ConvenioControl convenioControl = new ConvenioControl();
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		
-		boolean ok = convenioControl.apagarConvenio(id);
+		if(usuario != null){
+			request.setAttribute("usuario", usuario);
 		
-		if(ok){
-			request.setAttribute("apagado", ok);
+			String id = request.getParameter("id");
+			
+			ConvenioControl convenioControl = new ConvenioControl();
+			
+			boolean ok = convenioControl.apagarConvenio(id);
+			
+			if(ok){
+				request.setAttribute("apagado", ok);
+			} else {
+				request.setAttribute("apagado", false);
+			}
+			
+			List<Convenio> lista = convenioControl.listarConvenios();
+			
+			request.setAttribute("listaConvenio", lista);
+			
+			request.getRequestDispatcher("WEB-INF/administrador/listarConvenio.jsp").forward(request, response);
 		} else {
-			request.setAttribute("apagado", false);
+			response.sendRedirect("loginServlet");
 		}
-		
-		List<Convenio> lista = convenioControl.listarConvenios();
-		
-		request.setAttribute("listaConvenio", lista);
-		
-		request.getRequestDispatcher("listarConvenio.jsp").forward(request, response);
 	}
 
 	/**

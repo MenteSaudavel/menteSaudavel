@@ -8,6 +8,7 @@ public class Paciente {
 	private String numeroCarteirinha;
 	private String cpf;
 	private Convenio Convenio;
+	private String email;
 	
 	public String getNome() {
 		return nome;
@@ -57,6 +58,15 @@ public class Paciente {
 		Convenio = convenio;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
 
 	
 	

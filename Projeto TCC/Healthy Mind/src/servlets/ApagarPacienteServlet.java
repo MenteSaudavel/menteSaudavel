@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.vo.Paciente;
+import model.vo.Usuario;
 import control.PacienteControl;
 
 /**
@@ -33,23 +35,33 @@ public class ApagarPacienteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String id = request.getParameter("id");
+		HttpSession session = request.getSession();
 		
-		PacienteControl pacienteControl = new PacienteControl();
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		
-		boolean ok = pacienteControl.apagarPaciente(id);
+		if(usuario != null){
+			request.setAttribute("usuario", usuario);
 		
-		if(ok){
-			request.setAttribute("apagado", ok);
-		} else{
-			request.setAttribute("apagado", "Ocorreu um erro ao apagar, por favor tente novamente.");
+			String id = request.getParameter("id");
+			
+			PacienteControl pacienteControl = new PacienteControl();
+			
+			boolean ok = pacienteControl.apagarPaciente(id);
+			
+			if(ok){
+				request.setAttribute("apagado", ok);
+			} else{
+				request.setAttribute("apagado", "Ocorreu um erro ao apagar, por favor tente novamente.");
+			}
+			
+			List<Paciente> lista = pacienteControl.listarPaciente();
+			
+			request.setAttribute("listaPaciente", lista);
+			
+			request.getRequestDispatcher("WEB-INF/administrador/listarPaciente.jsp").forward(request, response);
+		} else {
+			response.sendRedirect("loginServlet");
 		}
-		
-		List<Paciente> lista = pacienteControl.listarPaciente();
-		
-		request.setAttribute("listaPaciente", lista);
-		
-		request.getRequestDispatcher("listarPaciente.jsp").forward(request, response);
 	}
 
 	/**

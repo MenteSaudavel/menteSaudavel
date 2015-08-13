@@ -1,14 +1,37 @@
 package control;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import model.dao.PacienteDao;
+import model.dao.UsuarioDao;
 import model.vo.Convenio;
 import model.vo.Paciente;
+import model.vo.Usuario;
 
 public class PacienteControl {
 	
-	public boolean cadastrar(String nome, String telefone, String numeroCarteirinha, String cpf, String idConvenio){
+	public boolean cadastrar(String nome, String telefone, String numeroCarteirinha, String cpf, String idConvenio, String email, String confNumCarteirinha) throws UsuarioException{
+		
+		if(!numeroCarteirinha.equals(confNumCarteirinha)){
+			throw new UsuarioException("O número da carteirinha não foi digitado corretamente nos dois campos, tente novamente.");
+		}
+		
+		String senhaConvertida;
+		MessageDigest algorithm;
+		
+		try {
+			algorithm = MessageDigest.getInstance("SHA-256");
+	        byte hashSenha[] = algorithm.digest(numeroCarteirinha.getBytes());
+	        
+	        senhaConvertida = new String(hashSenha);
+		
+		} catch (NoSuchAlgorithmException e) {
+		
+			throw new UsuarioException("Erro na conversão de senha: algoritmo não encontrado");
+			
+		}
 		
 		int idConvenioConvertido;
 		
@@ -31,8 +54,19 @@ public class PacienteControl {
 		convenio.setId(idConvenioConvertido);
 		paciente.setConvenio(convenio);
 		
+		paciente.setEmail(email);
+		
 		PacienteDao pacienteDao = new PacienteDao();
 		pacienteDao.cadastrarPaciente(paciente);
+		
+		Usuario usuario = new Usuario();
+		
+		usuario.setEmail(email);
+		usuario.setSenha(senhaConvertida);
+		usuario.setTipoPerfil("paciente");
+		
+		UsuarioDao usuarioDao = new UsuarioDao();
+		usuarioDao.cadastrarUsuario(usuario);
 		
 		return true;
 		

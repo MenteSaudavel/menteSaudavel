@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Editar convênio</title>
+<title>Editar Convênio</title>
 
 <link rel="stylesheet" href="css/bootstrap.css">
 
 </head>
 <body>
 	
-<nav class="navbar navbar-inverse navbar-static-top">
+<nav class="navbar navbar-default navbar-static-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -21,14 +21,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand">Mente Saudável</a>
+      <a class="navbar-brand" href="inicioServlet">Mente Saudável <span class="glyphicon glyphicon-home"> </span></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-      
-        <li><a href="inicioServlet"> <span class="glyphicon glyphicon-home"> </span> <span class="sr-only">(current)</span></a></li>
       
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Convênios <span class="caret"></span></a>
@@ -54,8 +52,13 @@
           </ul>
         </li>
         
-        
-      </ul>
+       	<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consulta <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="agendarConsultaServlet">Agendar Consulta</a></li>
+            <li><a href="visualizarConsultaServlet">Visualizar Consulta</a></li>
+          </ul>
+        </li>      </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
@@ -65,19 +68,88 @@
 		<input type="hidden" name="id" value="${convenio.id }">
 		
 		<div class="form-group">
-			<label class="col-sm-2 control-label">Nome do convênio</label>
+			<label class="col-sm-2 control-label">Nome do Convênio</label>
 			
 			<div class="col-sm-5">
 				<input type="text" name="nome" required class="form-control" value="${convenio.nome }">
 			</div>
 		</div>
 		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Nome do Presidente</label>
+			
+			<div class="col-sm-5">
+				<input type="text" name="presidente" required class="form-control" value="${convenio.presidente }">
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">CNPJ</label>
+			
+			<div class="col-sm-5">
+				<input type="text" name="cnpj" required class="form-control" value="${convenio.cnpj }">
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Telefone</label>
+			
+			<div class="col-sm-5">
+				<input type="text" name="telefone" required class="form-control" value="${convenio.telefoneConvenio }">
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Endereço</label>
+			
+			<div class="col-sm-5">
+				<input type="text" name="endereco" required class="form-control" value="${convenio.enderecoConvenio }">
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">CEP</label>
+			
+			<div class="col-sm-5">
+				<input type="text" name="cep" required class="form-control" value="${convenio.cep }">
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Cidade</label>
+			
+			<div class="col-sm-5">
+				<input type="text" name="cidade" required class="form-control" value="${convenio.cidadeConvenio }">
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">UF</label>
+			
+			<div class="col-sm-5">
+				<input type="text" name="uf" required class="form-control" value="${convenio.uf }">
+			</div>
+		</div>
+		
 		<div class="form-group">
 			<div class="col-sm-7 control-label">
-				<input type="submit" value="Editar" class="btn btn-success">
+				<button type="submit" class="btn btn-success">Salvar <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> </button>
 			</div>
 		</div>
 	
+	</form>
+	
+	<form class="form-group" method="get" action="listarConvenioServlet">
+		<div class="col-sm-7 control-label">
+			<button type="submit" class="btn btn-danger">Cancelar <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> </button>
+		</div>
 	</form>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

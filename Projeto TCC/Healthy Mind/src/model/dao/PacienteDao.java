@@ -20,7 +20,7 @@ public class PacienteDao {
 
 	public void cadastrarPaciente(Paciente paciente) {
 
-		String sql = "insert into paciente (nome, telefone, numeroCarteirinha, cpf, idConvenio) values (?,?,?,?,?);";
+		String sql = "insert into paciente (nome, telefone, numeroCarteirinha, cpf, idConvenio, email) values (?,?,?,?,?,?)";
 
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -30,6 +30,7 @@ public class PacienteDao {
 			stmt.setString(3, paciente.getNumeroCarteirinha());
 			stmt.setString(4, paciente.getCpf());
 			stmt.setInt(5, paciente.getConvenio().getId());
+			stmt.setString(6, paciente.getEmail());
 			
 			stmt.execute();
 			stmt.close();
@@ -43,7 +44,7 @@ public class PacienteDao {
 	
 	public void editarPaciente(Paciente paciente){
 	
-		String sql = "update paciente set nome=?, telefone=?, numeroCarteirinha=?, cpf=?, idConvenio=? where idPaciente=?;";
+		String sql = "update paciente set nome=?, telefone=?, numeroCarteirinha=?, cpf=?, idConvenio=?, email=? where idPaciente=?;";
 		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -53,7 +54,8 @@ public class PacienteDao {
 			stmt.setString(3, paciente.getNumeroCarteirinha());
 			stmt.setString(4, paciente.getCpf());
 			stmt.setInt(5, paciente.getConvenio().getId());
-			stmt.setInt(6, paciente.getId());
+			stmt.setString(6, paciente.getEmail());
+			stmt.setInt(7, paciente.getId());
 			
 			stmt.execute();
 			stmt.close();
@@ -89,6 +91,7 @@ public class PacienteDao {
 				p.setNumeroCarteirinha(rs.getString("numeroCarteirinha"));
 				p.setCpf(rs.getString("cpf"));
 				p.setConvenio(c);
+				p.setEmail(rs.getString("email"));
 
 				
 				lista.add(p);
@@ -126,6 +129,8 @@ public class PacienteDao {
 				
 				p.setConvenio(c);
 				
+				p.setEmail(rs.getString("email"));
+				
 				lista.add(p); 
 
 			}
@@ -161,6 +166,7 @@ public class PacienteDao {
 			paciente.setCpf(rs.getString("cpf"));
 			paciente.setConvenio(c);
 			paciente.setId(rs.getInt("idPaciente"));
+			paciente.setEmail(rs.getString("email"));
 			
 			stmt.close();
 			

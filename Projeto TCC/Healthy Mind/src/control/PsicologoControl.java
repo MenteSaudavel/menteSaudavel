@@ -1,13 +1,37 @@
 package control;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import model.dao.PsicologoDao;
+import model.dao.UsuarioDao;
+import model.vo.Convenio;
 import model.vo.Psicologo;
+import model.vo.Usuario;
 
 public class PsicologoControl {
 	
-	public boolean cadastrarPsicologo(String nome, String telefoneConsultorio, String idConvenio, String crp){
+	public boolean cadastrarPsicologo(String nome, String telefoneConsultorio, String idConvenio, String crp, String email, String confCrp) throws UsuarioException{
+		
+		if(!crp.equals(confCrp)){
+			throw new UsuarioException("O número do CRP não foi digitado corretamente nos dois campos, tente novamente.");
+		}
+		
+		String senhaConvertida;
+		MessageDigest algorithm;
+		
+		try {
+			algorithm = MessageDigest.getInstance("SHA-256");
+	        byte hashSenha[] = algorithm.digest(crp.getBytes());
+	        
+	        senhaConvertida = new String(hashSenha);
+		
+		} catch (NoSuchAlgorithmException e) {
+		
+			throw new UsuarioException("Erro na conversão de senha: algoritmo não encontrado");
+			
+		}
 		
 		int idConvenioConvertido;
 		
@@ -24,12 +48,24 @@ public class PsicologoControl {
 		psicologo.setNome(nome);
 		psicologo.setTelefoneConsultorio(telefoneConsultorio);
 		
-		psicologo.setIdConvenio(idConvenioConvertido);
+		Convenio convenio = new Convenio();
+		convenio.setId(idConvenioConvertido);
+		psicologo.setConvenio(convenio);
 		
 		psicologo.setCrp(crp);
+		psicologo.setEmail(email);
 		
 		PsicologoDao psicologoDao = new PsicologoDao();
 		psicologoDao.cadastrarPsicologo(psicologo);
+		
+		Usuario usuario = new Usuario();
+		
+		usuario.setEmail(email);
+		usuario.setSenha(senhaConvertida);
+		usuario.setTipoPerfil("psicologo");
+		
+		UsuarioDao usuarioDao = new UsuarioDao();
+		usuarioDao.cadastrarUsuario(usuario);
 		
 		return true;
 	}
@@ -48,7 +84,11 @@ public class PsicologoControl {
 			
 			psicologo.setNome(nome);
 			psicologo.setTelefoneConsultorio(telefoneConsultorio);
-			psicologo.setIdConvenio(idConvenioConvertido);
+			
+			Convenio convenio = new Convenio();
+			convenio.setId(idConvenioConvertido);
+			psicologo.setConvenio(convenio);
+			
 			psicologo.setCrp(crp);
 			psicologo.setId(idConvertido);
 			

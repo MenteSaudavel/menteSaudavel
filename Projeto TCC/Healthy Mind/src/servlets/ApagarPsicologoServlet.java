@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.vo.Psicologo;
+import model.vo.Usuario;
 import control.PsicologoControl;
 
 /**
@@ -33,23 +35,33 @@ public class ApagarPsicologoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String id = request.getParameter("id");
+		HttpSession session = request.getSession();
 		
-		PsicologoControl psicologoControl = new PsicologoControl();
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		
-		boolean ok = psicologoControl.apagarPsicologo(id);
+		if(usuario != null){
+			request.setAttribute("usuario", usuario);
 		
-		if(ok){
-			request.setAttribute("apagado", ok);
-		} else{
-			request.setAttribute("msg", "Ocorreu um erro ao apagar, por favor tente novamente.");
+			String id = request.getParameter("id");
+			
+			PsicologoControl psicologoControl = new PsicologoControl();
+			
+			boolean ok = psicologoControl.apagarPsicologo(id);
+			
+			if(ok){
+				request.setAttribute("apagado", ok);
+			} else{
+				request.setAttribute("msg", "Ocorreu um erro ao apagar, por favor tente novamente.");
+			}
+			
+			List<Psicologo> lista = psicologoControl.listarPsicologo();
+			
+			request.setAttribute("listaPsicologo", lista);
+			
+			request.getRequestDispatcher("WEB-INF/administrador/listarPsicologo.jsp").forward(request, response);
+		} else {
+			response.sendRedirect("loginServlet");
 		}
-		
-		List<Psicologo> lista = psicologoControl.listarPsicologo();
-		
-		request.setAttribute("listaPsicologo", lista);
-		
-		request.getRequestDispatcher("listarPsicologo.jsp").forward(request, response);
 	}
 
 	/**

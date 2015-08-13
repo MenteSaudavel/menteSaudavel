@@ -5,8 +5,9 @@ public class Psicologo {
 	private int id;
 	private String nome;
 	private String telefoneConsultorio;
-	private Integer idConvenio;
+	private Convenio Convenio;
 	private String crp;
+	private String email;
 	
 	public String getNome() {
 		return nome;
@@ -40,12 +41,23 @@ public class Psicologo {
 		this.id = id;
 	}
 
-	public Integer getIdConvenio() {
-		return idConvenio;
+	public Convenio getConvenio() {
+		return Convenio;
 	}
 
-	public void setIdConvenio(Integer idConvenio) {
-		this.idConvenio = idConvenio;
+	public void setConvenio(Convenio convenio) {
+		Convenio = convenio;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
+	
 
 }
