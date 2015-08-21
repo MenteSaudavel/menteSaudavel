@@ -55,7 +55,27 @@ public class AdministradorControl {
 		
 	}
 	
-	public boolean editarAdministrador(){
+	public boolean editarAdministrador(String nome, String telefone, String funcao, String id){
+		
+		int idConvertido;
+		
+		try{
+			idConvertido = Integer.parseInt(id);
+		} catch(NumberFormatException e){
+			return false;
+		}
+		
+		Administrador administrador = new Administrador();
+		
+		administrador.setNome(nome);
+		administrador.setTelefone(telefone);
+		administrador.setFuncao(funcao);
+		administrador.setId(idConvertido);
+		
+		AdministradorDao administradorDao = new AdministradorDao();
+		administradorDao.editarAdministrador(administrador);
+		
+		return true;
 		
 	}
 	
@@ -87,5 +107,21 @@ public class AdministradorControl {
 		List<Administrador> lista = administradorDao.listarAdministrador();
 		
 		return lista;
+	}
+	
+	public Administrador buscarAdministrador(String id){
+		
+		int idConvertido;
+		
+
+		try{
+			idConvertido = Integer.parseInt(id);
+			
+			AdministradorDao administradorDao = new AdministradorDao();
+			
+			return administradorDao.buscarAdministrador(idConvertido);
+		} catch(NumberFormatException e){
+			return null;
+		}
 	}
 }

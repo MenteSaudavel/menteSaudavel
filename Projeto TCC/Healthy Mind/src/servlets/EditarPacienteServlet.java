@@ -100,6 +100,9 @@ public class EditarPacienteServlet extends HttpServlet {
 
 			boolean ok = pacienteControl.editarPaciente(nome, telefone,
 					numeroCarteirinha, cpf, idConvenio, id);
+			
+			request.setAttribute("listaPaciente",
+					pacienteControl.listarPaciente());
 
 			if (ok) {
 				request.setAttribute("editado", true);
@@ -114,9 +117,6 @@ public class EditarPacienteServlet extends HttpServlet {
 						request, response);
 
 			}
-
-			request.setAttribute("listaPaciente",
-					pacienteControl.listarPaciente());
 
 		} else {
 			response.sendRedirect("loginServlet");

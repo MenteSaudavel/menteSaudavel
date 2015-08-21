@@ -8,11 +8,18 @@
 <title>Login</title>
 
 <link rel="stylesheet" href="css/bootstrap.css">
+<style>
+	.form-signin{
+		max-width: 450px;
+		margin:0 auto;
+	
+	}
 
+</style>
 </head>
 <body>
 
-	<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-default navbar-static-top">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
@@ -23,7 +30,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="inicioServlet">Mente Saudável</a>
+			<a class="navbar-brand" href="inicioServlet"><span class="glyphicon glyphicon-circle-arrow-left"></span></a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -33,32 +40,41 @@
 
 
 			</ul>
-		</div>
-		<!-- /.navbar-collapse -->
-	</div>
-	<!-- /.container-fluid --> </nav>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>
 
 	
 	<div class="container">
 			
-		<div class="col-md-4">
+		
 	      <form class="form-signin" action="loginServlet" method="post">
 	      	
-	        <h2 class="form-signin-heading"><img alt="Mente Saudável" src="img/bitmap3.png"></h2>
+	        <h2 class="form-signin-heading"><img alt="Mente Saudável" src="img/bitmap2.png"></h2>
 	        <label for="inputEmail" class="sr-only"></label>
-	        <input type="email" id="inputEmail" class="form-control" placeholder="Endereço de e-mail" name="email" required autofocus>
+	        <input type="email" id="inputEmail" class="form-control input-lg" placeholder="Endereço de e-mail" name="email" required autofocus>
 	        <label for="inputPassword" class="sr-only"></label>
 	        <br>
-	        <input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="senha" required>
+	        <input type="password" id="inputPassword" class="form-control input-lg" placeholder="Senha" name="senha" required>
 	        <br>
 	        <button class="btn btn-lg btn-success btn-block" type="submit">Entrar</button>
 	        
 	      </form>
-		</div>
+		
 	</div>
 	
 	<br>
-	<c:if test="${logado == false }"><div class="alert alert-danger" role="alert">Usuário não encontrado.</div></c:if>
+	<c:if test="${logado == false }">
+	<div class="alert alert-danger alert-dismissible" role="alert">
+		<span class="glyphicon glyphicon-alert"></span>
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<strong>Usuário não encontrado!</strong>
+	</div>
+	</c:if>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-1.11.3.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>	
 	
 </body>
 </html>

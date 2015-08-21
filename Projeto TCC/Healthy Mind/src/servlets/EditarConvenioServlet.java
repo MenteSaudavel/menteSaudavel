@@ -93,7 +93,10 @@ public class EditarConvenioServlet extends HttpServlet {
 			boolean ok = convenioControl.editar(nome, presidente, cnpj,
 					telefoneConvenio, enderecoConvenio, cep, cidadeConvenio,
 					uf, id);
-
+			
+			request.setAttribute("listaConvenio",
+					convenioControl.listarConvenios());
+			
 			if (ok) {
 				request.setAttribute("editado", true);
 				request.getRequestDispatcher(

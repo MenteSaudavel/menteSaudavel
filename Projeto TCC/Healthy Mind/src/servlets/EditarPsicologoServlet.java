@@ -99,6 +99,10 @@ public class EditarPsicologoServlet extends HttpServlet {
 
 			boolean ok = psicologoControl.editarPsicologo(nome,
 					telefoneConsultorio, idConvenio, crp, id);
+			
+			request.setAttribute("listaPsicologo",
+					psicologoControl.listarPsicologo());
+			
 			if (ok) {
 				request.setAttribute("editado", true);
 				request.getRequestDispatcher(
@@ -111,9 +115,6 @@ public class EditarPsicologoServlet extends HttpServlet {
 						"WEB-INF/administrador/listarPsicologo.jsp").forward(
 						request, response);
 			}
-
-			request.setAttribute("listaPsicologo",
-					psicologoControl.listarPsicologo());
 
 		} else {
 			response.sendRedirect("loginServlet");

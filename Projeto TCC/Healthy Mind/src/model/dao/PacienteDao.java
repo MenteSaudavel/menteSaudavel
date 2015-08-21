@@ -44,7 +44,7 @@ public class PacienteDao {
 	
 	public void editarPaciente(Paciente paciente){
 	
-		String sql = "update paciente set nome=?, telefone=?, numeroCarteirinha=?, cpf=?, idConvenio=?, email=? where idPaciente=?;";
+		String sql = "update paciente set nome=?, telefone=?, numeroCarteirinha=?, cpf=?, idConvenio=? where idPaciente=?;";
 		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -54,8 +54,7 @@ public class PacienteDao {
 			stmt.setString(3, paciente.getNumeroCarteirinha());
 			stmt.setString(4, paciente.getCpf());
 			stmt.setInt(5, paciente.getConvenio().getId());
-			stmt.setString(6, paciente.getEmail());
-			stmt.setInt(7, paciente.getId());
+			stmt.setInt(6, paciente.getId());
 			
 			stmt.execute();
 			stmt.close();

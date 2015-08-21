@@ -67,5 +67,55 @@ public class UsuarioDao {
 		
 		return u;
 	}
+	
+	public void editarUsuario(Usuario usuario){
+		
+		String sql = "update usuario set email=?, senha=? where id=?";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setString(1, usuario.getEmail());
+			stmt.setString(2, usuario.getSenha());
+			stmt.setInt(3, usuario.getId());
+			
+			stmt.execute();
+			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public Usuario buscarUsuario(int id){
+		
+		Usuario usuario = new Usuario();
+		
+		String sql = "select * from usuario where id=?";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setInt(1, id);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			rs.next();
+			
+			usuario.setId(rs.getInt("id"));
+			usuario.setEmail(rs.getString("email"));
+			usuario.setSenha(rs.getString("senha"));
+			usuario.setTipoPerfil(rs.getString("tipoPerfil"));
+			
+			stmt.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return usuario;
+	}
 
 }

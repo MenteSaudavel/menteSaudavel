@@ -40,7 +40,7 @@ public class AdministradorDao {
 	
 	public void editarAdministrador(Administrador administrador){
 		
-		String sql = "update administrador set nome=?, telefone=?, funcao=?, email=? where id=?";
+		String sql = "update administrador set nome=?, telefone=?, funcao=? where id=?";
 		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -48,8 +48,7 @@ public class AdministradorDao {
 			stmt.setString(1, administrador.getNome());
 			stmt.setString(2, administrador.getTelefone());
 			stmt.setString(3, administrador.getFuncao());
-			stmt.setString(4, administrador.getEmail());
-			stmt.setInt(5, administrador.getId());
+			stmt.setInt(4, administrador.getId());
 			
 			stmt.execute();
 			stmt.close();
@@ -111,5 +110,36 @@ public class AdministradorDao {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public Administrador buscarAdministrador(int id){
+		
+		Administrador administrador = new Administrador();
+		
+		String sql = "select * from administrador where id=?";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setInt(1, id);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			rs.next();
+			
+			administrador.setId(rs.getInt("id"));
+			administrador.setNome(rs.getString("nome"));
+			administrador.setTelefone(rs.getString("telefone"));
+			administrador.setFuncao(rs.getString("funcao"));
+			administrador.setEmail(rs.getString("email"));
+			
+			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return administrador;
 	}
 }
