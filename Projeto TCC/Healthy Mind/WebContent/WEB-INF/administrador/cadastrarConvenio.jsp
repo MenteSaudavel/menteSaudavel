@@ -43,11 +43,15 @@
 					<label class="control-label">Cidade</label>	
 					<input type="text" name="cidade" required class="form-control">
 				</div>
-					
-					
+				
 				<div class="form-group">
 					<label class="control-label">UF</label>	
-					<input type="text" name="uf" required class="form-control">
+					<select name="idUf" class="form-control">
+						<option></option>
+						<c:forEach var="uf" items="${listaUf}">
+							<option value="${uf.id }">${uf.nome }</option>
+						</c:forEach>
+					</select>
 				</div>
 				
 				

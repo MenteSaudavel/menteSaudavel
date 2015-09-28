@@ -55,11 +55,14 @@
 					<input type="text" name="cidade" required class="form-control" value="${convenio.cidadeConvenio }">
 				</div>
 				
-				
 				<div class="form-group">
-					<label class="control-label">UF</label>
-					
-					<input type="text" name="uf" required class="form-control" value="${convenio.uf }">
+					<label class="control-label">UF</label>	
+					<select name="idUf" class="form-control">
+						<option></option>
+						<c:forEach var="uf" items="${listaUf}">
+							<option value="${uf.id }" <c:if test="${convenio.uf.id == uf.id }"> selected </c:if>>${uf.nome }</option>
+						</c:forEach>
+					</select>
 				</div>
 				
 				<div class="form-group">

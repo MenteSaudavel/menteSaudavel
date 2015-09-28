@@ -36,7 +36,7 @@
 						<td class="text-center">${convenio.enderecoConvenio }</td>
 						<td class="text-center">${convenio.cep }</td>
 						<td class="text-center">${convenio.cidadeConvenio }</td>
-						<td class="text-center">${convenio.uf }</td>
+						<td class="text-center">${convenio.uf.nome }</td>
 						<td class="text-center"> 
 							<a href="editarConvenioServlet?id=${convenio.id }" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-edit"></span></a> 
 						</td>

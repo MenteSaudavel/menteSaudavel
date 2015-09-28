@@ -2,6 +2,7 @@ package control;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import model.dao.AdministradorDao;
 import model.dao.PacienteDao;
@@ -119,6 +120,62 @@ public class UsuarioControl {
 		} catch(NumberFormatException e){
 			return null;
 		}
+	}
+	
+	public boolean inativarUsuario(String id){
+		
+		int idConvertido;
+		
+		try{
+			idConvertido = Integer.parseInt(id);
+			
+		} catch(NumberFormatException e){
+			return false;
+		}
+		
+		Usuario usuario = new Usuario();
+		
+		usuario.setId(idConvertido);
+		
+		UsuarioDao usuarioDao = new UsuarioDao();
+		
+		usuarioDao.inativarUsuario(usuario);
+		
+		return true;
+		
+	}
+	
+	public boolean ativarUsuario(String id){
+		
+		int idConvertido;
+		
+		try{
+			idConvertido = Integer.parseInt(id);
+			
+		} catch(NumberFormatException e){
+			return false;
+		}
+		
+		Usuario usuario = new Usuario();
+		
+		usuario.setId(idConvertido);
+		
+		UsuarioDao usuarioDao = new UsuarioDao();
+		
+		usuarioDao.ativarUsuario(usuario);
+		
+		return true;
+	}
+	
+	public List<Usuario> pesquisarUsuario(String email){
+		
+		List<Usuario> lista;
+		
+		UsuarioDao usuarioDao = new UsuarioDao();
+		
+		lista = usuarioDao.pesquisarUsuario(email);
+		
+		return lista;
 	}
 	
 }

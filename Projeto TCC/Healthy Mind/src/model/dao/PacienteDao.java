@@ -196,4 +196,38 @@ public class PacienteDao {
 			e.printStackTrace();
 		}		
 	}
+	
+	public List<Paciente> pesquisarConvenioPaciente(String email){
+		
+		List<Paciente> lista = new ArrayList<Paciente>();
+		
+		String sql = "select idConvenio from paciente where email like ?";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setString(1, "%"+email+"%");
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				
+				Paciente p = new Paciente();
+				
+				ConvenioDao convenioDao = new ConvenioDao();
+				
+				Convenio c = convenioDao.buscarConvenio(rs.getInt("idConvenio"));
+				
+				p.setConvenio(c);
+				
+				lista.add(p);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return lista;
+	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import model.dao.ConvenioDao;
 import model.vo.Convenio;
+import model.vo.UF;
 
 public class ConvenioControl {
 	
@@ -19,6 +20,18 @@ public class ConvenioControl {
 		
 		Convenio convenio = new Convenio();
 		
+		int ufConvertido;
+		
+		try{
+			ufConvertido = Integer.parseInt(uf);
+		} catch(NumberFormatException e){
+			return false;
+		}
+		
+		UF u = new UF();
+		u.setId(ufConvertido);
+		
+		
 		convenio.setNome(nome);
 		convenio.setPresidente(presidente);
 		convenio.setCnpj(cnpj);
@@ -26,7 +39,7 @@ public class ConvenioControl {
 		convenio.setEnderecoConvenio(enderecoConvenio);
 		convenio.setCep(cep);
 		convenio.setCidadeConvenio(cidadeConvenio);
-		convenio.setUf(uf);
+		convenio.setUf(u);
 		
 		ConvenioDao convenioDao = new ConvenioDao();
 		convenioDao.cadastrarConvenio(convenio);
@@ -37,11 +50,16 @@ public class ConvenioControl {
 	public boolean editar(String nome, String presidente, String cnpj, String telefoneConvenio, String enderecoConvenio, String cep, String cidadeConvenio, String uf, String id){
 		
 		int idConvertido;
+		int ufConvertido;
 		
 		try{
 			idConvertido = Integer.parseInt(id);
+			ufConvertido = Integer.parseInt(uf);
 			
 			Convenio convenio = new Convenio();
+			
+			UF u = new UF();
+			u.setId(ufConvertido);
 			
 			convenio.setNome(nome);
 			convenio.setPresidente(presidente);
@@ -50,7 +68,7 @@ public class ConvenioControl {
 			convenio.setEnderecoConvenio(enderecoConvenio);
 			convenio.setCep(cep);
 			convenio.setCidadeConvenio(cidadeConvenio);
-			convenio.setUf(uf);
+			convenio.setUf(u);
 			
 			convenio.setId(idConvertido);
 			

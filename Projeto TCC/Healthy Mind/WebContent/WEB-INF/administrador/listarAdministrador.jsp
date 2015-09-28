@@ -10,8 +10,9 @@
 					<td class="text-center"> <b> Nome do Administrador </b></td>
 					<td class="text-center"> <b> Telefone</b></td>
 					<td class="text-center"> <b> Função </b></td>
+					<td class="text-center"> <b> Email </b></td>
 					<td class="text-center"> <b> Editar </b></td>
-					<td class="text-center"> <b> Apagar </b></td>
+					<td class="text-center"> <b> Ver perfil </b></td>
 				</tr>
 				
 				<c:if test="${empty listaAdministrador }">
@@ -25,12 +26,12 @@
 					 <td class="text-center"> ${administrador.nome } </td>
 					 <td class="text-center"> ${administrador.telefone } </td>
 					 <td class="text-center"> ${administrador.funcao} </td>
+					 <td class="text-center"> ${administrador.email} </td>
 					 <td class="text-center">
 					 	<a href="editarAdministradorServlet?id=${administrador.id }" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-edit"></span></a> 
 					 </td>
 					 <td class="text-center">
-					 	<a href="apagarAdministradorServlet?id=${administrador.id }" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a> 
-					 </td>
+					 	<a href="visualizarPerfilUsuarioServlet?email=${administrador.email }" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-eye-open"></span></a> 
 					</tr>
 				</c:forEach>
 		  </table>
@@ -72,6 +73,5 @@
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	 	</div>
 	 </c:if>
-	 
 
 <jsp:include page="footerAdm.jsp"></jsp:include>

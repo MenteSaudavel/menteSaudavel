@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.vo.Convenio;
+import model.vo.UF;
 import model.vo.Usuario;
 import control.ConvenioControl;
+import control.UFControl;
 
 /**
  * Servlet implementation class EditarConvenioServlet
@@ -47,6 +50,12 @@ public class EditarConvenioServlet extends HttpServlet {
 			ConvenioControl convenioControl = new ConvenioControl();
 
 			Convenio convenio = convenioControl.buscarConvenio(id);
+			
+			UFControl ufControl = new UFControl();
+			
+			List<UF> lista = ufControl.listarUF();
+			
+			request.setAttribute("listaUf", lista);
 
 			if (convenio != null) {
 				request.setAttribute("convenio", convenio);
@@ -98,7 +107,7 @@ public class EditarConvenioServlet extends HttpServlet {
 					convenioControl.listarConvenios());
 			
 			if (ok) {
-				request.setAttribute("editado", true);
+				request.setAttribute("editado", true);		
 				request.getRequestDispatcher(
 						"WEB-INF/administrador/listarConvenio.jsp").forward(
 						request, response);

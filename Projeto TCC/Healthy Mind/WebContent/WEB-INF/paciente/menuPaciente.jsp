@@ -13,11 +13,13 @@
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
 				<img alt="" src="img/msg inicio3.png">
-				<div class="carousel-caption">...</div>
+				<div class="carousel-caption"></div>
 			</div>
 			<div class="item">
-				<img alt="" src="img/msg inicio3.png">
-				<div class="carousel-caption">...</div>
+				<p align=center>
+					<img alt="" src="img/logo-slogan-novo1.png">
+				</p>
+				<div class="carousel-caption"></div>
 			</div>
 			
 		</div>

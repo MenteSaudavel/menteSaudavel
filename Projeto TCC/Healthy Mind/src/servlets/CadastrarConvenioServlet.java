@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.vo.UF;
 import model.vo.Usuario;
 import control.ConvenioControl;
+import control.UFControl;
 
 /**
  * Servlet implementation class ConvenioServlet
@@ -41,7 +44,13 @@ public class CadastrarConvenioServlet extends HttpServlet {
 
 		if (usuario != null) {
 			request.setAttribute("usuario", usuario);
-
+			
+			UFControl ufControl = new UFControl();
+			
+			List<UF> lista = ufControl.listarUF();
+			
+			request.setAttribute("listaUf", lista);
+			
 			request.getRequestDispatcher(
 					"WEB-INF/administrador/cadastrarConvenio.jsp").forward(
 					request, response);
@@ -71,7 +80,7 @@ public class CadastrarConvenioServlet extends HttpServlet {
 			String endereco = request.getParameter("endereco");
 			String cep = request.getParameter("cep");
 			String cidade = request.getParameter("cidade");
-			String uf = request.getParameter("uf");
+			String uf = request.getParameter("idUf");
 
 			ConvenioControl convenioControl = new ConvenioControl();
 
@@ -80,6 +89,13 @@ public class CadastrarConvenioServlet extends HttpServlet {
 
 			if (ok) {
 				request.setAttribute("cadastrado", true);
+				
+				UFControl ufControl = new UFControl();
+				
+				List<UF> lista = ufControl.listarUF();
+				
+				request.setAttribute("listaUf", lista);
+				
 				request.getRequestDispatcher(
 						"WEB-INF/administrador/cadastrarConvenio.jsp").forward(
 						request, response);

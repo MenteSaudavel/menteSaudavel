@@ -161,4 +161,13 @@ public class PacienteControl {
 		
 		return true;
 	}
+	
+	public List<Paciente> pesquisarConvenioPaciente(String email){
+		
+		PacienteDao pacienteDao = new PacienteDao();
+		
+		List<Paciente> lista = pacienteDao.pesquisarConvenioPaciente(email);
+		
+		return lista;
+	}
 }

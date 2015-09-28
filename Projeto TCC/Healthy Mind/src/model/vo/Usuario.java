@@ -6,6 +6,7 @@ public class Usuario {
 	private String email;
 	private String senha;
 	private String tipoPerfil;
+	private boolean statusPerfil;
 	
 	public int getId() {
 		return id;
@@ -30,6 +31,12 @@ public class Usuario {
 	}
 	public void setTipoPerfil(String tipoPerfil) {
 		this.tipoPerfil = tipoPerfil;
+	}
+	public boolean isStatusPerfil() {
+		return statusPerfil;
+	}
+	public void setStatusPerfil(boolean statusPerfil) {
+		this.statusPerfil = statusPerfil;
 	}
 	
 	

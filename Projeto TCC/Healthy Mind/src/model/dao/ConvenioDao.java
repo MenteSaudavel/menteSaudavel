@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.vo.Convenio;
+import model.vo.UF;
 
 public class ConvenioDao {
 	Connection conexao;
@@ -20,28 +21,34 @@ public class ConvenioDao {
 		
 		List<Convenio> lista = new ArrayList<Convenio>();
 		
-		String sql = "select * from convenio;";
+		String sql = "select * from convenio inner join uf on convenio.idUf = uf.idUf;";
 		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			
 			ResultSet rs = stmt.executeQuery();
 			
+			UF uf = new UF();
+			
 			while(rs.next()){
 				
 				Convenio c = new Convenio();
 				
-				c.setId(rs.getInt("idConvenio"));
-				c.setNome(rs.getString("nome"));
-				c.setPresidente(rs.getString("presidente"));
-				c.setCnpj(rs.getString("cnpj"));
-				c.setTelefoneConvenio(rs.getString("telefoneConvenio"));
-				c.setEnderecoConvenio(rs.getString("enderecoConvenio"));
-				c.setCep(rs.getString("cep"));
-				c.setCidadeConvenio(rs.getString("cidadeconvenio"));
-				c.setUf(rs.getString("uf"));
+				uf.setId(rs.getInt("uf.idUf"));
+				uf.setCodigoIbge(rs.getInt("uf.codigo_ibge"));
+				uf.setSigla(rs.getString("uf.sigla"));
+				uf.setNome(rs.getString("uf.nome"));
 				
-				
+				c.setId(rs.getInt("convenio.idConvenio"));
+				c.setNome(rs.getString("convenio.nome"));
+				c.setPresidente(rs.getString("convenio.presidente"));
+				c.setCnpj(rs.getString("convenio.cnpj"));
+				c.setTelefoneConvenio(rs.getString("convenio.telefoneConvenio"));
+				c.setEnderecoConvenio(rs.getString("convenio.enderecoConvenio"));
+				c.setCep(rs.getString("convenio.cep"));
+				c.setCidadeConvenio(rs.getString("convenio.cidadeconvenio"));
+				c.setUf(uf);
+
 				lista.add(c);
 			}
 			
@@ -56,7 +63,7 @@ public class ConvenioDao {
 	
 	public void cadastrarConvenio(Convenio convenio){
 		
-		String sql = "insert into convenio (nome, presidente, cnpj, telefoneConvenio, enderecoConvenio, cep, cidadeConvenio, uf) values (?, ?, ?, ?, ?, ?, ?, ?);";
+		String sql = "insert into convenio (nome, presidente, cnpj, telefoneConvenio, enderecoConvenio, cep, cidadeConvenio, idUf) values (?, ?, ?, ?, ?, ?, ?, ?);";
 		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -68,7 +75,7 @@ public class ConvenioDao {
 			stmt.setString(5, convenio.getEnderecoConvenio());
 			stmt.setString(6, convenio.getCep());
 			stmt.setString(7, convenio.getCidadeConvenio());
-			stmt.setString(8, convenio.getUf());
+			stmt.setInt(8, convenio.getUf().getId());
 			
 			stmt.execute();
 			stmt.close();
@@ -83,7 +90,7 @@ public class ConvenioDao {
 	
 	public void editarConvenio(Convenio convenio){
 		
-		String sql = "update convenio set nome=?, presidente=?, cnpj=?, telefoneConvenio=?, enderecoConvenio=?, cep=?, cidadeConvenio=?, uf=? where idConvenio=?;";
+		String sql = "update convenio set nome=?, presidente=?, cnpj=?, telefoneConvenio=?, enderecoConvenio=?, cep=?, cidadeConvenio=?, idUf=? where idConvenio=?;";
 		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -95,7 +102,7 @@ public class ConvenioDao {
 			stmt.setString(5, convenio.getEnderecoConvenio());
 			stmt.setString(6, convenio.getCep());
 			stmt.setString(7, convenio.getCidadeConvenio());
-			stmt.setString(8, convenio.getUf());
+			stmt.setInt(8, convenio.getUf().getId());
 			stmt.setInt(9, convenio.getId());
 			
 			stmt.execute();
@@ -130,7 +137,7 @@ public class ConvenioDao {
 		
 		Convenio convenio = new Convenio();
 		
-		String sql = "select * from convenio where idConvenio=?;";
+		String sql = "select * from convenio inner join uf on convenio.idUf=uf.idUf where idConvenio=?;";
 		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -141,15 +148,18 @@ public class ConvenioDao {
 			
 			rs.next();
 			
-			convenio.setNome(rs.getString("nome"));
-			convenio.setPresidente(rs.getString("presidente"));
-			convenio.setCnpj(rs.getString("cnpj"));
-			convenio.setTelefoneConvenio(rs.getString("telefoneConvenio"));
-			convenio.setEnderecoConvenio(rs.getString("enderecoConvenio"));
-			convenio.setCep(rs.getString("cep"));
-			convenio.setCidadeConvenio(rs.getString("cidadeConvenio"));
-			convenio.setUf(rs.getString("uf"));
-			convenio.setId(rs.getInt("idConvenio"));
+			UF uf = new UF();
+			uf.setId(rs.getInt("uf.idUf"));
+			
+			convenio.setNome(rs.getString("convenio.nome"));
+			convenio.setPresidente(rs.getString("convenio.presidente"));
+			convenio.setCnpj(rs.getString("convenio.cnpj"));
+			convenio.setTelefoneConvenio(rs.getString("convenio.telefoneConvenio"));
+			convenio.setEnderecoConvenio(rs.getString("convenio.enderecoConvenio"));
+			convenio.setCep(rs.getString("convenio.cep"));
+			convenio.setCidadeConvenio(rs.getString("convenio.cidadeConvenio"));
+			convenio.setUf(uf);
+			convenio.setId(rs.getInt("convenio.idConvenio"));
 			
 			
 			stmt.close();
@@ -161,5 +171,4 @@ public class ConvenioDao {
 		
 		return convenio;
 	}
-	
 }

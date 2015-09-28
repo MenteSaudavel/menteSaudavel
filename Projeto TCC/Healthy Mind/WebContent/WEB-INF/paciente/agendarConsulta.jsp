@@ -1,13 +1,26 @@
 <%@ include file="topPaciente.jsp" %>
 
+
+	<style>
+   		.oculto{
+   			display:none;
+   		}
+	</style>
+
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-7">
 				<form action="agendarConsultaServlet" method="post">
-
+										
+					<table class="oculto">
+						<c:forEach var="paciente" items="${listaIdConvenio }">
+							<input type="hidden" value="${paciente.convenio.id}" name="idConvenio">
+						</c:forEach>
+					</table>
+					
 					<div class="form-group">
-						<label class="control-label"> Selecione um psicólogo </label> <select
-							name="idPsicologo" class="form-control">
+						<label class="control-label"> Selecione um psicólogo </label>
+						<select name="idPsicologo" class="form-control">
 							<option></option>
 							<c:forEach var="psicologo" items="${listaPsicologo}">
 								<option value="${psicologo.id }">${psicologo.nome }</option>

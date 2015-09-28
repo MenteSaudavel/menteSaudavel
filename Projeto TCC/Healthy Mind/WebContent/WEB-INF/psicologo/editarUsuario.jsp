@@ -31,7 +31,7 @@
 				
 				<div class="form-group">
 					<div class="control-label pull-right">
-						<a class="btn btn-danger" href="menuAdministradorServlet">
+						<a class="btn btn-danger" href="menuPsicologoServlet">
 							Cancelar <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
 						</a>
 						<button type="submit" class="btn btn-success">Salvar <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> </button>
@@ -43,7 +43,7 @@
 	</div>
 </div>
 
-	<form method="get" action="menuAdministradorServlet">
+	<form method="get" action="menuPsicologoServlet">
 		<div class="form-group">
 			<div class="col-sm-7 control-label"> <button type="submit" class="btn btn-primary">  <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Voltar </button> </div>
 		</div>

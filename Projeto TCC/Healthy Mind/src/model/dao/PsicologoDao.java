@@ -17,7 +17,7 @@ public class PsicologoDao {
 		this.conexao = new FabricaConexoes().getConexao();
 	}
 	/**
-	 * Método para cadastrar Psicólogo
+	 * Método para cadastrar psicólogo
 	 * @param psicologo
 	 */
 	public void cadastrarPsicologo(Psicologo psicologo){
@@ -88,6 +88,7 @@ public class PsicologoDao {
 				p.setTelefoneConsultorio(rs.getString("telefoneConsultorio"));
 				p.setConvenio(c);
 				p.setCrp(rs.getString("crp"));
+				p.setEmail(rs.getString("email"));
 				
 				lista.add(p);
 			}
@@ -123,6 +124,7 @@ public class PsicologoDao {
 				p.setTelefoneConsultorio(rs.getString("telefoneConsultorio"));
 				p.setConvenio(c);
 				p.setCrp(rs.getString("crp"));
+				p.setEmail(rs.getString("email"));
 				
 				lista.add(p);
 			}
@@ -156,6 +158,7 @@ public class PsicologoDao {
 			psicologo.setTelefoneConsultorio(rs.getString("telefoneConsultorio"));
 			psicologo.setConvenio(c);
 			psicologo.setCrp(rs.getString("crp"));
+			psicologo.setEmail(rs.getString("email"));
 			psicologo.setId(rs.getInt("idPsicologo"));
 			
 			stmt.close();
@@ -186,6 +189,43 @@ public class PsicologoDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+	
+	public List<Psicologo> listarPsicologoSelect(int idConvenio){
+		
+		List<Psicologo> lista = new ArrayList<Psicologo>();
+		
+		String sql = "select * from psicologo where idConvenio=?";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setInt(1, idConvenio);
+			
+			ResultSet rs = stmt.executeQuery();
+			ConvenioDao convenioDao = new ConvenioDao();
+			
+			while(rs.next()){
+				
+				Psicologo p = new Psicologo();
+				Convenio c = convenioDao.buscarConvenio(rs.getInt("idConvenio"));
+				
+				p.setId(rs.getInt("idPsicologo"));
+				p.setNome(rs.getString("nome"));
+				p.setTelefoneConsultorio(rs.getString("telefoneConsultorio"));
+				p.setConvenio(c);
+				p.setCrp(rs.getString("crp"));
+				p.setEmail(rs.getString("email"));
+				
+				lista.add(p);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return lista;
 		
 	}
 }

@@ -53,7 +53,7 @@
 					aria-expanded="false">Paciente <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="cadastrarPacienteServlet"><span class="glyphicon glyphicon-plus-sign"></span> Cadastrar Paciente</a></li>
-						<li><a href="pesquisarPacienteServlet"><span class="glyphicon glyphicon-search"></span> Pesquisar Paciente</a></li>
+						<li><a href="listarPacienteServlet"><span class="glyphicon glyphicon-list-alt"></span> Lista de Pacientes</a></li>
 				</ul></li>
 
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -62,8 +62,8 @@
 					<ul class="dropdown-menu">
 						<li><a href="cadastrarPsicologoServlet"><span class="glyphicon glyphicon-plus-sign"></span> Cadastrar
 								Psicólogo</a></li>
-						<li><a href="pesquisarPsicologoServlet"><span class="glyphicon glyphicon-search"></span> Pesquisar
-								Psicólogo</a></li>
+						<li><a href="listarPsicologoServlet"><span class="glyphicon glyphicon-list-alt"></span> Lista de
+								Psicólogos</a></li>
 				</ul></li>
 					
 					

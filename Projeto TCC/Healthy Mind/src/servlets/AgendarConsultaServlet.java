@@ -10,10 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.vo.Paciente;
 import model.vo.Psicologo;
 import model.vo.Usuario;
 import control.ConsultaControl;
+import control.PacienteControl;
 import control.PsicologoControl;
+import control.UsuarioControl;
 
 /**
  * Servlet implementation class AgendarConsultaServlet
@@ -43,11 +46,27 @@ public class AgendarConsultaServlet extends HttpServlet {
 		if(usuario != null){
 			request.setAttribute("usuario", usuario);
 			
+			String email = usuario.getEmail();
+			
+			PacienteControl pacienteControl = new PacienteControl();
+			
+			List<Paciente> listaIdConvenio = pacienteControl.pesquisarConvenioPaciente(email);
+			
+			request.setAttribute("listaIdConvenio", listaIdConvenio);
+			
+			String idConvenio = request.getParameter("idConvenio");
+			
 			PsicologoControl psicologoControl = new PsicologoControl();
 			
-			List<Psicologo> listaPsciologo = psicologoControl.listarPsicologo();
+			List<Psicologo> listaPsicologo = psicologoControl.listarPsicologoSelect(idConvenio);
 			
-			request.setAttribute("listaPsicologo", listaPsciologo);
+			request.setAttribute("listaPsicologo", listaPsicologo);
+			
+			/*PsicologoControl psicologoControl = new PsicologoControl();
+			
+			List<Psicologo> listaPsicologo = psicologoControl.listarPsicologo();
+			
+			request.setAttribute("listaPsicologo", listaPsicologo);*/
 			
 			request.getRequestDispatcher("WEB-INF/paciente/agendarConsulta.jsp").forward(request, response);
 		} else {

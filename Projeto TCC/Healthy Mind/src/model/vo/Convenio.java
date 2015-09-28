@@ -10,7 +10,7 @@ public class Convenio {
 	private String enderecoConvenio;
 	private String cep;
 	private String cidadeConvenio;
-	private String uf;
+	private UF uf;
 	
 	
 	public int getId() {
@@ -55,18 +55,18 @@ public class Convenio {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-
-	public String getUf() {
-		return uf;
-	}
-	public void setUf(String uf) {
-		this.uf = uf;
-	}
 	public String getCidadeConvenio() {
 		return cidadeConvenio;
 	}
 	public void setCidadeConvenio(String cidadeConvenio) {
 		this.cidadeConvenio = cidadeConvenio;
 	}
+	public UF getUf() {
+		return uf;
+	}
+	public void setUf(UF uf) {
+		this.uf = uf;
+	}
+	
 	
 }

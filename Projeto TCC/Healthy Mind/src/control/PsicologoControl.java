@@ -162,4 +162,21 @@ public class PsicologoControl {
 		return true;
 		
 	}
+	
+	public List<Psicologo> listarPsicologoSelect(String idConvenio){
+		
+		int idConvenioConvertido;
+		
+		try{
+			idConvenioConvertido = Integer.parseInt(idConvenio);
+		} catch(NumberFormatException e){
+			return null;
+		}
+		
+		PsicologoDao psicologoDao = new PsicologoDao();
+		
+		List<Psicologo> lista = psicologoDao.listarPsicologoSelect(idConvenioConvertido);
+		
+		return lista;
+	}
 }
