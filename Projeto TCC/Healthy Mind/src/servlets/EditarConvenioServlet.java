@@ -44,30 +44,38 @@ public class EditarConvenioServlet extends HttpServlet {
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 
 		if (usuario != null) {
-
-			String id = request.getParameter("id");
-
-			ConvenioControl convenioControl = new ConvenioControl();
-
-			Convenio convenio = convenioControl.buscarConvenio(id);
+			request.setAttribute("usuario", usuario);
 			
-			UFControl ufControl = new UFControl();
+			if(usuario.getTipoPerfil().equals("administrador")){
 			
-			List<UF> lista = ufControl.listarUF();
-			
-			request.setAttribute("listaUf", lista);
-
-			if (convenio != null) {
-				request.setAttribute("convenio", convenio);
-				request.getRequestDispatcher(
-						"WEB-INF/administrador/editarConvenio.jsp").forward(
-						request, response);
+				String id = request.getParameter("id");
+	
+				ConvenioControl convenioControl = new ConvenioControl();
+	
+				Convenio convenio = convenioControl.buscarConvenio(id);
+				
+				UFControl ufControl = new UFControl();
+				
+				List<UF> lista = ufControl.listarUF();
+				
+				request.setAttribute("listaUf", lista);
+	
+				if (convenio != null) {
+					request.setAttribute("convenio", convenio);
+					request.getRequestDispatcher(
+							"WEB-INF/administrador/editarConvenio.jsp").forward(
+							request, response);
+				} else {
+					request.setAttribute("erro", "Convênio não encontrado!");
+					request.getRequestDispatcher(
+							"WEB-INF/administrador/listarConvenio.jsp").forward(
+							request, response);
+				}
+				
 			} else {
-				request.setAttribute("erro", "Convênio não encontrado!");
-				request.getRequestDispatcher(
-						"WEB-INF/administrador/listarConvenio.jsp").forward(
-						request, response);
+				response.sendRedirect("loginServlet");
 			}
+			
 		} else {
 			response.sendRedirect("loginServlet");
 		}
@@ -94,7 +102,7 @@ public class EditarConvenioServlet extends HttpServlet {
 			String enderecoConvenio = request.getParameter("endereco");
 			String cep = request.getParameter("cep");
 			String cidadeConvenio = request.getParameter("cidade");
-			String uf = request.getParameter("uf");
+			String uf = request.getParameter("idUf");
 			String id = request.getParameter("id");
 
 			ConvenioControl convenioControl = new ConvenioControl();

@@ -41,24 +41,30 @@ public class ApagarPsicologoServlet extends HttpServlet {
 		
 		if(usuario != null){
 			request.setAttribute("usuario", usuario);
-		
-			String id = request.getParameter("id");
 			
-			PsicologoControl psicologoControl = new PsicologoControl();
+			if(usuario.getTipoPerfil().equals("administrador")){
 			
-			boolean ok = psicologoControl.apagarPsicologo(id);
-			
-			if(ok){
-				request.setAttribute("apagado", ok);
-			} else{
-				request.setAttribute("msg", "Ocorreu um erro ao apagar, por favor tente novamente.");
+				String id = request.getParameter("id");
+				
+				PsicologoControl psicologoControl = new PsicologoControl();
+				
+				boolean ok = psicologoControl.apagarPsicologo(id);
+				
+				if(ok){
+					request.setAttribute("apagado", ok);
+				} else{
+					request.setAttribute("msg", "Ocorreu um erro ao apagar, por favor tente novamente.");
+				}
+				
+				List<Psicologo> lista = psicologoControl.listarPsicologo();
+				
+				request.setAttribute("listaPsicologo", lista);
+				
+				request.getRequestDispatcher("WEB-INF/administrador/listarPsicologo.jsp").forward(request, response);
+			} else {
+				response.sendRedirect("loginServlet");
 			}
 			
-			List<Psicologo> lista = psicologoControl.listarPsicologo();
-			
-			request.setAttribute("listaPsicologo", lista);
-			
-			request.getRequestDispatcher("WEB-INF/administrador/listarPsicologo.jsp").forward(request, response);
 		} else {
 			response.sendRedirect("loginServlet");
 		}

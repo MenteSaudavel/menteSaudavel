@@ -42,23 +42,28 @@ public class ApagarAdministradorServlet extends HttpServlet {
 		if(usuario != null){
 			request.setAttribute("usuario", usuario);
 			
-			String id = request.getParameter("id");
+			if(usuario.getTipoPerfil().equals("administrador")){
 			
-			AdministradorControl administradorControl = new AdministradorControl();
-			
-			boolean ok = administradorControl.apagarAdministrador(id);
-			
-			if(ok){
-				request.setAttribute("apagado", ok);
+				String id = request.getParameter("id");
+				
+				AdministradorControl administradorControl = new AdministradorControl();
+				
+				boolean ok = administradorControl.apagarAdministrador(id);
+				
+				if(ok){
+					request.setAttribute("apagado", ok);
+				} else {
+					request.setAttribute("apagado", false);
+				}
+				
+				List<Administrador> lista = administradorControl.listarAdministrador();
+				
+				request.setAttribute("listaAdministrador", lista);
+				
+				request.getRequestDispatcher("WEB-INF/administrador/listarAdministrador.jsp").forward(request, response);
 			} else {
-				request.setAttribute("apagado", false);
+				response.sendRedirect("loginServlet");
 			}
-			
-			List<Administrador> lista = administradorControl.listarAdministrador();
-			
-			request.setAttribute("listaAdministrador", lista);
-			
-			request.getRequestDispatcher("WEB-INF/administrador/listarAdministrador.jsp").forward(request, response);
 
 		} else {
 			response.sendRedirect("loginServlet");

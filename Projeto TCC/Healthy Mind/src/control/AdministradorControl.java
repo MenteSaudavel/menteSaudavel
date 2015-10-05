@@ -124,4 +124,15 @@ public class AdministradorControl {
 			return null;
 		}
 	}
+	
+	public List<Administrador> pesquisarAdministrador(String email){
+		
+		List<Administrador> lista;
+		
+		AdministradorDao administradorDao = new AdministradorDao();
+		
+		lista = administradorDao.pesquisarAdministrador(email);
+		
+		return lista;
+	}
 }

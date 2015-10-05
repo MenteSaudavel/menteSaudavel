@@ -186,6 +186,8 @@ public class UsuarioDao {
 				lista.add(u);
 			}
 			
+			stmt.close();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

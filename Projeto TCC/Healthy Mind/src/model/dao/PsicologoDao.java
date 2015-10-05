@@ -43,6 +43,24 @@ public class PsicologoDao {
 		}
 	}
 	
+	public void editarEmail(Psicologo psicologo){
+		
+		String sql = "update psicologo set email=? where idPsicologo=?;";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setString(1, psicologo.getEmail());
+			stmt.setInt(2, psicologo.getId());
+
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}	
+	
 	public void editarPsicologo(Psicologo psicologo){
 		
 		String sql = "update psicologo set nome=?, telefoneConsultorio=?, idConvenio=?, crp=? where idPsicologo=?;";
@@ -227,5 +245,41 @@ public class PsicologoDao {
 		
 		return lista;
 		
+	}
+	
+	public List<Psicologo> pesquisarPsicologoEmail(String email){
+		
+		List<Psicologo> lista = new ArrayList<Psicologo>();
+		
+		String sql = "select * from psicologo where email like ?";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setString(1, email);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				
+				Psicologo psicologo = new Psicologo();
+				
+				psicologo.setId(rs.getInt("idPsicologo"));
+				psicologo.setNome(rs.getString("nome"));
+				psicologo.setTelefoneConsultorio(rs.getString("telefoneConsultorio"));
+				psicologo.setCrp(rs.getString("crp"));
+				psicologo.setEmail(rs.getString("email"));
+				
+				lista.add(psicologo);
+			}
+			
+			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return lista;
 	}
 }

@@ -45,30 +45,37 @@ public class EditarPacienteServlet extends HttpServlet {
 
 		if (usuario != null) {
 			request.setAttribute("usuario", usuario);
-
-			String id = request.getParameter("id");
-
-			PacienteControl pacienteControl = new PacienteControl();
-
-			Paciente paciente = pacienteControl.buscarPaciente(id);
-
-			ConvenioControl convenioControl = new ConvenioControl();
-
-			List<Convenio> lista = convenioControl.listarConvenios();
-
-			request.setAttribute("lista", lista);
-
-			if (paciente != null) {
-				request.setAttribute("paciente", paciente);
-				request.getRequestDispatcher(
-						"WEB-INF/administrador/editarPaciente.jsp").forward(
-						request, response);
+			
+			if(usuario.getTipoPerfil().equals("administrador")){
+			
+				String id = request.getParameter("id");
+	
+				PacienteControl pacienteControl = new PacienteControl();
+	
+				Paciente paciente = pacienteControl.buscarPaciente(id);
+	
+				ConvenioControl convenioControl = new ConvenioControl();
+	
+				List<Convenio> lista = convenioControl.listarConvenios();
+	
+				request.setAttribute("lista", lista);
+	
+				if (paciente != null) {
+					request.setAttribute("paciente", paciente);
+					request.getRequestDispatcher(
+							"WEB-INF/administrador/editarPaciente.jsp").forward(
+							request, response);
+				} else {
+					request.setAttribute("erro", "Paciente não encontrado");
+					request.getRequestDispatcher(
+							"WEB-INF/administrador/listarPaciente.jsp").forward(
+							request, response);
+				}
+				
 			} else {
-				request.setAttribute("erro", "Paciente não encontrado");
-				request.getRequestDispatcher(
-						"WEB-INF/administrador/listarPaciente.jsp").forward(
-						request, response);
+				response.sendRedirect("loginServlet");
 			}
+			
 		} else {
 			response.sendRedirect("loginServlet");
 		}

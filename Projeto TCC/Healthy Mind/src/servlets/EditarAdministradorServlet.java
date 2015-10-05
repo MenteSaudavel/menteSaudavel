@@ -41,23 +41,28 @@ public class EditarAdministradorServlet extends HttpServlet {
 		if (usuario != null) {
 			request.setAttribute("usuario", usuario);
 			
-			String id = request.getParameter("id");
+			if(usuario.getTipoPerfil().equals("administrador")){
 			
-			AdministradorControl administradorControl = new AdministradorControl();
+				String id = request.getParameter("id");
+				
+				AdministradorControl administradorControl = new AdministradorControl();
+				
+				Administrador administrador = administradorControl.buscarAdministrador(id);
+				
+				if(administrador != null){
+					request.setAttribute("administrador", administrador);
+					request.getRequestDispatcher(
+							"WEB-INF/administrador/editarAdministrador.jsp").forward(
+							request, response);
+				} else{
+					request.getRequestDispatcher(
+							"WEB-INF/administrador/listarAdministrador.jsp").forward(
+							request, response);
+				}
 			
-			Administrador administrador = administradorControl.buscarAdministrador(id);
-			
-			if(administrador != null){
-				request.setAttribute("administrador", administrador);
-				request.getRequestDispatcher(
-						"WEB-INF/administrador/editarAdministrador.jsp").forward(
-						request, response);
-			} else{
-				request.getRequestDispatcher(
-						"WEB-INF/administrador/listarAdministrador.jsp").forward(
-						request, response);
+			} else {
+				response.sendRedirect("loginServlet");
 			}
-			
 
 		} else {
 			response.sendRedirect("loginServlet");

@@ -42,6 +42,26 @@ public class PacienteDao {
 
 	}
 	
+	public void editarEmail(Paciente paciente){
+		
+		String sql = "update paciente set email=? where idPaciente=?;";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setString(1, paciente.getEmail());
+			stmt.setInt(2, paciente.getId());
+			
+			stmt.execute();
+			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}	
+	
 	public void editarPaciente(Paciente paciente){
 	
 		String sql = "update paciente set nome=?, telefone=?, numeroCarteirinha=?, cpf=?, idConvenio=? where idPaciente=?;";
@@ -222,6 +242,42 @@ public class PacienteDao {
 				
 				lista.add(p);
 			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return lista;
+	}
+	
+	public List<Paciente> pesquisarPacienteEmail(String email){
+		
+		List<Paciente> lista = new ArrayList<Paciente>();
+		
+		String sql = "select * from paciente where email like ?";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setString(1, "%"+email+"%");
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				Paciente paciente = new Paciente();
+				
+				paciente.setId(rs.getInt("idPaciente"));
+				paciente.setNome(rs.getString("nome"));
+				paciente.setTelefone(rs.getString("telefone"));
+				paciente.setNumeroCarteirinha(rs.getString("numeroCarteirinha"));
+				paciente.setCpf(rs.getString("cpf"));
+				paciente.setEmail(rs.getString("email"));
+				
+				lista.add(paciente);
+			}
+			
+			stmt.close();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

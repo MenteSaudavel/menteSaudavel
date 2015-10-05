@@ -7,32 +7,33 @@
 
 					<div class="form-group">
 						<label class="control-label"> Nome do administrador </label> <input
-							type="text" name="nome" required class="form-control">
+							type="text" name="nome" required class="form-control"  data-toggle="tooltip" data-placement="right" title="Nome completo do administrador">
 					</div>
-
+				
 					<div class="form-group">
 						<label class="control-label"> Telefone </label> <input type="text"
-							name="telefone" required class="form-control">
+							name="telefone" required class="form-control" data-toggle="tooltip" data-placement="right" title="Se o administrador não tiver telefone, preencher em escrio (Não possui)">
 					</div>
 
 					<div class="form-group">
 						<label class="control-label"> Função </label> <input type="text"
-							name="funcao" required class="form-control">
+							name="funcao" required class="form-control" data-toggle="tooltip" data-placement="right" title="Função que o administrador exerce na instituição">
 					</div>
 
 					<div class="form-group">
 						<label class="control-label"> E-mail </label> <input type="email"
-							name="email" required class="form-control">
+							name="email" required class="form-control" data-toggle="tooltip" data-placement="right" title="Email do administrador que será utilizado para acessar o sistema">
 					</div>
 					
 					<div class="form-group">
 						<label class="control-label"> Senha </label> <input type="password"
-							name="senha" required class="form-control">
+							name="senha" required class="form-control" data-toggle="tooltip" data-placement="right" title="Para sua segurança, escolha uma senha que 
+							contenha no mínimo 8(oito) caracteres">
 					</div>
 					
 					<div class="form-group">
 						<label class="control-label"> Confirmar Senha </label> <input type="password"
-							name="confirmarSenha" required class="form-control">
+							name="confirmarSenha" required class="form-control" data-toggle="tooltip" data-placement="right" title="Confirme sua senha">
 					</div>
 										
 					<div class="form-group">

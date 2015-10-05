@@ -170,4 +170,12 @@ public class PacienteControl {
 		
 		return lista;
 	}
+	
+	public List<Paciente> pesquisarPacienteEmail(String email){
+		PacienteDao pacienteDao = new PacienteDao();
+		
+		List<Paciente> lista = pacienteDao.pesquisarPacienteEmail(email);
+		
+		return lista;
+	}
 }

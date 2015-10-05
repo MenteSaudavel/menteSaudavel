@@ -45,15 +45,21 @@ public class CadastrarConvenioServlet extends HttpServlet {
 		if (usuario != null) {
 			request.setAttribute("usuario", usuario);
 			
-			UFControl ufControl = new UFControl();
+			if(usuario.getTipoPerfil().equals("administrador")){
 			
-			List<UF> lista = ufControl.listarUF();
+				UFControl ufControl = new UFControl();
+				
+				List<UF> lista = ufControl.listarUF();
+				
+				request.setAttribute("listaUf", lista);
+				
+				request.getRequestDispatcher(
+						"WEB-INF/administrador/cadastrarConvenio.jsp").forward(
+						request, response);
+			} else {
+				response.sendRedirect("loginServlet");
+			}
 			
-			request.setAttribute("listaUf", lista);
-			
-			request.getRequestDispatcher(
-					"WEB-INF/administrador/cadastrarConvenio.jsp").forward(
-					request, response);
 		} else {
 			response.sendRedirect("loginServlet");
 		}

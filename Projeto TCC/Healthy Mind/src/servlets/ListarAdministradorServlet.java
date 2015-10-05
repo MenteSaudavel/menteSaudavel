@@ -42,15 +42,22 @@ public class ListarAdministradorServlet extends HttpServlet {
 		if (usuario != null) {
 			request.setAttribute("usuario", usuario);
 			
-			AdministradorControl administradorControl = new AdministradorControl();
+			if(usuario.getTipoPerfil().equals("administrador")){
 			
-			List<Administrador> lista = administradorControl.listarAdministrador();
+				AdministradorControl administradorControl = new AdministradorControl();
+				
+				List<Administrador> lista = administradorControl.listarAdministrador();
+				
+				request.setAttribute("listaAdministrador", lista);
+				
+				request.getRequestDispatcher(
+						"WEB-INF/administrador/listarAdministrador.jsp").forward(
+						request, response);
+				
+			} else {
+				response.sendRedirect("loginServlet");
+			}
 			
-			request.setAttribute("listaAdministrador", lista);
-			
-			request.getRequestDispatcher(
-					"WEB-INF/administrador/listarAdministrador.jsp").forward(
-					request, response);
 		} else {
 			response.sendRedirect("loginServlet");
 		}

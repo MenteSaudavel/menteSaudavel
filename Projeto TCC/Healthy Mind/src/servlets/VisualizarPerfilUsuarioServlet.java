@@ -41,16 +41,21 @@ public class VisualizarPerfilUsuarioServlet extends HttpServlet {
 		if (usuario != null) {
 			request.setAttribute("usuario", usuario);
 			
-			String email = request.getParameter("email");
+			if(usuario.getTipoPerfil().equals("administrador")){
 			
-			UsuarioControl usuarioControl = new UsuarioControl();
-			
-			List<Usuario> lista = usuarioControl.pesquisarUsuario(email);
-			
-			request.setAttribute("listaUsuario", lista);
-			
-			request.getRequestDispatcher("WEB-INF/administrador/listarUsuario.jsp").forward(request, response);
-			
+				String email = request.getParameter("email");
+				
+				UsuarioControl usuarioControl = new UsuarioControl();
+				
+				List<Usuario> lista = usuarioControl.pesquisarUsuario(email);
+				
+				request.setAttribute("listaUsuario", lista);
+				
+				request.getRequestDispatcher("WEB-INF/administrador/listarUsuario.jsp").forward(request, response);
+				
+			} else {
+				response.sendRedirect("loginServlet");
+			}	
 			
 		} else {
 			response.sendRedirect("loginServlet");

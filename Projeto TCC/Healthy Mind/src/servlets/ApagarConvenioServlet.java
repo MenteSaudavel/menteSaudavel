@@ -42,23 +42,29 @@ public class ApagarConvenioServlet extends HttpServlet {
 		if(usuario != null){
 			request.setAttribute("usuario", usuario);
 		
-			String id = request.getParameter("id");
+			if(usuario.getTipoPerfil().equals("administrador")){
 			
-			ConvenioControl convenioControl = new ConvenioControl();
-			
-			boolean ok = convenioControl.apagarConvenio(id);
-			
-			if(ok){
-				request.setAttribute("apagado", ok);
+				String id = request.getParameter("id");
+				
+				ConvenioControl convenioControl = new ConvenioControl();
+				
+				boolean ok = convenioControl.apagarConvenio(id);
+				
+				if(ok){
+					request.setAttribute("apagado", ok);
+				} else {
+					request.setAttribute("apagado", false);
+				}
+				
+				List<Convenio> lista = convenioControl.listarConvenios();
+				
+				request.setAttribute("listaConvenio", lista);
+				
+				request.getRequestDispatcher("WEB-INF/administrador/listarConvenio.jsp").forward(request, response);
 			} else {
-				request.setAttribute("apagado", false);
+				response.sendRedirect("loginServlet");
 			}
 			
-			List<Convenio> lista = convenioControl.listarConvenios();
-			
-			request.setAttribute("listaConvenio", lista);
-			
-			request.getRequestDispatcher("WEB-INF/administrador/listarConvenio.jsp").forward(request, response);
 		} else {
 			response.sendRedirect("loginServlet");
 		}

@@ -43,16 +43,22 @@ public class VisualizarConsultaServlet extends HttpServlet {
 
 		if (usuario != null) {
 			request.setAttribute("usuario", usuario);
-
-			ConsultaControl consultaControl = new ConsultaControl();
-
-			List<Consulta> lista = consultaControl.visualizarConsulta();
-
-			request.setAttribute("listaConsulta", lista);
-
-			request.getRequestDispatcher(
-					"WEB-INF/paciente/visualizarConsulta.jsp").forward(request,
-					response);
+			
+			if(usuario.getTipoPerfil().equals("paciente")){
+			
+				ConsultaControl consultaControl = new ConsultaControl();
+	
+				List<Consulta> lista = consultaControl.visualizarConsulta();
+	
+				request.setAttribute("listaConsulta", lista);
+	
+				request.getRequestDispatcher(
+						"WEB-INF/paciente/visualizarConsulta.jsp").forward(request,
+						response);
+			} else {
+				response.sendRedirect("loginServlet");
+			}
+				
 		} else {
 			response.sendRedirect("loginServlet");
 		}

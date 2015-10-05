@@ -34,17 +34,23 @@ public class CadastrarAdministradorServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		/*HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 		
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		
 		if(usuario != null){
 			request.setAttribute("usuario", usuario);
-		
-			*/request.getRequestDispatcher("WEB-INF/administrador/cadastrarAdministrador.jsp").forward(request, response);
-		/*} else {
+			
+			if(usuario.getTipoPerfil().equals("administrador")){
+			
+				request.getRequestDispatcher("WEB-INF/administrador/cadastrarAdministrador.jsp").forward(request, response);
+			} else {
+				response.sendRedirect("loginServlet");
+			}
+			
+		} else {
 			response.sendRedirect("loginServlet");
-		}*/
+		}
 	}
 
 	/**
@@ -53,11 +59,11 @@ public class CadastrarAdministradorServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		/*HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 		
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		
-		if(usuario != null){  */
+		if(usuario != null){  
 		
 			String nome = request.getParameter("nome");
 			String telefone = request.getParameter("telefone");
@@ -69,10 +75,10 @@ public class CadastrarAdministradorServlet extends HttpServlet {
 			AdministradorControl administradorControl = new AdministradorControl();
 			
 			try {
-				boolean ok = administradorControl.cadastrarAdministrador(nome, telefone, funcao, email, senha, confirmarSenha);
+				administradorControl.cadastrarAdministrador(nome, telefone, funcao, email, senha, confirmarSenha);
 				
-					request.setAttribute("cadastrado", true);
-					request.getRequestDispatcher("WEB-INF/administrador/cadastrarAdministrador.jsp").forward(request, response);
+				request.setAttribute("cadastrado", true);
+				request.getRequestDispatcher("WEB-INF/administrador/cadastrarAdministrador.jsp").forward(request, response);
 		
 			} catch (UsuarioException e) {
 				// TODO Auto-generated catch block
@@ -80,9 +86,9 @@ public class CadastrarAdministradorServlet extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/administrador/cadastrarAdministrador.jsp").forward(request, response);
 				
 			}
-		/*} else {
+		} else {
 			response.sendRedirect("loginServlet");
-		}    */
+		}    
 
 	}
 

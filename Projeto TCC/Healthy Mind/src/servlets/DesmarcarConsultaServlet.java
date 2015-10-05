@@ -43,29 +43,35 @@ public class DesmarcarConsultaServlet extends HttpServlet {
 
 		if (usuario != null) {
 			request.setAttribute("usuario", usuario);
-
-			String idConsulta = request.getParameter("idConsulta");
-
-			ConsultaControl consultaControl = new ConsultaControl();
-
-			boolean ok = consultaControl.desmarcarConsulta(idConsulta);
-
-			if (ok) {
-				request.setAttribute("desmarcado", true);
-				request.getRequestDispatcher(
-						"WEB-INF/paciente/visualizarConsulta.jsp").forward(
-						request, response);
-
+			
+			if(usuario.getTipoPerfil().equals("paciente")){
+			
+				String idConsulta = request.getParameter("idConsulta");
+	
+				ConsultaControl consultaControl = new ConsultaControl();
+	
+				boolean ok = consultaControl.desmarcarConsulta(idConsulta);
+	
+				if (ok) {
+					request.setAttribute("desmarcado", true);
+					request.getRequestDispatcher(
+							"WEB-INF/paciente/visualizarConsulta.jsp").forward(
+							request, response);
+	
+				} else {
+					request.setAttribute("desmarcado", false);
+					request.getRequestDispatcher(
+							"WEB-INF/paciente/visualizarConsulta.jsp").forward(
+							request, response);
+				}
+	
+				List<Consulta> lista = consultaControl.visualizarConsulta();
+	
+				request.setAttribute("listaConsulta", lista);
+				
 			} else {
-				request.setAttribute("desmarcado", false);
-				request.getRequestDispatcher(
-						"WEB-INF/paciente/visualizarConsulta.jsp").forward(
-						request, response);
+				response.sendRedirect("loginServlet");
 			}
-
-			List<Consulta> lista = consultaControl.visualizarConsulta();
-
-			request.setAttribute("listaConsulta", lista);
 
 		} else {
 			response.sendRedirect("loginServlet");

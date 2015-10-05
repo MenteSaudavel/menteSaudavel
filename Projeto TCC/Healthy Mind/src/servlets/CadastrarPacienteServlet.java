@@ -45,16 +45,22 @@ public class CadastrarPacienteServlet extends HttpServlet {
 
 		if (usuario != null) {
 			request.setAttribute("usuario", usuario);
-
-			ConvenioControl convenioControl = new ConvenioControl();
-
-			List<Convenio> lista = convenioControl.listarConvenios();
-
-			request.setAttribute("lista", lista);
-
-			request.getRequestDispatcher(
-					"WEB-INF/administrador/cadastrarPaciente.jsp").forward(
-					request, response);
+			
+			if(usuario.getTipoPerfil().equals("administrador")){
+			
+				ConvenioControl convenioControl = new ConvenioControl();
+	
+				List<Convenio> lista = convenioControl.listarConvenios();
+	
+				request.setAttribute("lista", lista);
+	
+				request.getRequestDispatcher(
+						"WEB-INF/administrador/cadastrarPaciente.jsp").forward(
+						request, response);
+			} else {
+				response.sendRedirect("loginServlet");
+			}
+				
 		} else {
 			response.sendRedirect("loginServlet");
 		}

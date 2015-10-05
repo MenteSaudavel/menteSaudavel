@@ -40,13 +40,19 @@ public class PesquisarPsicologoServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
-
+		
 		if (usuario != null) {
 			request.setAttribute("usuario", usuario);
-
-			request.getRequestDispatcher(
-					"WEB-INF/administrador/pesquisarPsicologo.jsp").forward(
-					request, response);
+			
+			if(usuario.getTipoPerfil().equals("administrador")){
+			
+				request.getRequestDispatcher(
+						"WEB-INF/administrador/pesquisarPsicologo.jsp").forward(
+						request, response);
+			} else {
+				response.sendRedirect("loginServlet");
+			}
+				
 		} else {
 			response.sendRedirect("loginServlet");
 		}

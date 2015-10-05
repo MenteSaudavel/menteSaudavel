@@ -43,10 +43,16 @@ public class PesquisarPacienteServlet extends HttpServlet {
 
 		if (usuario != null) {
 			request.setAttribute("usuario", usuario);
-
-			request.getRequestDispatcher(
-					"WEB-INF/administrador/pesquisarPaciente.jsp").forward(
-					request, response);
+			
+			if(usuario.getTipoPerfil().equals("administrador")){
+			
+				request.getRequestDispatcher(
+						"WEB-INF/administrador/pesquisarPaciente.jsp").forward(
+						request, response);
+			} else {
+				response.sendRedirect("loginServlet");
+			}	
+			
 		} else {
 			response.sendRedirect("loginServlet");
 		}

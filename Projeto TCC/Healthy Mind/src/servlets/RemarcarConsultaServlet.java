@@ -45,30 +45,37 @@ public class RemarcarConsultaServlet extends HttpServlet {
 
 		if (usuario != null) {
 			request.setAttribute("usuario", usuario);
-
-			String id = request.getParameter("idConsulta");
-
-			ConsultaControl consultaControl = new ConsultaControl();
-
-			Consulta consulta = consultaControl.buscarConsulta(id);
-
-			PsicologoControl psicologoControl = new PsicologoControl();
-
-			List<Psicologo> listaPsciologo = psicologoControl.listarPsicologo();
-
-			request.setAttribute("listaPsicologo", listaPsciologo);
-
-			if (consulta != null) {
-				request.setAttribute("consulta", consulta);
-				request.getRequestDispatcher(
-						"WEB-INF/paciente/remarcarConsulta.jsp").forward(
-						request, response);
+			
+			if(usuario.getTipoPerfil().equals("paciente")){
+			
+				String id = request.getParameter("idConsulta");
+	
+				ConsultaControl consultaControl = new ConsultaControl();
+	
+				Consulta consulta = consultaControl.buscarConsulta(id);
+	
+				PsicologoControl psicologoControl = new PsicologoControl();
+	
+				List<Psicologo> listaPsciologo = psicologoControl.listarPsicologo();
+	
+				request.setAttribute("listaPsicologo", listaPsciologo);
+	
+				if (consulta != null) {
+					request.setAttribute("consulta", consulta);
+					request.getRequestDispatcher(
+							"WEB-INF/paciente/remarcarConsulta.jsp").forward(
+							request, response);
+				} else {
+					request.setAttribute("erro", "Consulta não encontrada");
+					request.getRequestDispatcher(
+							"WEB-INF/paciente/visualizarConsulta.jsp").forward(
+							request, response);
+				}
+				
 			} else {
-				request.setAttribute("erro", "Consulta não encontrada");
-				request.getRequestDispatcher(
-						"WEB-INF/paciente/visualizarConsulta.jsp").forward(
-						request, response);
+				response.sendRedirect("loginServlet");
 			}
+				
 		} else {
 			response.sendRedirect("loginServlet");
 		}

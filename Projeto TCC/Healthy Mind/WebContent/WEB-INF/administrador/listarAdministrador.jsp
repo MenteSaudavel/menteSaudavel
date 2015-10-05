@@ -1,5 +1,5 @@
 <%@ include file="topAdm.jsp" %>
-
+	
 		<div class="panel panel-primary">
 		  <!-- Default panel contents -->
 		  <div class="panel-heading"><span class="glyphicon glyphicon-th-list"></span> <b>Lista de Administradores</b></div>
@@ -31,7 +31,7 @@
 					 	<a href="editarAdministradorServlet?id=${administrador.id }" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-edit"></span></a> 
 					 </td>
 					 <td class="text-center">
-					 	<a href="visualizarPerfilUsuarioServlet?email=${administrador.email }" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-eye-open"></span></a> 
+					 	<a href="visualizarPerfilUsuarioServlet?email=${administrador.email }" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open"></span></a> 
 					</tr>
 				</c:forEach>
 		  </table>
@@ -42,23 +42,33 @@
 			<div class="col-sm-7 control-label"> <button type="submit" class="btn btn-primary">  <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Voltar </button> </div>
 		</div>
 	</form>		 
+	
+	<!-- Modal -->
+	<div class="modal fade bs-example-modal-lg" id="myModal">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+	
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div>
+	 <br>
+	 <br>
 	 
-	 <br>
-	 <br>
 	 <c:if test="${apagado == true }">
 	 	<div class="alert alert-success alert-dismissible" role="alert">
 	 		<span class="glyphicon glyphicon-thumbs-up"></span>
-	 		Administrador apagado com sucesso!
+	 		Convênio apagado com sucesso!
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	 	</div>
 	 </c:if>
 	 <c:if test="${apagado == false }">
 	 	<div class="alert alert-danger alert-dismissible" role="alert">
 	 		<span class="glyphicon glyphicon-alert"></span>
-	 		Erro ao apagar administrador, tente novamente.
+	 		Erro ao apagar convênio, tente novamente.
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	 	</div>
 	 </c:if>	 
+	 
 	 <c:if test="${editado == true }">
 	 	<div class="alert alert-success alert-dismissible" role="alert">
 	 		<span class="glyphicon glyphicon-thumbs-up"></span>

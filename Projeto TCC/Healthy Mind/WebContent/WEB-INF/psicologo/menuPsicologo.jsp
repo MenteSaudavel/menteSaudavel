@@ -1,5 +1,7 @@
 <%@ include file="topPsicologo.jsp" %>
-
+	
+	<link href="css/carousel.css" rel="stylesheet">
+	
 	<div id="carousel-example-generic" class="carousel slide"
 		data-ride="carousel">
 		<!-- Indicators -->
@@ -12,11 +14,18 @@
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
-				<img alt="" src="img/msg inicio3.png">
+			
+					<c:forEach var="psicologo" items="${listaPsicologo }">
+						<h1 align=center>Seja bem-vindo(a)</h1>
+						<h1 align=center>${psicologo.nome }</h1>
+					</c:forEach>
+					
 				<div class="carousel-caption">...</div>
 			</div>
 			<div class="item">
-				<img alt="" src="img/msg inicio3.png">
+				<p align=center>
+					<img alt="" src="img/logo-slogan-novo1.png">
+				</p>
 				<div class="carousel-caption">...</div>
 			</div>
 			

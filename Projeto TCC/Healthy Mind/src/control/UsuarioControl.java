@@ -41,9 +41,9 @@ public class UsuarioControl {
 		return usuarioDao.logar(usuario);
 	}
 	
-	public boolean editarUsuario(String email, String senha, String confirmarSenha) throws UsuarioException{
+	public boolean editarUsuario(String email, String senhaNova, String confirmarSenha, String tipoPerfil, String id, String idUsuario) throws UsuarioException{
 		
-		if(!senha.equals(confirmarSenha)){
+		if(!senhaNova.equals(confirmarSenha)){
 			throw new UsuarioException("Os campos senha e confirmar senha não coicidem, tente novamente.");
 		}
 		
@@ -52,7 +52,7 @@ public class UsuarioControl {
 		
 		try {
 			algorithm = MessageDigest.getInstance("SHA-256");
-	        byte hashSenha[] = algorithm.digest(senha.getBytes());
+	        byte hashSenha[] = algorithm.digest(senhaNova.getBytes());
 	        
 	        senhaConvertida = new String(hashSenha);
 		
@@ -62,10 +62,23 @@ public class UsuarioControl {
 			
 		}
 		
+		int idConvertido;
+		int idUsuarioConvertido;
+		
+		try{
+			idConvertido = Integer.parseInt(id);
+			idUsuarioConvertido = Integer.parseInt(idUsuario);
+			
+		}catch(NumberFormatException e){
+			throw new UsuarioException(e.getMessage());
+		}
+		
 		Usuario usuario = new Usuario();
 		
 		usuario.setEmail(email);
 		usuario.setSenha(senhaConvertida);
+		usuario.setTipoPerfil(tipoPerfil);
+		usuario.setId(idUsuarioConvertido);
 		
 		UsuarioDao usuarioDao = new UsuarioDao();
 		usuarioDao.editarUsuario(usuario);
@@ -73,10 +86,11 @@ public class UsuarioControl {
 		if(usuario.getTipoPerfil().equals("administrador")){
 			
 			Administrador administrador = new Administrador();
+			administrador.setId(idConvertido);
 			administrador.setEmail(email);
 			
 			AdministradorDao administradorDao = new AdministradorDao();
-			administradorDao.editarAdministrador(administrador);
+			administradorDao.editarEmail(administrador);
 			
 			return true;
 		}
@@ -84,21 +98,25 @@ public class UsuarioControl {
 		if(usuario.getTipoPerfil().equals("paciente")){
 			
 			Paciente paciente = new Paciente();
+			
+			paciente.setId(idConvertido);
 			paciente.setEmail(email);
 			
 			PacienteDao pacienteDao = new PacienteDao();
-			pacienteDao.editarPaciente(paciente);
+			pacienteDao.editarEmail(paciente);
 			
 			return true;
-		}
+		} 
 		
 		if(usuario.getTipoPerfil().equals("psicologo")){
 			
 			Psicologo psicologo = new Psicologo();
+			
+			psicologo.setId(idConvertido);
 			psicologo.setEmail(email);
 			
 			PsicologoDao psicologoDao = new PsicologoDao();
-			psicologoDao.editarPsicologo(psicologo);
+			psicologoDao.editarEmail(psicologo);
 			
 			return true;
 		}

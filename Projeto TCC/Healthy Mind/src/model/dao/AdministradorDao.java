@@ -38,6 +38,25 @@ public class AdministradorDao {
 		}
 	}
 	
+	public void editarEmail(Administrador administrador){
+		
+		String sql = "update administrador set email=? where id=?";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setString(1, administrador.getEmail());
+			stmt.setInt(2, administrador.getId());
+			
+			stmt.execute();
+			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}	
+	
 	public void editarAdministrador(Administrador administrador){
 		
 		String sql = "update administrador set nome=?, telefone=?, funcao=? where id=?";
@@ -141,5 +160,40 @@ public class AdministradorDao {
 		}
 		
 		return administrador;
+	}
+	
+	public List<Administrador> pesquisarAdministrador(String email){
+		
+		List<Administrador> lista = new ArrayList<Administrador>();
+		
+		String sql = "select * from administrador where email like ?";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setString(1, "%"+email+"%");
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				Administrador adm = new Administrador();
+				
+				adm.setId(rs.getInt("id"));
+				adm.setNome(rs.getString("nome"));
+				adm.setTelefone(rs.getString("telefone"));
+				adm.setFuncao(rs.getString("funcao"));
+				adm.setEmail(rs.getString("email"));
+				
+				lista.add(adm);
+			}
+			
+			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return lista;
 	}
 }

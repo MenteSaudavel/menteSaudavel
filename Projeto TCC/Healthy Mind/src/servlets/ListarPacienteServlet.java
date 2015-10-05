@@ -45,22 +45,27 @@ public class ListarPacienteServlet extends HttpServlet {
 
 		if (usuario != null) {
 			request.setAttribute("usuario", usuario);
-
-			PacienteControl pacienteControl = new PacienteControl();
-
-			List<Paciente> lista = pacienteControl.listarPaciente();
-
-			request.setAttribute("listaPaciente", lista);
-
-			ConvenioControl convenioControl = new ConvenioControl();
-
-			List<Convenio> listac = convenioControl.listarConvenios();
-
-			request.setAttribute("listac", listac);
-
-			request.getRequestDispatcher(
-					"WEB-INF/administrador/listarPaciente.jsp").forward(
-					request, response);
+			
+			if(usuario.getTipoPerfil().equals("administrador")){
+			
+				PacienteControl pacienteControl = new PacienteControl();
+	
+				List<Paciente> lista = pacienteControl.listarPaciente();
+	
+				request.setAttribute("listaPaciente", lista);
+	
+				ConvenioControl convenioControl = new ConvenioControl();
+	
+				List<Convenio> listac = convenioControl.listarConvenios();
+	
+				request.setAttribute("listac", listac);
+	
+				request.getRequestDispatcher(
+						"WEB-INF/administrador/listarPaciente.jsp").forward(
+						request, response);
+			} else {
+				response.sendRedirect("loginServlet");
+			}
 
 		} else {
 			response.sendRedirect("loginServlet");

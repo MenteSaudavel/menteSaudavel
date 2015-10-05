@@ -1,5 +1,16 @@
 <%@ include file="topAdm.jsp" %>
-
+	
+	<link href="css/carousel.css" rel="stylesheet">
+	
+	<style>
+		.centro-vertical {
+		  position: absolute;
+		  top: 50%;
+		  left:50%;
+		  transform: translate(-50%,-50%);
+		}
+	</style>
+	
 	<div id="carousel-example-generic" class="carousel slide"
 		data-ride="carousel">
 		<!-- Indicators -->
@@ -12,10 +23,14 @@
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
-			<p align=center>
-				<img alt="" src="img/msg inicio4.png">
-			</p>
-				<div class="carousel-caption"></div>
+			
+					<c:forEach var="administrador" items="${listaAdministrador }">
+						<h1 align=center>Seja bem-vindo(a)</h1>
+						<h1 align=center>${administrador.nome }</h1>
+					</c:forEach>
+				<div class="carousel-caption">
+					
+				</div>
 			</div>
 			<div class="item">
 				<p align=center>

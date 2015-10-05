@@ -42,23 +42,29 @@ public class ApagarPacienteServlet extends HttpServlet {
 		if(usuario != null){
 			request.setAttribute("usuario", usuario);
 		
-			String id = request.getParameter("id");
+			if(usuario.getTipoPerfil().equals("administrador")){
 			
-			PacienteControl pacienteControl = new PacienteControl();
-			
-			boolean ok = pacienteControl.apagarPaciente(id);
-			
-			if(ok){
-				request.setAttribute("apagado", ok);
-			} else{
-				request.setAttribute("apagado", "Ocorreu um erro ao apagar, por favor tente novamente.");
+				String id = request.getParameter("id");
+				
+				PacienteControl pacienteControl = new PacienteControl();
+				
+				boolean ok = pacienteControl.apagarPaciente(id);
+				
+				if(ok){
+					request.setAttribute("apagado", ok);
+				} else{
+					request.setAttribute("apagado", "Ocorreu um erro ao apagar, por favor tente novamente.");
+				}
+				
+				List<Paciente> lista = pacienteControl.listarPaciente();
+				
+				request.setAttribute("listaPaciente", lista);
+				
+				request.getRequestDispatcher("WEB-INF/administrador/listarPaciente.jsp").forward(request, response);
+			} else {
+				response.sendRedirect("loginServlet");
 			}
 			
-			List<Paciente> lista = pacienteControl.listarPaciente();
-			
-			request.setAttribute("listaPaciente", lista);
-			
-			request.getRequestDispatcher("WEB-INF/administrador/listarPaciente.jsp").forward(request, response);
 		} else {
 			response.sendRedirect("loginServlet");
 		}

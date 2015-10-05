@@ -16,7 +16,6 @@
 					<td class="text-center"><b>Cidade</b>
 					<td class="text-center"><b>UF</b>
 					<td class="text-center"><b>Editar</b></td>
-					<td class="text-center"><b>Apagar</b></td>
 				</tr>
 			</thead>
 			
@@ -39,9 +38,6 @@
 						<td class="text-center">${convenio.uf.nome }</td>
 						<td class="text-center"> 
 							<a href="editarConvenioServlet?id=${convenio.id }" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-edit"></span></a> 
-						</td>
-						<td class="text-center">
-							<a href="apagarConvenioServlet?id=${convenio.id }" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a> 
 						</td>
 					</tr>
 				</c:forEach>

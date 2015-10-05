@@ -16,7 +16,6 @@ import model.vo.Usuario;
 import control.ConsultaControl;
 import control.PacienteControl;
 import control.PsicologoControl;
-import control.UsuarioControl;
 
 /**
  * Servlet implementation class AgendarConsultaServlet
@@ -46,29 +45,36 @@ public class AgendarConsultaServlet extends HttpServlet {
 		if(usuario != null){
 			request.setAttribute("usuario", usuario);
 			
-			String email = usuario.getEmail();
+			if(usuario.getTipoPerfil().equals("paciente")){
+				
+				String email = usuario.getEmail();
+				
+				PacienteControl pacienteControl = new PacienteControl();
+				
+				List<Paciente> listaIdConvenio = pacienteControl.pesquisarConvenioPaciente(email);
+				
+				request.setAttribute("listaIdConvenio", listaIdConvenio);
+				
+				String idConvenio = request.getParameter("idConvenio");
+				
+				PsicologoControl psicologoControl = new PsicologoControl();
+				
+				List<Psicologo> listaPsicologo = psicologoControl.listarPsicologoSelect(idConvenio);
+				
+				request.setAttribute("listaPsicologo", listaPsicologo);
+				
+				/*PsicologoControl psicologoControl = new PsicologoControl();
+				
+				List<Psicologo> listaPsicologo = psicologoControl.listarPsicologo();
+				
+				request.setAttribute("listaPsicologo", listaPsicologo);*/
+				
+				request.getRequestDispatcher("WEB-INF/paciente/agendarConsulta.jsp").forward(request, response);
+			} else{
+				response.sendRedirect("loginServlet");
+			}
 			
-			PacienteControl pacienteControl = new PacienteControl();
 			
-			List<Paciente> listaIdConvenio = pacienteControl.pesquisarConvenioPaciente(email);
-			
-			request.setAttribute("listaIdConvenio", listaIdConvenio);
-			
-			String idConvenio = request.getParameter("idConvenio");
-			
-			PsicologoControl psicologoControl = new PsicologoControl();
-			
-			List<Psicologo> listaPsicologo = psicologoControl.listarPsicologoSelect(idConvenio);
-			
-			request.setAttribute("listaPsicologo", listaPsicologo);
-			
-			/*PsicologoControl psicologoControl = new PsicologoControl();
-			
-			List<Psicologo> listaPsicologo = psicologoControl.listarPsicologo();
-			
-			request.setAttribute("listaPsicologo", listaPsicologo);*/
-			
-			request.getRequestDispatcher("WEB-INF/paciente/agendarConsulta.jsp").forward(request, response);
 		} else {
 			response.sendRedirect("loginServlet");
 		}

@@ -43,7 +43,7 @@
 							 	<a href="editarPsicologoServlet?id=${psicologo.id }" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-edit"></span></a> 
 							 </td>
 							 <td class="text-center">
-							 	<a href="visualizarPerfilUsuarioServlet?email=${psicologo.email }" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-eye-open"></span></a>
+							 	<a href="visualizarPerfilUsuarioServlet?email=${psicologo.email }" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open"></span></a>
 							 </td>
 							</tr>
 						</c:forEach>
@@ -69,6 +69,15 @@
 	        </div>
 	    </div>
 	</div>
+	 
+	<!-- Modal -->
+	<div class="modal fade bs-example-modal-lg" id="myModal">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+	
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div>	 
 	 
 	 <form method="get" action="menuPacienteServlet" class="form-group">
 		<div class="form-group">

@@ -179,4 +179,12 @@ public class PsicologoControl {
 		
 		return lista;
 	}
+	
+	public List<Psicologo> pesquisarPsicologoEmail(String email){
+		PsicologoDao psicologoDao = new PsicologoDao();
+		
+		List<Psicologo> lista = psicologoDao.pesquisarPsicologoEmail(email);
+		
+		return lista;
+	}
 }

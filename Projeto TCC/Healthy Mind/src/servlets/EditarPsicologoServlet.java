@@ -45,30 +45,37 @@ public class EditarPsicologoServlet extends HttpServlet {
 
 		if (usuario != null) {
 			request.setAttribute("usuario", usuario);
-
-			String id = request.getParameter("id");
-
-			PsicologoControl psicologoControl = new PsicologoControl();
-
-			Psicologo psicologo = psicologoControl.buscarPsicologo(id);
-
-			ConvenioControl convenioControl = new ConvenioControl();
-
-			List<Convenio> lista = convenioControl.listarConvenios();
-
-			request.setAttribute("lista", lista);
-
-			if (psicologo != null) {
-				request.setAttribute("psicologo", psicologo);
-				request.getRequestDispatcher(
-						"WEB-INF/administrador/editarPsicologo.jsp").forward(
-						request, response);
+			
+			if(usuario.getTipoPerfil().equals("administrador")){
+			
+				String id = request.getParameter("id");
+	
+				PsicologoControl psicologoControl = new PsicologoControl();
+	
+				Psicologo psicologo = psicologoControl.buscarPsicologo(id);
+	
+				ConvenioControl convenioControl = new ConvenioControl();
+	
+				List<Convenio> lista = convenioControl.listarConvenios();
+	
+				request.setAttribute("lista", lista);
+	
+				if (psicologo != null) {
+					request.setAttribute("psicologo", psicologo);
+					request.getRequestDispatcher(
+							"WEB-INF/administrador/editarPsicologo.jsp").forward(
+							request, response);
+				} else {
+					request.setAttribute("erro", "Psicologo não encontrado");
+					request.getRequestDispatcher(
+							"WEB-INF/administrador/listarPsicologo.jsp").forward(
+							request, response);
+				}
+				
 			} else {
-				request.setAttribute("erro", "Psicologo não encontrado");
-				request.getRequestDispatcher(
-						"WEB-INF/administrador/listarPsicologo.jsp").forward(
-						request, response);
+				response.sendRedirect("loginServlet");
 			}
+			
 		} else {
 			response.sendRedirect("loginServlet");
 		}

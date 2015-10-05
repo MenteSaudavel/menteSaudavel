@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import control.AdministradorControl;
+import control.PacienteControl;
+import control.PsicologoControl;
 import control.UsuarioControl;
 import control.UsuarioException;
 import model.vo.Usuario;
@@ -51,6 +54,11 @@ public class EditarUsuarioServlet extends HttpServlet {
 				
 				if(usuario.getTipoPerfil().equals("administrador")){
 					request.setAttribute("user", user);
+					
+					AdministradorControl administradorControl = new AdministradorControl();
+					
+					request.setAttribute("listaAdministrador", administradorControl.pesquisarAdministrador(usuario.getEmail()));
+					
 					request.getRequestDispatcher(
 							"WEB-INF/administrador/editarUsuario.jsp").forward(
 							request, response);
@@ -58,6 +66,11 @@ public class EditarUsuarioServlet extends HttpServlet {
 				
 				if(usuario.getTipoPerfil().equals("paciente")){
 					request.setAttribute("user", user);
+					
+					PacienteControl pacienteControl = new PacienteControl();
+					
+					request.setAttribute("listaPaciente", pacienteControl.pesquisarPacienteEmail(usuario.getEmail()));
+					
 					request.getRequestDispatcher(
 							"WEB-INF/paciente/editarUsuario.jsp").forward(
 							request, response);
@@ -65,6 +78,11 @@ public class EditarUsuarioServlet extends HttpServlet {
 				
 				if(usuario.getTipoPerfil().equals("psicologo")){
 					request.setAttribute("user", user);
+					
+					PsicologoControl psicologoControl = new PsicologoControl();
+					
+					request.setAttribute("listaPsicologo", psicologoControl.pesquisarPsicologoEmail(usuario.getEmail()));
+					
 					request.getRequestDispatcher(
 							"WEB-INF/psicologo/editarUsuario.jsp").forward(
 							request, response);
@@ -93,39 +111,54 @@ public class EditarUsuarioServlet extends HttpServlet {
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 
 		if (usuario != null) {
+			request.setAttribute("usuario", usuario);
 			
+			String id = request.getParameter("id");
+			String idUsuario = String.valueOf(usuario.getId());
 			String email = request.getParameter("email");
-			String senha = request.getParameter("senha");
+			String senhaNova = request.getParameter("senhaNova");
 			String confirmarSenha = request.getParameter("confirmarSenha");
+			String tipoPerfil = usuario.getTipoPerfil();
 			
 			UsuarioControl usuarioControl = new UsuarioControl();
 			
 			
 			try {
-				usuarioControl.editarUsuario(email, senha, confirmarSenha);
 				
 				if(usuario.getTipoPerfil().equals("administrador")){
+					
+					usuarioControl.editarUsuario(email, senhaNova, confirmarSenha, tipoPerfil, id, idUsuario);
 					
 					request.setAttribute("editado", true);
 					request.getRequestDispatcher(
 							"WEB-INF/administrador/editarUsuario.jsp").forward(
 							request, response);
+				} else{
+					request.setAttribute("editado", false);
 				}
 				
 				if(usuario.getTipoPerfil().equals("paciente")){
+					
+					usuarioControl.editarUsuario(email, senhaNova, confirmarSenha, tipoPerfil, id, idUsuario);
 					
 					request.setAttribute("editado", true);
 					request.getRequestDispatcher(
 							"WEB-INF/paciente/editarUsuario.jsp").forward(
 							request, response);
+				} else{
+					request.setAttribute("editado", false);
 				}
 				
 				if(usuario.getTipoPerfil().equals("psicologo")){
+					
+					usuarioControl.editarUsuario(email, senhaNova, confirmarSenha, tipoPerfil, id, idUsuario);
 					
 					request.setAttribute("editado", true);
 					request.getRequestDispatcher(
 							"WEB-INF/psicologo/editarUsuario.jsp").forward(
 							request, response);
+				} else{
+					request.setAttribute("editado", false);
 				}
 
 			} catch (UsuarioException e) {

@@ -40,18 +40,24 @@ public class AtivarUsuarioServlet extends HttpServlet {
 		if(usuario != null){
 			request.setAttribute("usuario", usuario);
 			
-			String id = request.getParameter("id");
+			if(usuario.getTipoPerfil().equals("administrador")){
 			
-			UsuarioControl usuarioControl = new UsuarioControl();
-			
-			boolean ok = usuarioControl.ativarUsuario(id);
-			
-			if(ok){
-				request.setAttribute("ativado", true);
+				String id = request.getParameter("id");
 				
-				request.getRequestDispatcher("WEB-INF/administrador/listarUsuario.jsp").forward(request, response);
-			} else{
-				request.setAttribute("ativado", false);
+				UsuarioControl usuarioControl = new UsuarioControl();
+				
+				boolean ok = usuarioControl.ativarUsuario(id);
+				
+				if(ok){
+					request.setAttribute("ativado", true);
+					
+					request.getRequestDispatcher("WEB-INF/administrador/listarUsuario.jsp").forward(request, response);
+					
+				} else{
+					request.setAttribute("ativado", false);
+				}
+			} else {
+				response.sendRedirect("loginServlet");
 			}
 	
 		} else {
