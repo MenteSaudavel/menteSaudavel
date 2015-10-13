@@ -9,6 +9,7 @@ import java.util.List;
 
 import model.vo.Convenio;
 import model.vo.Psicologo;
+import model.vo.UF;
 
 public class PsicologoDao {
 	Connection conexao;
@@ -16,13 +17,15 @@ public class PsicologoDao {
 	public PsicologoDao() {
 		this.conexao = new FabricaConexoes().getConexao();
 	}
+	
 	/**
 	 * Método para cadastrar psicólogo
 	 * @param psicologo
 	 */
+	
 	public void cadastrarPsicologo(Psicologo psicologo){
 		
-		String sql = "insert into psicologo (nome, telefoneConsultorio, idConvenio, crp, email) values (?,?,?,?,?);";
+		String sql = "insert into psicologo (nome, telefoneConsultorio, idConvenio, idConvenio2, idConvenio3, idConvenio4, idConvenio5, crp, idUf, email) values (?,?,?,?,?,?,?,?,?,?);";
 		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -32,8 +35,33 @@ public class PsicologoDao {
 			
 			stmt.setInt(3, psicologo.getConvenio().getId());
 			
-			stmt.setString(4, psicologo.getCrp());
-			stmt.setString(5, psicologo.getEmail());
+			if(psicologo.getConvenio2()==null){
+				stmt.setNull(4, 0);
+			} else {
+				stmt.setInt(4, psicologo.getConvenio2().getId());
+			}
+			
+			if(psicologo.getConvenio3()==null){
+				stmt.setNull(5, 0);
+			} else {
+				stmt.setInt(5, psicologo.getConvenio3().getId());
+			}
+			
+			if(psicologo.getConvenio4()==null){
+				stmt.setNull(6, 0);
+			} else {
+				stmt.setInt(6, psicologo.getConvenio4().getId());
+			}
+			
+			if(psicologo.getConvenio5()==null){
+				stmt.setNull(7, 0);
+			} else {
+				stmt.setInt(7, psicologo.getConvenio5().getId());
+			}
+			
+			stmt.setString(8, psicologo.getCrp());
+			stmt.setInt(9, psicologo.getUf().getId());
+			stmt.setString(10, psicologo.getEmail());
 			
 			stmt.execute();
 			stmt.close();
@@ -63,7 +91,7 @@ public class PsicologoDao {
 	
 	public void editarPsicologo(Psicologo psicologo){
 		
-		String sql = "update psicologo set nome=?, telefoneConsultorio=?, idConvenio=?, crp=? where idPsicologo=?;";
+		String sql = "update psicologo set nome=?, telefoneConsultorio=?, idConvenio=?, idConvenio2=?, idConvenio3=?, idConvenio4=?, idConvenio5=?, crp=? where idPsicologo=?";
 		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -71,8 +99,33 @@ public class PsicologoDao {
 			stmt.setString(1, psicologo.getNome());
 			stmt.setString(2, psicologo.getTelefoneConsultorio());
 			stmt.setInt(3, psicologo.getConvenio().getId());
-			stmt.setString(4, psicologo.getCrp());
-			stmt.setInt(5, psicologo.getId());
+			
+			if(psicologo.getConvenio2()==null){
+				stmt.setNull(4, 0);
+			} else {
+				stmt.setInt(4, psicologo.getConvenio2().getId());
+			}
+			
+			if(psicologo.getConvenio3()==null){
+				stmt.setNull(5, 0);
+			} else {
+				stmt.setInt(5, psicologo.getConvenio3().getId());
+			}
+			
+			if(psicologo.getConvenio4()==null){
+				stmt.setNull(6, 0);
+			} else {
+				stmt.setInt(6, psicologo.getConvenio4().getId());
+			}
+			
+			if(psicologo.getConvenio5()==null){
+				stmt.setNull(7, 0);
+			} else {
+				stmt.setInt(7, psicologo.getConvenio5().getId());
+			}
+			
+			stmt.setString(8, psicologo.getCrp());
+			stmt.setInt(9, psicologo.getId());
 
 			stmt.execute();
 			stmt.close();
@@ -123,26 +176,34 @@ public class PsicologoDao {
 		
 		List<Psicologo> lista = new ArrayList<Psicologo>();
 		
-		String sql = "select * from psicologo;";
+		String sql = "select p.idPsicologo, p.nome, p.telefoneConsultorio, p.idConvenio, p.idConvenio2, p.idConvenio3, p.idConvenio4, p.idConvenio5, p.crp, p.email, p.idUf, uf.sigla, group_concat(distinct c.nome order by p.nome asc separator ', ') as Convenios from psicologo as p join convenio as c on p.idConvenio = c.idConvenio or p.idConvenio2 = c.idConvenio or p.idConvenio3 = c.idConvenio or p.idConvenio4 = c.idConvenio or p.idConvenio5 = c.idConvenio join uf on p.idUf = uf.idUf group by p.idPsicologo";
 		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			
 			
 			ResultSet rs = stmt.executeQuery();
-			ConvenioDao convenioDao = new ConvenioDao();
 			
 			while(rs.next()){
 				
 				Psicologo p = new Psicologo();
-				Convenio c = convenioDao.buscarConvenio(rs.getInt("idConvenio"));
 				
-				p.setId(rs.getInt("idPsicologo"));
-				p.setNome(rs.getString("nome"));
-				p.setTelefoneConsultorio(rs.getString("telefoneConsultorio"));
+				p.setId(rs.getInt("p.idPsicologo"));
+				p.setNome(rs.getString("p.nome"));
+				p.setTelefoneConsultorio(rs.getString("p.telefoneConsultorio"));
+				
+				Convenio c = new Convenio();
+				c.setNome(rs.getString("Convenios"));
 				p.setConvenio(c);
-				p.setCrp(rs.getString("crp"));
-				p.setEmail(rs.getString("email"));
+				
+				p.setCrp(rs.getString("p.crp"));
+				
+				UF uf = new UF();
+				uf.setId(rs.getInt("p.idUf"));
+				uf.setSigla(rs.getString("uf.sigla"));
+				p.setUf(uf);
+				
+				p.setEmail(rs.getString("p.email"));
 				
 				lista.add(p);
 			}
@@ -157,7 +218,7 @@ public class PsicologoDao {
 	
 	public Psicologo buscarPsicologo(int id){
 		
-		Psicologo psicologo = new Psicologo();
+		Psicologo p = new Psicologo();
 		
 		String sql = "select * from psicologo where idPsicologo=?";
 		
@@ -167,18 +228,26 @@ public class PsicologoDao {
 			stmt.setInt(1, id);
 			
 			ResultSet rs = stmt.executeQuery();
+			
 			ConvenioDao convenioDao = new ConvenioDao();
 			
 			rs.next();
 			Convenio c = convenioDao.buscarConvenio(rs.getInt("idConvenio"));
+			Convenio c2 = convenioDao.buscarConvenio(rs.getInt("idConvenio2"));
+			Convenio c3 = convenioDao.buscarConvenio(rs.getInt("idConvenio3"));
+			Convenio c4 = convenioDao.buscarConvenio(rs.getInt("idConvenio4"));
+			Convenio c5 = convenioDao.buscarConvenio(rs.getInt("idConvenio5"));
 			
-			psicologo.setNome(rs.getString("nome"));
-			psicologo.setTelefoneConsultorio(rs.getString("telefoneConsultorio"));
-			psicologo.setConvenio(c);
-			psicologo.setCrp(rs.getString("crp"));
-			psicologo.setEmail(rs.getString("email"));
-			psicologo.setId(rs.getInt("idPsicologo"));
-			
+			p.setNome(rs.getString("nome"));
+			p.setTelefoneConsultorio(rs.getString("telefoneConsultorio"));
+			p.setConvenio(c);
+			p.setConvenio2(c2);
+			p.setConvenio3(c3);
+			p.setConvenio4(c4);
+			p.setConvenio5(c5);
+			p.setCrp(rs.getString("crp"));
+			p.setEmail(rs.getString("email"));
+			p.setId(rs.getInt("idPsicologo"));
 			stmt.close();
 				
 		} catch (SQLException e) {
@@ -186,7 +255,7 @@ public class PsicologoDao {
 			e.printStackTrace();
 		}
 		
-		return psicologo;
+		return p;
 	}
 	
 	public void apagarPsicologo(Psicologo psicologo){

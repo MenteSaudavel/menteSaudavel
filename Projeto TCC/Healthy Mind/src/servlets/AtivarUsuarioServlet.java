@@ -51,8 +51,6 @@ public class AtivarUsuarioServlet extends HttpServlet {
 				if(ok){
 					request.setAttribute("ativado", true);
 					
-					request.getRequestDispatcher("WEB-INF/administrador/listarUsuario.jsp").forward(request, response);
-					
 				} else{
 					request.setAttribute("ativado", false);
 				}

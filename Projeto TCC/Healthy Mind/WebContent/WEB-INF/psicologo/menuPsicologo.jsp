@@ -2,6 +2,21 @@
 	
 	<link href="css/carousel.css" rel="stylesheet">
 	
+	<style>
+		.centro-vertical {
+		  position: absolute;
+		  top: 50%;
+		  left:50%;
+		  transform: translate(-50%,-50%);
+		  font-family: Times New Roman;
+		  font-style: oblique;
+		}
+		
+		h1{
+			font-size: 50px;
+		}
+	</style>	
+	
 	<div id="carousel-example-generic" class="carousel slide"
 		data-ride="carousel">
 		<!-- Indicators -->
@@ -15,10 +30,16 @@
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
 			
-					<c:forEach var="psicologo" items="${listaPsicologo }">
-						<h1 align=center>Seja bem-vindo(a)</h1>
-						<h1 align=center>${psicologo.nome }</h1>
-					</c:forEach>
+				<c:forEach var="psicologo" items="${listaPsicologo }">
+					<table class="centro-vertical">
+					<tr>
+						<td><h1 align=center>Seja bem-vindo(a)</h1></td>
+					</tr>
+					<tr>
+						<td><h1 align=center>${psicologo.nome }</h1></td>
+					</tr>
+					</table>
+				</c:forEach>
 					
 				<div class="carousel-caption">...</div>
 			</div>

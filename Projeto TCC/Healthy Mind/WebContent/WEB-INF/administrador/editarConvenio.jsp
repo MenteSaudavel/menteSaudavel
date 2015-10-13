@@ -67,7 +67,7 @@
 				
 				<div class="form-group">
 					<div class="control-label pull-right">
-						<button type="reset" class="btn btn-warning">
+						<button type="reset" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Este botão restaura o valor de todos os campos ao original">
 							Restaurar <span class="glyphicon glyphicon-refresh"
 								aria-hidden="true"></span>
 						</button>

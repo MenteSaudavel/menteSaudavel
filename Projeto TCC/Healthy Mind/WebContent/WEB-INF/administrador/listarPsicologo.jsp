@@ -21,8 +21,9 @@
 				    	<tr class="info">
 							<td class="text-center"> <b> Nome do Psicólogo </b></td>
 							<td class="text-center"> <b> Telefone do Consultório </b></td>
-							<td class="text-center"> <b> Convênio </b></td>
+							<td class="text-center"> <b> Convênios </b></td>
 							<td class="text-center"> <b> Número do CRP </b></td>
+							<td class="text-center"> <b> Região do CRP </b></td>
 							<td class="text-center"> <b> Editar </b></td>
 							<td class="text-center"> <b> Ver Perfil </b></td>
 						</tr>
@@ -39,6 +40,7 @@
 							 <td class="text-center"> ${psicologo.telefoneConsultorio } </td>
 							 <td class="text-center"> ${psicologo.convenio.nome } </td>
 							 <td class="text-center"> ${psicologo.crp } </td>
+							 <td class="text-center"> ${psicologo.uf.sigla } </td>
 							 <td class="text-center">
 							 	<a href="editarPsicologoServlet?id=${psicologo.id }" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-edit"></span></a> 
 							 </td>

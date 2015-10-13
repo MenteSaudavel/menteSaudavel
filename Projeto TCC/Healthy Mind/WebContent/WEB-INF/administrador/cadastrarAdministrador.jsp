@@ -12,7 +12,7 @@
 				
 					<div class="form-group">
 						<label class="control-label"> Telefone </label> <input type="text"
-							name="telefone" required class="form-control" data-toggle="tooltip" data-placement="right" title="Se o administrador não tiver telefone, preencher em escrio (Não possui)">
+							name="telefone" required class="form-control" data-toggle="tooltip" data-placement="right" title="Se o administrador não tiver telefone, preencher em escrio (Não possui). O telefone deve ser preenchido no formato: (00) 0000-0000">
 					</div>
 
 					<div class="form-group">
@@ -38,7 +38,7 @@
 										
 					<div class="form-group">
 						<div class="control-label pull-right">
-							<button type="reset" class="btn btn-danger">
+							<button type="reset" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Este botão limpa o valor cadastrado em todos os campos">
 								Limpar <span class="glyphicon glyphicon-erase"
 									aria-hidden="true"></span>
 							</button>

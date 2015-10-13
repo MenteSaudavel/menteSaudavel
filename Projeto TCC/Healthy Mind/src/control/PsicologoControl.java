@@ -8,11 +8,12 @@ import model.dao.PsicologoDao;
 import model.dao.UsuarioDao;
 import model.vo.Convenio;
 import model.vo.Psicologo;
+import model.vo.UF;
 import model.vo.Usuario;
 
 public class PsicologoControl {
 	
-	public boolean cadastrarPsicologo(String nome, String telefoneConsultorio, String idConvenio, String crp, String email, String confCrp) throws UsuarioException{
+	public boolean cadastrarPsicologo(String nome, String telefoneConsultorio, String idConvenio, String idConvenio2, String idConvenio3, String idConvenio4, String idConvenio5, String crp, String idUf, String email, String confCrp) throws UsuarioException{
 		
 		if(!crp.equals(confCrp)){
 			throw new UsuarioException("O número do CRP não foi digitado corretamente nos dois campos, tente novamente.");
@@ -34,14 +35,21 @@ public class PsicologoControl {
 		}
 		
 		int idConvenioConvertido;
+		int idUfConvertido;
 		
 		try{
 			
 			idConvenioConvertido = Integer.parseInt(idConvenio);
+			idUfConvertido = Integer.parseInt(idUf);
 			
 		} catch(NumberFormatException e){
 			return false;
 		}
+		
+		int idConvenioConvertido2;
+		int idConvenioConvertido3;
+		int idConvenioConvertido4;
+		int idConvenioConvertido5;
 		
 		Psicologo psicologo = new Psicologo();
 		
@@ -52,7 +60,75 @@ public class PsicologoControl {
 		convenio.setId(idConvenioConvertido);
 		psicologo.setConvenio(convenio);
 		
+		Convenio convenio2 = new Convenio();
+		
+		if(idConvenio2.isEmpty()){
+			psicologo.setConvenio2(null);
+		} else {
+			
+			try{
+				idConvenioConvertido2 = Integer.parseInt(idConvenio2);
+			} catch(NumberFormatException e){
+				return false;
+			}
+			
+			convenio2.setId(idConvenioConvertido2);
+			psicologo.setConvenio2(convenio2);
+		}
+		
+		Convenio convenio3 = new Convenio();
+		
+		if(idConvenio3.isEmpty()){
+			psicologo.setConvenio3(null);
+		} else {
+			
+			try{
+				idConvenioConvertido3 = Integer.parseInt(idConvenio3);
+			} catch (NumberFormatException e){
+				return false;
+			}
+			
+			convenio3.setId(idConvenioConvertido3);
+			psicologo.setConvenio3(convenio3);
+		}
+		
+		Convenio convenio4 = new Convenio();
+		
+		if(idConvenio4.isEmpty()){
+			psicologo.setConvenio4(null);
+		} else {
+			
+			try{
+				idConvenioConvertido4 = Integer.parseInt(idConvenio4);
+			} catch(NumberFormatException e){
+				return false;
+			}
+			
+			convenio4.setId(idConvenioConvertido4);
+			psicologo.setConvenio4(convenio4);
+		}
+		
+		Convenio convenio5 = new Convenio();
+		
+		if(idConvenio5.isEmpty()){
+			psicologo.setConvenio5(null);
+		} else {
+			try{
+				idConvenioConvertido5 = Integer.parseInt(idConvenio5);
+			} catch(NumberFormatException e){
+				return false;
+			}
+			
+			convenio5.setId(idConvenioConvertido5);
+			psicologo.setConvenio5(convenio5);
+		}
+		
 		psicologo.setCrp(crp);
+		
+		UF uf = new UF();
+		uf.setId(idUfConvertido);
+		psicologo.setUf(uf);
+		
 		psicologo.setEmail(email);
 		
 		PsicologoDao psicologoDao = new PsicologoDao();
@@ -70,7 +146,7 @@ public class PsicologoControl {
 		return true;
 	}
 	
-	public boolean editarPsicologo(String nome, String telefoneConsultorio, String idConvenio, String crp, String id){
+	public boolean editarPsicologo(String nome, String telefoneConsultorio, String idConvenio, String idConvenio2, String idConvenio3, String idConvenio4, String idConvenio5, String crp, String id){
 		
 		int idConvertido;
 		int idConvenioConvertido;
@@ -80,6 +156,11 @@ public class PsicologoControl {
 			
 			idConvenioConvertido = Integer.parseInt(idConvenio);
 			
+			int idConvenioConvertido2;
+			int idConvenioConvertido3;
+			int idConvenioConvertido4;
+			int idConvenioConvertido5;
+			
 			Psicologo psicologo = new Psicologo();
 			
 			psicologo.setNome(nome);
@@ -88,6 +169,69 @@ public class PsicologoControl {
 			Convenio convenio = new Convenio();
 			convenio.setId(idConvenioConvertido);
 			psicologo.setConvenio(convenio);
+			
+			Convenio convenio2 = new Convenio();
+			
+			if(idConvenio2.isEmpty()){
+				psicologo.setConvenio2(null);
+			} else {
+				
+				try{
+					idConvenioConvertido2 = Integer.parseInt(idConvenio2);
+				} catch(NumberFormatException e){
+					return false;
+				}
+				
+				convenio2.setId(idConvenioConvertido2);
+				psicologo.setConvenio2(convenio2);
+			}
+			
+			Convenio convenio3 = new Convenio();
+			
+			if(idConvenio3.isEmpty()){
+				psicologo.setConvenio3(null);
+			} else {
+				
+				try{
+					idConvenioConvertido3 = Integer.parseInt(idConvenio3);
+				} catch (NumberFormatException e){
+					return false;
+				}
+				
+				convenio3.setId(idConvenioConvertido3);
+				psicologo.setConvenio3(convenio3);
+			}
+			
+			Convenio convenio4 = new Convenio();
+			
+			if(idConvenio4.isEmpty()){
+				psicologo.setConvenio4(null);
+			} else {
+				
+				try{
+					idConvenioConvertido4 = Integer.parseInt(idConvenio4);
+				} catch(NumberFormatException e){
+					return false;
+				}
+				
+				convenio4.setId(idConvenioConvertido4);
+				psicologo.setConvenio4(convenio4);
+			}
+			
+			Convenio convenio5 = new Convenio();
+			
+			if(idConvenio5.isEmpty()){
+				psicologo.setConvenio5(null);
+			} else {
+				try{
+					idConvenioConvertido5 = Integer.parseInt(idConvenio5);
+				} catch(NumberFormatException e){
+					return false;
+				}
+				
+				convenio5.setId(idConvenioConvertido5);
+				psicologo.setConvenio5(convenio5);
+			}
 			
 			psicologo.setCrp(crp);
 			psicologo.setId(idConvertido);

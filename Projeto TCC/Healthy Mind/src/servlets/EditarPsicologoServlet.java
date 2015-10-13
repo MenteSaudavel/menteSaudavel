@@ -99,13 +99,16 @@ public class EditarPsicologoServlet extends HttpServlet {
 			String telefoneConsultorio = request
 					.getParameter("telefoneConsultorio");
 			String idConvenio = request.getParameter("idConvenio");
+			String idConvenio2 = request.getParameter("idConvenio2");
+			String idConvenio3 = request.getParameter("idConvenio3");
+			String idConvenio4 = request.getParameter("idConvenio4");
+			String idConvenio5 = request.getParameter("idConvenio5");
 			String crp = request.getParameter("crp");
 			String id = request.getParameter("id");
 
 			PsicologoControl psicologoControl = new PsicologoControl();
 
-			boolean ok = psicologoControl.editarPsicologo(nome,
-					telefoneConsultorio, idConvenio, crp, id);
+			boolean ok = psicologoControl.editarPsicologo(nome, telefoneConsultorio, idConvenio, idConvenio2, idConvenio3, idConvenio4, idConvenio5, crp, id);
 			
 			request.setAttribute("listaPsicologo",
 					psicologoControl.listarPsicologo());

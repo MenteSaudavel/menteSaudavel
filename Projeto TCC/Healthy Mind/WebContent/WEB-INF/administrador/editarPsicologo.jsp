@@ -22,14 +22,50 @@
 				<div class="form-group">
 					<label class="control-label">Convênio</label>
 					
-						<select name="idConvenio" class="form-control">
+						<select name="idConvenio" class="form-control" data-toggle="tooltip" data-placement="right" title="Selecione somente os convênios que o psicólogo atende, se sobrar espaço não selecionar nada">
 								<option></option>
 							<c:forEach var="convenio" items="${lista}">	
 									
 								<option value="${convenio.id }" <c:if test="${psicologo.convenio.id == convenio.id }"> selected </c:if> >${convenio.nome }</option>
 									
 							</c:forEach>	
-						</select>	
+						</select>
+						<br>
+						<div class="collapse" id="collapseExample">
+							  <div class="form-group">
+							  
+									<select name="idConvenio2" class="form-control" data-toggle="tooltip" data-placement="right" title="Selecione somente os convênios que o psicólogo atende, se sobrar espaço não selecionar nada">
+										<option></option>
+											<c:forEach var="convenio" items="${lista}">	
+												<option value="${convenio.id }" <c:if test="${psicologo.convenio2.id == convenio.id }"> selected </c:if> >${convenio.nome }</option>
+											</c:forEach>	
+									</select>
+									<br>
+									<select name="idConvenio3" class="form-control" data-toggle="tooltip" data-placement="right" title="Selecione somente os convênios que o psicólogo atende, se sobrar espaço não selecionar nada">
+										<option></option>
+											<c:forEach var="convenio" items="${lista}">	
+												<option value="${convenio.id }" <c:if test="${psicologo.convenio3.id == convenio.id }"> selected </c:if> >${convenio.nome }</option>
+											</c:forEach>	
+									</select>
+									<br>
+									<select name="idConvenio4" class="form-control" data-toggle="tooltip" data-placement="right" title="Selecione somente os convênios que o psicólogo atende, se sobrar espaço não selecionar nada">
+										<option></option>
+											<c:forEach var="convenio" items="${lista}">	
+												<option value="${convenio.id }" <c:if test="${psicologo.convenio4.id == convenio.id }"> selected </c:if> >${convenio.nome }</option>
+											</c:forEach>	
+									</select>
+									<br>
+									<select name="idConvenio5" class="form-control" data-toggle="tooltip" data-placement="right" title="Selecione somente os convênios que o psicólogo atende, se sobrar espaço não selecionar nada">
+										<option></option>
+											<c:forEach var="convenio" items="${lista}">	
+												<option value="${convenio.id }" <c:if test="${psicologo.convenio5.id == convenio.id }"> selected </c:if> >${convenio.nome }</option>
+														
+											</c:forEach>	
+									</select>  
+							  </div>
+							</div>
+							
+							<button class="btn btn-info" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Mostrar mais convênios <span class="glyphicon glyphicon-zoom-in"></span> </button>	
 				</div>
 				
 				<div class="form-group">
@@ -39,7 +75,7 @@
 	
 				<div class="form-group">
 					<div class="control-label pull-right">
-						<button type="reset" class="btn btn-warning">
+						<button type="reset" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Este botão restaura o valor de todos os campos ao original">
 							Restaurar <span class="glyphicon glyphicon-refresh"
 								aria-hidden="true"></span>
 						</button>

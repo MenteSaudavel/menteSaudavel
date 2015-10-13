@@ -1,7 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
-
+	<c:forEach var="u" items="${listaUsuario}">
+	<input type="hidden" value="${u.tipoPerfil }" name="tipoPerfil">
 		<div class="modal-content">
 			<div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -19,22 +20,19 @@
 						<td class="text-center"> <b> Inativar </b></td>
 						<td class="text-center"> <b> Ativar </b></td>
 					</tr>
-					
-					<c:forEach var="u" items="${listaUsuario}">
-						<input type="hidden" value="${u.tipoPerfil }" name="tipoPerfil">
-						<tr >
+					<tr >
 						 <td class="text-center"> ${u.email } </td>
 						 <td class="text-center"> <c:if test="${u.tipoPerfil == 'administrador' }">Administrador</c:if> <c:if test="${u.tipoPerfil == 'paciente' }">Paciente</c:if> <c:if test="${u.tipoPerfil == 'psicologo' }">Psicólogo</c:if> </td>
 						 <td class="text-center"> <c:choose> <c:when test="${u.statusPerfil == false}">Ativo</c:when> <c:when test="${u.statusPerfil == true}">Inativo</c:when> </c:choose> </td>
 						 <td class="text-center">
-						 	<a href="inativarUsuarioServlet?id=${u.id }" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-ban-circle"></span></a> 
+						 	<a href="inativarUsuarioServlet?id=${u.id }" class="btn btn-warning btn-sm" id="inativar"><span class="glyphicon glyphicon-ban-circle"></span></a> 
 						 </td>
 						 <td class="text-center">
-						 	<a href="ativarUsuarioServlet?id=${u.id }" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok-circle"></span></a>
+						 	<a href="ativarUsuarioServlet?id=${u.id }" class="btn btn-success btn-sm" id="ativar"><span class="glyphicon glyphicon-ok-circle"></span></a>
 						 </td>
-						</tr>
+					</tr>
 						
-					</c:forEach>
+					
 			  </table>		        
 		      
 	<c:if test="${inativado == true }">
@@ -70,8 +68,10 @@
 		    </div>
 		    
 		    <div class="modal-footer">
-		        <button type="button" class="btn btn-info" data-dismiss="modal">Ok</button>
+		    	<c:if test="${u.tipoPerfil == 'administrador' }"><a href="listarAdministradorServlet" class="btn btn-info">Ok</a></c:if>
+		    	<c:if test="${u.tipoPerfil == 'paciente' }"><a href="listarPacienteServlet" class="btn btn-info">Ok</a></c:if>
+		    	<c:if test="${u.tipoPerfil == 'psicologo' }"><a href="listarPsicologoServlet" class="btn btn-info">Ok</a></c:if>
 		    </div>
 		</div><!-- /.modal-content -->
-
+</c:forEach>
 	
