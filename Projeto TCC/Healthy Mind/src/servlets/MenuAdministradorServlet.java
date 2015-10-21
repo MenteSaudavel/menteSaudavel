@@ -48,10 +48,12 @@ public class MenuAdministradorServlet extends HttpServlet {
 				
 				List<Administrador> lista = administradorControl.pesquisarAdministrador(usuario.getEmail());
 				
+				request.setAttribute("listaAdministradorUsuario", lista);
+				
 				request.setAttribute("listaAdministrador", lista);
 
 				request.getRequestDispatcher("WEB-INF/administrador/menuAdministrador.jsp").forward(request, response);
-		
+	
 			} else {
 				response.sendRedirect("loginServlet");
 			}

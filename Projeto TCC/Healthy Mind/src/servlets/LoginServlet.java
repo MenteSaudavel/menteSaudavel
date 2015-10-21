@@ -55,38 +55,43 @@ public class LoginServlet extends HttpServlet {
 			
 			if(usuario != null){
 				
-				
-				if(usuario.getTipoPerfil().equals("administrador")){
+				if(String.valueOf(usuario.isStatusPerfil()).equals("false")){
 					
-					request.getSession().invalidate();
+					if(usuario.getTipoPerfil().equals("administrador")){
+						
+						request.getSession().invalidate();
+						
+						HttpSession session = request.getSession();
+						
+						session.setAttribute("usuario", usuario);
+						
+						response.sendRedirect("menuAdministradorServlet");
+					} 
 					
-					HttpSession session = request.getSession();
+					if(usuario.getTipoPerfil().equals("paciente")){
+						
+						request.getSession().invalidate();
+						
+						HttpSession session = request.getSession();
+						
+						session.setAttribute("usuario", usuario);
+						
+						response.sendRedirect("menuPacienteServlet");
+					}
 					
-					session.setAttribute("usuario", usuario);
+					if(usuario.getTipoPerfil().equals("psicologo")){
+						
+						request.getSession().invalidate();
+						
+						HttpSession session = request.getSession();
+						
+						session.setAttribute("usuario", usuario);
+						
+						response.sendRedirect("menuPsicologoServlet");
+					}
+				} else {
 					
-					response.sendRedirect("menuAdministradorServlet");
-				} 
-				
-				if(usuario.getTipoPerfil().equals("paciente")){
-					
-					request.getSession().invalidate();
-					
-					HttpSession session = request.getSession();
-					
-					session.setAttribute("usuario", usuario);
-					
-					response.sendRedirect("menuPacienteServlet");
-				}
-				
-				if(usuario.getTipoPerfil().equals("psicologo")){
-					
-					request.getSession().invalidate();
-					
-					HttpSession session = request.getSession();
-					
-					session.setAttribute("usuario", usuario);
-					
-					response.sendRedirect("menuPsicologoServlet");
+					request.getRequestDispatcher("WEB-INF/mensagens/mensagemPerfilInativo.jsp").forward(request, response);
 				}
 				
 				

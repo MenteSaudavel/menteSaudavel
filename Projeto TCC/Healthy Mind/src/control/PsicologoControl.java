@@ -331,4 +331,46 @@ public class PsicologoControl {
 		
 		return lista;
 	}
+	
+	public boolean vincularUsuario(String idUsuario, String email){
+		
+		int idUsuarioConvertido;
+		
+		try{
+			idUsuarioConvertido = Integer.parseInt(idUsuario);
+		} catch(NumberFormatException e){
+			return false;
+		}
+		
+		Usuario usuario = new Usuario();
+		usuario.setId(idUsuarioConvertido);
+		
+		Psicologo psicologo = new Psicologo();
+		psicologo.setUsuario(usuario);
+		psicologo.setEmail(email);
+		
+		PsicologoDao psicologoDao = new PsicologoDao();
+		psicologoDao.vincularUsuario(psicologo);
+		
+		return true;
+	}
+	
+	public List<Psicologo> listarUsuario(String id){
+		
+		List<Psicologo> lista;
+		
+		int idConvertido;
+		
+		try{
+			idConvertido = Integer.parseInt(id);
+		} catch(NumberFormatException e){
+			return null;
+		}
+		
+		PsicologoDao psicologoDao = new PsicologoDao();
+		
+		lista = psicologoDao.listarUsuario(idConvertido);
+		
+		return lista;
+	}
 }

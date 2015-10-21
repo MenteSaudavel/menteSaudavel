@@ -17,7 +17,7 @@
 					
 					<div class="form-group">
 						<label class="control-label"> CPF </label>
-						<input type="text" name="cpf" required class="form-control" data-toggle="tooltip" data-placement="right" title="CPF do paciente">
+						<input type="text" name="cpf" required class="form-control" data-toggle="tooltip" data-placement="right" title="O CPF do paciente deve ser preenchido no formato: 000.000.000-00">
 					</div>
 					
 					<div class="form-group">

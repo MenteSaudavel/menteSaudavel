@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.vo.Administrador;
+import model.vo.Usuario;
 
 public class AdministradorDao {
 
@@ -99,6 +100,10 @@ public class AdministradorDao {
 				adm.setFuncao(rs.getString("funcao"));
 				adm.setEmail(rs.getString("email"));
 				
+				Usuario u = new Usuario();
+				u.setId(rs.getInt("idUsuario"));
+				adm.setUsuario(u);
+				
 				lista.add(adm);
 			}
 			
@@ -152,6 +157,10 @@ public class AdministradorDao {
 			administrador.setFuncao(rs.getString("funcao"));
 			administrador.setEmail(rs.getString("email"));
 			
+			Usuario u = new Usuario();
+			u.setId(rs.getInt("idUsuario"));
+			administrador.setUsuario(u);
+			
 			stmt.close();
 			
 		} catch (SQLException e) {
@@ -184,7 +193,69 @@ public class AdministradorDao {
 				adm.setFuncao(rs.getString("funcao"));
 				adm.setEmail(rs.getString("email"));
 				
+				Usuario u = new Usuario();
+				u.setId(rs.getInt("idUsuario"));
+				adm.setUsuario(u);
+				
 				lista.add(adm);
+			}
+			
+			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return lista;
+	}
+	
+	public void vincularUsuario(Administrador administrador){
+		
+		String sql = "update administrador set idUsuario=? where email like ?";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setInt(1, administrador.getUsuario().getId());
+			stmt.setString(2, administrador.getEmail());
+			
+			stmt.execute();
+			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public List<Administrador> listarUsuario(int id){
+		List<Administrador> lista = new ArrayList<Administrador>();
+		
+		String sql = "select a.id, u.id, u.email, u.tipoPerfil, u.statusPerfil from usuario as u join administrador as a on u.id=a.idUsuario where a.id=?";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setInt(1, id);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				
+				Administrador administrador = new Administrador();
+				
+				administrador.setId(rs.getInt("a.id"));
+				
+				Usuario usuario = new Usuario();
+				usuario.setId(rs.getInt("u.id"));
+				usuario.setEmail(rs.getString("u.email"));
+				usuario.setTipoPerfil(rs.getString("u.tipoPerfil"));
+				usuario.setStatusPerfil(rs.getBoolean("u.statusPerfil"));
+				
+				administrador.setUsuario(usuario);
+				
+				lista.add(administrador);
 			}
 			
 			stmt.close();

@@ -7,6 +7,7 @@ public class Administrador {
 	private String telefone;
 	private String funcao;
 	private String email;
+	private Usuario Usuario;
 	
 	public int getId() {
 		return id;
@@ -47,6 +48,16 @@ public class Administrador {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public Usuario getUsuario() {
+		return Usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		Usuario = usuario;
+	}
+
+	
 	
 	
 	

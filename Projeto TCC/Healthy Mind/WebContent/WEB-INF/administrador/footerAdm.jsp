@@ -7,5 +7,6 @@
 		  $('[data-toggle="tooltip"]').tooltip()
 		})
 	</script>
+	<br>
 </body>
 </html>

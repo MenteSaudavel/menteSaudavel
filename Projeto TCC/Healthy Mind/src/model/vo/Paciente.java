@@ -9,6 +9,7 @@ public class Paciente {
 	private String cpf;
 	private Convenio Convenio;
 	private String email;
+	private Usuario Usuario;
 	
 	public String getNome() {
 		return nome;
@@ -64,6 +65,14 @@ public class Paciente {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Usuario getUsuario() {
+		return Usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		Usuario = usuario;
 	}
 	
 	

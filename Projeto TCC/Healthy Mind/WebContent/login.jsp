@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -173,9 +172,23 @@
 				aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 			</button>
-			<strong>Usuário não encontrado!</strong>
+			<strong>Usuário não encontrado ou senha incorreta!</strong>
 		</div>
 	</c:if>
+	
+	<div class="container marketing navbar-fixed-bottom">
+
+		<!-- FOOTER -->
+		<footer class="footer">
+			<hr>
+			<p>
+				&copy; 2015 Mente Saudável.  &middot; <a href="entrarEmContato.jsp">Fale Conosco</a> &middot;
+			</p>
+		</footer>
+
+	</div>
+	<!-- /.container -->
+	
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="js/jquery-1.11.3.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->

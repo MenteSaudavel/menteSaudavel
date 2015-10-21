@@ -9,6 +9,7 @@ import java.util.List;
 
 import model.vo.Convenio;
 import model.vo.Paciente;
+import model.vo.Usuario;
 
 public class PacienteDao {
 
@@ -127,7 +128,7 @@ public class PacienteDao {
 		
 		List<Paciente> lista = new ArrayList<Paciente>();
 		
-		String sql = "select * from paciente;";
+		String sql = "select * from paciente";
 		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -149,6 +150,10 @@ public class PacienteDao {
 				p.setConvenio(c);
 				
 				p.setEmail(rs.getString("email"));
+				
+				Usuario u = new Usuario();
+				u.setId(rs.getInt("idUsuario"));
+				p.setUsuario(u);
 				
 				lista.add(p); 
 
@@ -273,6 +278,68 @@ public class PacienteDao {
 				paciente.setNumeroCarteirinha(rs.getString("numeroCarteirinha"));
 				paciente.setCpf(rs.getString("cpf"));
 				paciente.setEmail(rs.getString("email"));
+				
+				Usuario u = new Usuario();
+				u.setId(rs.getInt("idUsuario"));
+				paciente.setUsuario(u);
+				
+				lista.add(paciente);
+			}
+			
+			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return lista;
+	}
+	
+	public void vincularUsuario(Paciente paciente){
+		
+		String sql = "update paciente set idUsuario=? where email like ?";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setInt(1, paciente.getUsuario().getId());
+			stmt.setString(2, paciente.getEmail());
+			
+			stmt.execute();
+			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public List<Paciente> listarUsuario(int id){
+		List<Paciente> lista = new ArrayList<Paciente>();
+		
+		String sql = "select p.idPaciente, u.id, u.email, u.tipoPerfil, u.statusPerfil from usuario as u join paciente as p on u.id=p.idUsuario where p.idPaciente=?";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setInt(1, id);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				
+				Paciente paciente = new Paciente();
+				
+				paciente.setId(rs.getInt("p.idPaciente"));
+				
+				Usuario usuario = new Usuario();
+				usuario.setId(rs.getInt("u.id"));
+				usuario.setEmail(rs.getString("u.email"));
+				usuario.setTipoPerfil(rs.getString("u.tipoPerfil"));
+				usuario.setStatusPerfil(rs.getBoolean("u.statusPerfil"));
+				
+				paciente.setUsuario(usuario);
 				
 				lista.add(paciente);
 			}

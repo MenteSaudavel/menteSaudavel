@@ -32,6 +32,15 @@ public class AdministradorControl {
 			
 		} 
 		
+		Usuario usuario = new Usuario();
+		
+		usuario.setEmail(email);
+		usuario.setSenha(senhaConvertida);
+		usuario.setTipoPerfil("administrador");
+		
+		UsuarioDao usuarioDao = new UsuarioDao();
+		usuarioDao.cadastrarUsuario(usuario);
+		
 		Administrador administrador = new Administrador();
 		
 		administrador.setNome(nome);
@@ -41,15 +50,6 @@ public class AdministradorControl {
 		
 		AdministradorDao administradorDao = new AdministradorDao();
 		administradorDao.cadastrarAdministrador(administrador);
-		
-		Usuario usuario = new Usuario();
-		
-		usuario.setEmail(email);
-		usuario.setSenha(senhaConvertida);
-		usuario.setTipoPerfil("administrador");
-		
-		UsuarioDao usuarioDao = new UsuarioDao();
-		usuarioDao.cadastrarUsuario(usuario);
 		
 		return true;
 		
@@ -132,6 +132,48 @@ public class AdministradorControl {
 		AdministradorDao administradorDao = new AdministradorDao();
 		
 		lista = administradorDao.pesquisarAdministrador(email);
+		
+		return lista;
+	}
+	
+	public boolean vincularUsuario(String idUsuario, String email){
+		
+		int idUsuarioConvertido;
+		
+		try{
+			idUsuarioConvertido = Integer.parseInt(idUsuario);
+		} catch(NumberFormatException e){
+			return false;
+		}
+		
+		Usuario usuario = new Usuario();
+		usuario.setId(idUsuarioConvertido);
+		
+		Administrador administrador = new Administrador();
+		administrador.setUsuario(usuario);
+		administrador.setEmail(email);
+		
+		AdministradorDao administradorDao = new AdministradorDao();
+		administradorDao.vincularUsuario(administrador);
+		
+		return true;
+	}
+	
+	public List<Administrador> listarUsuario(String id){
+		
+		List<Administrador> lista;
+		
+		int idConvertido;
+		
+		try{
+			idConvertido = Integer.parseInt(id);
+		} catch(NumberFormatException e){
+			return null;
+		}
+		
+		AdministradorDao administradorDao = new AdministradorDao();
+		
+		lista = administradorDao.listarUsuario(idConvertido);
 		
 		return lista;
 	}

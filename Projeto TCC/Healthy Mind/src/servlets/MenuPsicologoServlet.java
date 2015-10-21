@@ -46,9 +46,13 @@ public class MenuPsicologoServlet extends HttpServlet {
 				
 				PsicologoControl psicologoContro = new PsicologoControl();
 				
-				List<Psicologo> lista = psicologoContro.pesquisarPsicologoEmail(usuario.getEmail());
+				String email = usuario.getEmail();
+				
+				List<Psicologo> lista = psicologoContro.pesquisarPsicologoEmail(email);
 				
 				request.setAttribute("listaPsicologo", lista);
+				
+				request.setAttribute("listaPsicologoUsuario", lista);
 		
 				request.getRequestDispatcher("WEB-INF/psicologo/menuPsicologo.jsp").forward(request, response);
 			} else {

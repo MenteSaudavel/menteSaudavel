@@ -28,11 +28,11 @@ public class ConvenioDao {
 			
 			ResultSet rs = stmt.executeQuery();
 			
-			UF uf = new UF();
-			
 			while(rs.next()){
 				
 				Convenio c = new Convenio();
+				
+				UF uf = new UF();
 				
 				uf.setId(rs.getInt("uf.idUf"));
 				uf.setCodigoIbge(rs.getInt("uf.codigo_ibge"));

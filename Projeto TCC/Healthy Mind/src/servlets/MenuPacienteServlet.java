@@ -48,6 +48,8 @@ public class MenuPacienteServlet extends HttpServlet {
 				
 				List<Paciente> lista = pacienteControl.pesquisarPacienteEmail(usuario.getEmail());
 				
+				request.setAttribute("listaPacienteUsuario", lista);
+				
 				request.setAttribute("listaPaciente", lista);
 				
 				request.getRequestDispatcher("WEB-INF/paciente/menuPaciente.jsp").forward(request, response);

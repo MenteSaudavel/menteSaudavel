@@ -45,11 +45,36 @@
 				</div>
 				
 			</form>
+			
+			<c:forEach var="psicologo" items="${listaPsicologoUsuario }">
+			  <c:if test="${psicologo.usuario.id == 0}">
+				<form action="vincularUsuarioServlet" method="post">
+					<button class="btn btn-warning" type="submit"><span class="badge"><b>Clique aqui para confirmar seu perfil</b> <span class="glyphicon glyphicon-alert"></span></span></button>
+				</form>
+			   </c:if>
+			</c:forEach>
+			
 		</div>
 	</div>
 </div>
 
 	<br>
+	<c:if test="${vinculado == true }">
+		<div class="alert alert-success alert-dismissible" role="alert">
+	 		<span class="glyphicon glyphicon-thumbs-up"></span>
+	 		Perfil confirmado com sucesso!
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	 	</div>
+	</c:if>
+	
+	<c:if test="${vinculado == false }">
+		<div class="alert alert-danger alert-dismissible" role="alert">
+	 		<span class="glyphicon glyphicon-alert"></span>
+	 		Erro ao confirmar perfil, recarregue a página e tente novamente.
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	 	</div>
+	</c:if>
+	
 	<c:if test="${editado == true }">
 		<div class="alert alert-success alert-dismissible" role="alert">
 	 		<span class="glyphicon glyphicon-thumbs-up"></span>

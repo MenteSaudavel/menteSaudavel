@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,9 @@ import control.PacienteControl;
 import control.PsicologoControl;
 import control.UsuarioControl;
 import control.UsuarioException;
+import model.vo.Administrador;
+import model.vo.Paciente;
+import model.vo.Psicologo;
 import model.vo.Usuario;
 
 /**
@@ -57,11 +61,18 @@ public class EditarUsuarioServlet extends HttpServlet {
 					
 					AdministradorControl administradorControl = new AdministradorControl();
 					
-					request.setAttribute("listaAdministrador", administradorControl.pesquisarAdministrador(usuario.getEmail()));
+					String email = usuario.getEmail();
+					
+					request.setAttribute("listaAdministrador", administradorControl.pesquisarAdministrador(email));
+					
+					List<Administrador> lista = administradorControl.pesquisarAdministrador(email);
+					
+					request.setAttribute("listaAdministradorUsuario", lista);
 					
 					request.getRequestDispatcher(
 							"WEB-INF/administrador/editarUsuario.jsp").forward(
 							request, response);
+					
 				}
 				
 				if(usuario.getTipoPerfil().equals("paciente")){
@@ -69,7 +80,13 @@ public class EditarUsuarioServlet extends HttpServlet {
 					
 					PacienteControl pacienteControl = new PacienteControl();
 					
-					request.setAttribute("listaPaciente", pacienteControl.pesquisarPacienteEmail(usuario.getEmail()));
+					String email = usuario.getEmail();
+					
+					request.setAttribute("listaPaciente", pacienteControl.pesquisarPacienteEmail(email));
+					
+					List<Paciente> lista = pacienteControl.pesquisarPacienteEmail(email);
+		
+					request.setAttribute("listaPacienteUsuario", lista);
 					
 					request.getRequestDispatcher(
 							"WEB-INF/paciente/editarUsuario.jsp").forward(
@@ -81,7 +98,13 @@ public class EditarUsuarioServlet extends HttpServlet {
 					
 					PsicologoControl psicologoControl = new PsicologoControl();
 					
+					String email = usuario.getEmail();
+					
 					request.setAttribute("listaPsicologo", psicologoControl.pesquisarPsicologoEmail(usuario.getEmail()));
+					
+					List<Psicologo> lista = psicologoControl.pesquisarPsicologoEmail(email);
+		
+					request.setAttribute("listaPsicologoUsuario", lista);
 					
 					request.getRequestDispatcher(
 							"WEB-INF/psicologo/editarUsuario.jsp").forward(

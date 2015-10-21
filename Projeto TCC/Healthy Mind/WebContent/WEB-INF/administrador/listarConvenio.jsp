@@ -4,7 +4,7 @@
 	
 		<div class="panel-heading"><span class="glyphicon glyphicon-th-list"></span> <b>Lista de Convênios</b> </div>
 		
-		<table class="table table-bordered">
+		<table class="table table-hover">
 			<thead>
 				<tr class="info">
 					<td class="text-center"><b>Nome do Convênio</b></td>

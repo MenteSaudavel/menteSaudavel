@@ -178,4 +178,47 @@ public class PacienteControl {
 		
 		return lista;
 	}
+	
+	public boolean vincularUsuario(String idUsuario, String email){
+		
+		int idUsuarioConvertido;
+		
+		try{
+			idUsuarioConvertido = Integer.parseInt(idUsuario);
+		} catch(NumberFormatException e){
+			return false;
+		}
+		
+		Usuario usuario = new Usuario();
+		usuario.setId(idUsuarioConvertido);
+		
+		Paciente paciente = new Paciente();
+		paciente.setUsuario(usuario);
+		paciente.setEmail(email);
+		
+		PacienteDao pacienteDao = new PacienteDao();
+		pacienteDao.vincularUsuario(paciente);
+		
+		return true;
+		
+	}
+	
+	public List<Paciente> listarUsuario(String id){
+		
+		List<Paciente> lista;
+		
+		int idConvertido;
+		
+		try{
+			idConvertido = Integer.parseInt(id);
+		} catch(NumberFormatException e){
+			return null;
+		}
+		
+		PacienteDao pacienteDao = new PacienteDao();
+		
+		lista = pacienteDao.listarUsuario(idConvertido);
+		
+		return lista;
+	}
 }

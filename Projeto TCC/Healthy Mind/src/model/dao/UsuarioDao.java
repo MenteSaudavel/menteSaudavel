@@ -39,7 +39,7 @@ public class UsuarioDao {
 	
 	public Usuario logar(Usuario usuario){
 		
-		String sql = "select * from usuario where email=? and senha=? and statusPerfil=0";
+		String sql = "select * from usuario where email=? and senha=?";
 		
 		Usuario u = null;
 		
@@ -57,6 +57,7 @@ public class UsuarioDao {
 				u.setId(rs.getInt("id"));
 				u.setEmail(rs.getString("email"));
 				u.setTipoPerfil(rs.getString("tipoPerfil"));
+				u.setStatusPerfil(rs.getBoolean("statusPerfil"));
 				
 			}
 			
@@ -107,7 +108,6 @@ public class UsuarioDao {
 			
 			usuario.setId(rs.getInt("id"));
 			usuario.setEmail(rs.getString("email"));
-			usuario.setSenha(rs.getString("senha"));
 			usuario.setTipoPerfil(rs.getString("tipoPerfil"));
 			usuario.setStatusPerfil(rs.getBoolean("statusPerfil"));
 			
@@ -213,7 +213,6 @@ public class UsuarioDao {
 			
 			usuario.setId(rs.getInt("id"));
 			usuario.setEmail(rs.getString("email"));
-			usuario.setSenha(rs.getString("senha"));
 			usuario.setTipoPerfil(rs.getString("tipoPerfil"));
 			usuario.setStatusPerfil(rs.getBoolean("statusPerfil"));
 			
