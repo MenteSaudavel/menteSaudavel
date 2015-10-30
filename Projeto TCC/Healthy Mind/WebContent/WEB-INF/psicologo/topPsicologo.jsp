@@ -357,7 +357,16 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-
+			
+				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Agenda <span class="caret"></span></a>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenuDivider">
+						<li><a href="cadastrarAgendaServlet"><span class="glyphicon glyphicon-calendar"></span> Cadastrar Datas</a></li>
+						<li><a href="listarDatasServlet"><span class="glyphicon glyphicon-time"></span> Cadastrar Horários</a></li>
+						<li><a href="pesquisarDataServlet"><span class="glyphicon glyphicon-search"></span> Pesquisar Data</a></li>
+					</ul>
+				</li>
+				
+				<li><a href="realizarConsultaServlet">Realizar Consulta</a></li>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">

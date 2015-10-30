@@ -11,16 +11,12 @@
 		<div class="row">
 			<div class="col-md-7">
 				<form action="agendarConsultaServlet" method="post">
-										
-					<table class="oculto">
-						<c:forEach var="paciente" items="${listaIdConvenio }">
-							<input type="hidden" value="${paciente.convenio.id}" name="idConvenio">
-						</c:forEach>
-					</table>
+					
+					<input type="hidden" value="${idPaciente }" name="idPaciente">
 					
 					<div class="form-group">
 						<label class="control-label"> Selecione um psicólogo </label>
-						<select name="idPsicologo" class="form-control">
+						<select name="idPsicologo" class="form-control" required>
 							<option></option>
 							<c:forEach var="psicologo" items="${listaPsicologo}">
 								<option value="${psicologo.id }">${psicologo.nome }</option>
@@ -30,7 +26,7 @@
 
 					<div class="form-group">
 						<label class="control-label"> Data da Consulta </label>
-						<input type="text" name="dataConsulta" class="form-control" required>
+						<input type="date" name="dataConsulta" class="form-control" required>
 					</div>
 
 					<div class="form-group">

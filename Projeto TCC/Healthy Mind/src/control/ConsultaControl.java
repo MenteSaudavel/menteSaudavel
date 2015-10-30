@@ -3,6 +3,7 @@ package control;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -159,5 +160,17 @@ public class ConsultaControl {
 			return null;
 		}
 	}
+	
+	/*public void teste(){
+		
+		Calendar cal = Calendar.getInstance();
+		
+		cal.set(Calendar.YEAR, 2015);
+		cal.set(Calendar.MONDAY, Calendar.FEBRUARY);
+		cal.set(Calendar.DAY_OF_MONTH, 2);
+		
+		System.out.println(cal);
+		
+	}*/
 
 }

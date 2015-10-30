@@ -170,7 +170,7 @@ public class PacienteDao {
 		
 		Paciente paciente = new Paciente();
 		
-		String sql = "select * from paciente where idPaciente=?;";
+		String sql = "select * from paciente where idPaciente=?";
 		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -182,13 +182,14 @@ public class PacienteDao {
 			ConvenioDao convenioDao = new ConvenioDao();
 			
 			rs.next();
+			
 			Convenio c = convenioDao.buscarConvenio(rs.getInt("idConvenio"));
 			
 			paciente.setNome(rs.getString("nome"));
 			paciente.setTelefone(rs.getString("telefone"));
 			paciente.setNumeroCarteirinha(rs.getString("numeroCarteirinha"));
 			paciente.setCpf(rs.getString("cpf"));
-			paciente.setConvenio(c);
+			paciente.setConvenio(c);			
 			paciente.setId(rs.getInt("idPaciente"));
 			paciente.setEmail(rs.getString("email"));
 			
@@ -222,38 +223,35 @@ public class PacienteDao {
 		}		
 	}
 	
-	public List<Paciente> pesquisarConvenioPaciente(String email){
+	public Paciente pesquisarConvenioPaciente(int id){
 		
-		List<Paciente> lista = new ArrayList<Paciente>();
+		Paciente p = new Paciente();
 		
-		String sql = "select idConvenio from paciente where email like ?";
+		String sql = "select p.idConvenio, p.idPaciente from paciente as p join usuario as u on p.idUsuario=u.id where u.id=?";
 		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			
-			stmt.setString(1, "%"+email+"%");
+			stmt.setInt(1, id);
 			
 			ResultSet rs = stmt.executeQuery();
 			
-			while(rs.next()){
-				
-				Paciente p = new Paciente();
-				
-				ConvenioDao convenioDao = new ConvenioDao();
-				
-				Convenio c = convenioDao.buscarConvenio(rs.getInt("idConvenio"));
-				
-				p.setConvenio(c);
-				
-				lista.add(p);
-			}
+			ConvenioDao convenioDao = new ConvenioDao();
 			
+			rs.next();
+			
+			Convenio c = convenioDao.buscarConvenio(rs.getInt("p.idConvenio"));
+			p.setConvenio(c);
+			p.setId(rs.getInt("p.idPaciente"));
+			
+			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			System.out.println("catch dao");
 			e.printStackTrace();
 		}
 		
-		return lista;
+		return p;
 	}
 	
 	public List<Paciente> pesquisarPacienteEmail(String email){
@@ -318,7 +316,7 @@ public class PacienteDao {
 	public List<Paciente> listarUsuario(int id){
 		List<Paciente> lista = new ArrayList<Paciente>();
 		
-		String sql = "select p.idPaciente, u.id, u.email, u.tipoPerfil, u.statusPerfil from usuario as u join paciente as p on u.id=p.idUsuario where p.idPaciente=?";
+		String sql = "select p.idPaciente, p.idConvenio, u.id, u.email, u.tipoPerfil, u.statusPerfil from usuario as u join paciente as p on u.id=p.idUsuario where p.idPaciente=?";
 		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -332,6 +330,9 @@ public class PacienteDao {
 				Paciente paciente = new Paciente();
 				
 				paciente.setId(rs.getInt("p.idPaciente"));
+				
+				Convenio convenio = new Convenio();
+				convenio.setId(rs.getInt("p.idConvenio"));
 				
 				Usuario usuario = new Usuario();
 				usuario.setId(rs.getInt("u.id"));

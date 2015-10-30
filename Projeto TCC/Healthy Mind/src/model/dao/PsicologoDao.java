@@ -263,6 +263,33 @@ public class PsicologoDao {
 		return p;
 	}
 	
+	public Psicologo buscarPsicologoUsuario(int id){
+		
+		Psicologo p = new Psicologo();
+		
+		String sql = "select p.idPsicologo from psicologo as p where p.idUsuario=?";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setInt(1, id);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			rs.next();
+			
+			p.setId(rs.getInt("p.idPsicologo"));
+			
+			stmt.close();
+				
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return p;
+	}
+	
 	public void apagarPsicologo(Psicologo psicologo){
 		
 		String sql = "delete from psicologo where idPsicologo=?";
@@ -288,27 +315,25 @@ public class PsicologoDao {
 		
 		List<Psicologo> lista = new ArrayList<Psicologo>();
 		
-		String sql = "select * from psicologo where idConvenio=?";
+		String sql = "select nome, idPsicologo from psicologo where idConvenio=? or idConvenio2=? or idConvenio3=? or idConvenio4=? or idConvenio5=?";
 		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			
 			stmt.setInt(1, idConvenio);
+			stmt.setInt(2, idConvenio);
+			stmt.setInt(3, idConvenio);
+			stmt.setInt(4, idConvenio);
+			stmt.setInt(5, idConvenio);
 			
 			ResultSet rs = stmt.executeQuery();
-			ConvenioDao convenioDao = new ConvenioDao();
 			
 			while(rs.next()){
 				
 				Psicologo p = new Psicologo();
-				Convenio c = convenioDao.buscarConvenio(rs.getInt("idConvenio"));
 				
 				p.setId(rs.getInt("idPsicologo"));
 				p.setNome(rs.getString("nome"));
-				p.setTelefoneConsultorio(rs.getString("telefoneConsultorio"));
-				p.setConvenio(c);
-				p.setCrp(rs.getString("crp"));
-				p.setEmail(rs.getString("email"));
 						
 				lista.add(p);
 			}

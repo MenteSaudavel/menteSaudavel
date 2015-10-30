@@ -7,11 +7,11 @@
 		<table class="table">
 		
 			<tr class="info">
-				<td><b>Psicólogo</b></td>
-				<td><b>Data da Consulta</b></td>
-				<td><b>Hora da Consulta</b></td>
-				<td><b>Remarcar</b></td>
-				<td><b>Desmarcar</b></td>
+				<td class="text-center"><b>Psicólogo</b></td>
+				<td class="text-center"><b>Data da Consulta</b></td>
+				<td class="text-center"><b>Hora da Consulta</b></td>
+				<td class="text-center"><b>Remarcar</b></td>
+				<td class="text-center"><b>Desmarcar</b></td>
 			</tr>
 			
 			<c:if test="${empty listaConsulta }">
@@ -22,11 +22,11 @@
 			
 			<c:forEach var="consulta" items="${listaConsulta}">
 				<tr>
-					<td>${consulta.psicologo.nome }</td>
-					<td><fmt:formatDate pattern="dd/MM/yyyy" value="${consulta.dataConsulta }" /></td>
-					<td>${consulta.horaConsulta }</td>
-					<td> <a href="remarcarConsultaServlet?idConsulta=${consulta.idConsulta }" class="glyphicon glyphicon-edit"></a> </td>
-					<td> <a href="desmarcarConsultaServlet?idConsulta=${consulta.idConsulta }" class="glyphicon glyphicon-trash"> </a> </td>
+					<td class="text-center">${consulta.psicologo.nome }</td>
+					<td class="text-center"><fmt:formatDate pattern="dd/MM/yyyy" value="${consulta.dataConsulta }" /></td>
+					<td class="text-center">${consulta.horaConsulta }</td>
+					<td class="text-center"> <a href="remarcarConsultaServlet?idConsulta=${consulta.idConsulta }" class="glyphicon glyphicon-edit"></a> </td>
+					<td class="text-center"> <a href="desmarcarConsultaServlet?idConsulta=${consulta.idConsulta }" class="glyphicon glyphicon-trash"> </a> </td>
 				</tr>
 			</c:forEach>
 		</table>

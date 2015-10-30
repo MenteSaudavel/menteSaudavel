@@ -47,27 +47,17 @@ public class AgendarConsultaServlet extends HttpServlet {
 			
 			if(usuario.getTipoPerfil().equals("paciente")){
 				
-				String email = usuario.getEmail();
-				
+				String id = String.valueOf(usuario.getId());
 				PacienteControl pacienteControl = new PacienteControl();
+				Paciente paciente = pacienteControl.pesquisarConvenioPaciente(id);
 				
-				List<Paciente> listaIdConvenio = pacienteControl.pesquisarConvenioPaciente(email);
-				
-				request.setAttribute("listaIdConvenio", listaIdConvenio);
-				
-				String idConvenio = request.getParameter("idConvenio");
+				String idConvenio = String.valueOf(paciente.getConvenio().getId());
 				
 				PsicologoControl psicologoControl = new PsicologoControl();
-				
 				List<Psicologo> listaPsicologo = psicologoControl.listarPsicologoSelect(idConvenio);
-				
 				request.setAttribute("listaPsicologo", listaPsicologo);
 				
-				/*PsicologoControl psicologoControl = new PsicologoControl();
-				
-				List<Psicologo> listaPsicologo = psicologoControl.listarPsicologo();
-				
-				request.setAttribute("listaPsicologo", listaPsicologo);*/
+				request.setAttribute("idPaciente", paciente.getId());
 				
 				request.getRequestDispatcher("WEB-INF/paciente/agendarConsulta.jsp").forward(request, response);
 			} else{
@@ -96,8 +86,9 @@ public class AgendarConsultaServlet extends HttpServlet {
 			String hora = request.getParameter("horaConsulta");
 			String idPsicologo = request.getParameter("idPsicologo");
 			
-			//arrrumar futuramente
-			String idPaciente = "1";
+			String idPaciente = request.getParameter("idPaciente");
+			System.out.println(idPaciente);
+			System.out.println(data);
 			
 			ConsultaControl consultaControl = new ConsultaControl();
 			

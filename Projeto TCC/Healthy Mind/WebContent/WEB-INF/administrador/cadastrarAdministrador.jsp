@@ -6,34 +6,46 @@
 				<form method="post" action="cadastrarAdministradorServlet">
 
 					<div class="form-group">
-						<label class="control-label"> Nome do administrador </label> <input
-							type="text" name="nome" required class="form-control"  data-toggle="tooltip" data-placement="right" title="Nome completo do administrador">
+						<label class="control-label"> Nome do administrador </label>
+						<div class="form-group has-error">
+							<input type="text" name="nome" required class="form-control"  data-toggle="tooltip" data-placement="right" title="Nome completo do administrador">
+						</div>
 					</div>
 				
 					<div class="form-group">
-						<label class="control-label"> Telefone </label> <input type="text"
-							name="telefone" required class="form-control" data-toggle="tooltip" data-placement="right" title="Se o administrador não tiver telefone, preencher em escrio (Não possui). O telefone deve ser preenchido no formato: (00) 0000-0000">
+						<label class="control-label"> Telefone </label>
+						<div class="form-group has-error">
+							<input type="text" name="telefone" required class="form-control" data-toggle="tooltip" data-placement="right" title="Se o administrador não tiver telefone, preencher em escrio (Não possui). O telefone deve ser preenchido no formato: (00) 0000-0000">
+						</div>
 					</div>
 
 					<div class="form-group">
-						<label class="control-label"> Função </label> <input type="text"
-							name="funcao" required class="form-control" data-toggle="tooltip" data-placement="right" title="Função que o administrador exerce na instituição">
+						<label class="control-label"> Função </label>
+						<div class="form-group has-error">
+							<input type="text" name="funcao" required class="form-control" data-toggle="tooltip" data-placement="right" title="Função que o administrador exerce na instituição">
+						</div>
 					</div>
 
 					<div class="form-group">
-						<label class="control-label"> E-mail </label> <input type="email"
-							name="email" required class="form-control" data-toggle="tooltip" data-placement="right" title="Email do administrador que será utilizado para acessar o sistema">
+						<label class="control-label"> E-mail </label>
+						<div class="form-group has-error">
+							<input type="email" name="email" required class="form-control" data-toggle="tooltip" data-placement="right" title="Email do administrador que será utilizado para acessar o sistema">
+						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label"> Senha </label> <input type="password"
-							name="senha" required class="form-control" data-toggle="tooltip" data-placement="right" title="Para sua segurança, escolha uma senha que 
+						<label class="control-label"> Senha </label>
+						<div class="form-group has-error">
+							<input type="password" name="senha" required class="form-control" data-toggle="tooltip" data-placement="right" title="Para sua segurança, escolha uma senha que 
 							contenha no mínimo 8(oito) caracteres">
+						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label"> Confirmar Senha </label> <input type="password"
-							name="confirmarSenha" required class="form-control" data-toggle="tooltip" data-placement="right" title="Confirme sua senha">
+						<label class="control-label"> Confirmar Senha </label>
+						<div class="form-group has-error">
+							<input type="password" name="confirmarSenha" required class="form-control" data-toggle="tooltip" data-placement="right" title="Confirme sua senha">
+						</div>
 					</div>
 										
 					<div class="form-group">
@@ -42,7 +54,7 @@
 								Limpar <span class="glyphicon glyphicon-erase"
 									aria-hidden="true"></span>
 							</button>
-							<button type="submit" class="btn btn-success">
+							<button type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Todos os campos em vermelho são obrigatórios, certifique-se de preenchê-los">
 								Cadastrar <span class="glyphicon glyphicon-ok-sign"
 									aria-hidden="true"></span>
 							</button>

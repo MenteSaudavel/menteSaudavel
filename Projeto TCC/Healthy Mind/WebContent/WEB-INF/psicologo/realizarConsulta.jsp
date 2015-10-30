@@ -1,4 +1,4 @@
-<%@ include file="topPaciente.jsp" %>
+<%@ include file="topPsicologo.jsp" %>
 
 <!--
  *  Copyright (c) 2014 The WebRTC project authors. All Rights Reserved.
@@ -76,7 +76,7 @@
   	<script src="js1/jsPC/main.js"></script>
 
   	<script src="js1/lib/ga.js"></script>
-	
+
 </div>
 
-<jsp:include page="footerPaciente.jsp"></jsp:include>
+<jsp:include page="footerPsicologo.jsp"></jsp:include>

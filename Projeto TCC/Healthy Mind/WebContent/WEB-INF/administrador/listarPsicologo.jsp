@@ -1,14 +1,21 @@
 <%@ include file="topAdm.jsp" %>
-
+	
+	<style>
+	 .hoverOpcao:hover{
+		color: #127a9c;
+	}
+	</style>
+	
 	<div class="bs-example">
 	    <ul class="nav nav-tabs">
-	        <li class="active"><a data-toggle="tab" href="#listarPsicologo" class="btn btn-info">Lista de Psicólogos</a></li>
-	        <li><a data-toggle="tab" href="#pesquisarPsicologo" class="btn btn-info">Pesquisar Psicólogo</a></li>
+	        <li class="active"><a data-toggle="tab" href="#listarPsicologo" class="btn btn-info hoverOpcao">Lista de Psicólogos</a></li>
+	        <li><a data-toggle="tab" href="#pesquisarPsicologo" class="btn btn-info hoverOpcao">Pesquisar Psicólogo</a></li>
 	    </ul>
 	    
 	    <div class="tab-content">
 	        <div id="listarPsicologo" class="tab-pane fade in active">
 	        	<br>
+	        	<div class="container-fluid">
 			    <div class="panel panel-primary">
 				  <!-- Default panel contents -->
 				  <div class="panel-heading">
@@ -17,7 +24,7 @@
 				  </div>
 				
 				  <!-- Table -->
-				  <table class="table table-hover">
+				  <table class="table table-hover table-condensed">
 				 	<thead>
 				    	<tr class="info">
 							<td class="text-center"> <b> Nome do Psicólogo </b></td>
@@ -59,11 +66,13 @@
 				  </table>
 				</div>
 	        </div>
+	      </div>
 	        
 	       	<div id="pesquisarPsicologo" class="tab-pane fade">
 	       		<br>
+	       	<div class="container-fluid">
 			    <div class="row">
-				  <div class="col-lg-4">
+				  <div class="col-md-6">
 				  	<form method="post" action="pesquisarPsicologoServlet">
 					<div class="input-group">
 				      <input type="text" class="form-control" placeholder="Nome do Psicólogo" name="nomePesquisaPsicologo" required>
@@ -72,9 +81,9 @@
 				      </span>
 				    </div><!-- /input-group -->
 				    </form>
-				  </div><!-- /.col-lg-6 -->
+				  </div><!-- /.col-md-4 -->
 				</div><!-- /.row -->	
-	       		
+	       	</div>
 	        </div>
 	    </div>
 	</div>
@@ -104,7 +113,7 @@
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div>
-	 <form method="get" action="menuPacienteServlet" class="form-group">
+	 <form method="get" action="menuAdministradorServlet" class="form-group">
 		<div class="form-group">
 			<div class="col-sm-7 control-label"> <button type="submit" class="btn btn-primary">  <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Voltar </button> </div>
 		</div>

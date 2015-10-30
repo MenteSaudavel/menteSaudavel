@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
-	<c:forEach var="adm" items="${listaUsuario}">
+<c:forEach var="adm" items="${listaUsuario}">
 	<input type="hidden" value="${adm.usuario.tipoPerfil }" name="tipoPerfil">
 		<div class="modal-content">
 			<div class="modal-header">

@@ -30,7 +30,7 @@ public class InicioServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
-		
+
 	}
 
 	/**

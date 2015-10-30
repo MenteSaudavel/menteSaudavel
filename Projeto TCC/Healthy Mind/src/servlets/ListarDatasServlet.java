@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,19 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import control.AgendaControl;
+import control.PsicologoControl;
+import model.vo.Agenda;
+import model.vo.Psicologo;
 import model.vo.Usuario;
 
 /**
- * Servlet implementation class RealizarConsultaServlet
+ * Servlet implementation class ListarDatasServlet
  */
-@WebServlet("/realizarConsultaServlet")
-public class RealizarConsultaServlet extends HttpServlet {
+@WebServlet("/listarDatasServlet")
+public class ListarDatasServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RealizarConsultaServlet() {
+    public ListarDatasServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,10 +44,21 @@ public class RealizarConsultaServlet extends HttpServlet {
 		if (usuario != null) {
 			request.setAttribute("usuario", usuario);
 			
-			if(usuario.getTipoPerfil().equals("paciente")){
-				request.getRequestDispatcher("WEB-INF/paciente/realizarConsulta.jsp").forward(request, response);
-			} else if(usuario.getTipoPerfil().equals("psicologo")) {
-				request.getRequestDispatcher("WEB-INF/psicologo/realizarConsulta.jsp").forward(request, response);
+			if(usuario.getTipoPerfil().equals("psicologo")){
+				
+				String id = String.valueOf(usuario.getId());
+				PsicologoControl psicologoControl = new PsicologoControl();
+				Psicologo psicologo = psicologoControl.buscarPsicologoUsuario(id);
+				
+				String idPsicologo = String.valueOf(psicologo.getId());
+				
+				AgendaControl agendaControl = new AgendaControl();
+				List<Agenda> lista = agendaControl.listarDatas(idPsicologo);
+				
+				request.setAttribute("listaData", lista);
+				
+				request.getRequestDispatcher("WEB-INF/psicologo/listarDatas.jsp").forward(request, response);
+				
 			} else {
 				response.sendRedirect("loginServlet");
 			}
@@ -63,11 +79,12 @@ public class RealizarConsultaServlet extends HttpServlet {
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 
 		if (usuario != null) {
+			request.setAttribute("usuario", usuario);
 			
+				
 		} else {
 			response.sendRedirect("loginServlet");
 		}
-		
 	}
 
 }

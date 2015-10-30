@@ -9,19 +9,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import control.AgendaControl;
+import control.PsicologoControl;
+import model.vo.Psicologo;
 import model.vo.Usuario;
 
 /**
- * Servlet implementation class RealizarConsultaServlet
+ * Servlet implementation class CadastrarAgendaServlet
  */
-@WebServlet("/realizarConsultaServlet")
-public class RealizarConsultaServlet extends HttpServlet {
+@WebServlet("/cadastrarAgendaServlet")
+public class CadastrarAgendaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RealizarConsultaServlet() {
+    public CadastrarAgendaServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,10 +42,10 @@ public class RealizarConsultaServlet extends HttpServlet {
 		if (usuario != null) {
 			request.setAttribute("usuario", usuario);
 			
-			if(usuario.getTipoPerfil().equals("paciente")){
-				request.getRequestDispatcher("WEB-INF/paciente/realizarConsulta.jsp").forward(request, response);
-			} else if(usuario.getTipoPerfil().equals("psicologo")) {
-				request.getRequestDispatcher("WEB-INF/psicologo/realizarConsulta.jsp").forward(request, response);
+			if(usuario.getTipoPerfil().equals("psicologo")){
+				
+				request.getRequestDispatcher("WEB-INF/psicologo/cadastrarAgenda.jsp").forward(request, response);
+				
 			} else {
 				response.sendRedirect("loginServlet");
 			}
@@ -63,11 +66,35 @@ public class RealizarConsultaServlet extends HttpServlet {
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 
 		if (usuario != null) {
+			request.setAttribute("usuario", usuario);
 			
+			String id = String.valueOf(usuario.getId());
+			PsicologoControl psicologoControl = new PsicologoControl();
+			Psicologo psicologo = psicologoControl.buscarPsicologoUsuario(id);
+			
+			String idPsicologo = String.valueOf(psicologo.getId());
+			String dataAtendimento = request.getParameter("dataAtendimento");
+			String idTurno1 = request.getParameter("idTurno1");
+			String idTurno2 = request.getParameter("idTurno2");
+			String idTurno3 = request.getParameter("idTurno3");
+			
+			AgendaControl agendaControl = new AgendaControl();
+				
+			boolean ok = agendaControl.cadastrarAgenda(idPsicologo, dataAtendimento, idTurno1, idTurno2, idTurno3);
+				
+			if(ok){
+				request.setAttribute("cadastrado", true);
+					
+				request.getRequestDispatcher("WEB-INF/psicologo/cadastrarAgenda.jsp").forward(request, response);
+				
+			}else{
+				request.setAttribute("cadastrado", false);
+					
+				request.getRequestDispatcher("WEB-INF/psicologo/cadastrarAgenda.jsp").forward(request, response);
+			}
+				
 		} else {
 			response.sendRedirect("loginServlet");
 		}
-		
 	}
-
 }

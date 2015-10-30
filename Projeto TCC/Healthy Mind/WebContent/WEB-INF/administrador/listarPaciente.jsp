@@ -1,13 +1,21 @@
 <%@ include file="topAdm.jsp" %>
 	
+	<style>
+	 .hoverOpcao:hover{
+		color: #127a9c;
+	}
+	</style>
+	
 	<div class="bs-example">
 	    <ul class="nav nav-tabs">
-	        <li class="active"><a data-toggle="tab" href="#listarPaciente" class="btn btn-info">Lista de Pacientes</a></li>
-	        <li><a data-toggle="tab" href="#pesquisarPaciente" class="btn btn-info">Pesquisar Paciente</a></li>
+	        <li class="active"><a data-toggle="tab" href="#listarPaciente" class="btn btn-info hoverOpcao">Lista de Pacientes</a></li>
+	        <li><a data-toggle="tab" href="#pesquisarPaciente" class="btn btn-info hoverOpcao">Pesquisar Paciente</a></li>
 	    </ul>
 	    <div class="tab-content">
 	        <div id="listarPaciente" class="tab-pane fade in active">
 	            <br>
+	            
+	              <div class="container-fluid">
 	            	<div class="panel panel-primary">
 				  	<!-- Default panel contents -->
 				  	<div class="panel-heading"> 
@@ -18,7 +26,7 @@
 				
 				
 				  		<!-- Table -->
-				  		<table class="table table-hover">
+				  		<table class="table table-hover table-condensed">
 				  			<thead>
 						   		<tr class="info">
 									<td class="text-center"> <b> Nome do Paciente </b></td>
@@ -63,13 +71,14 @@
 							</tbody>	
 				  		</table>
 					</div>
-	            
+	              </div>
 	            
 	        </div>
 	        <div id="pesquisarPaciente" class="tab-pane fade">
 	             <br>
+	            <div class="container-fluid">
 			     <div class="row">
-				  <div class="col-lg-4">
+				  <div class="col-md-6">
 				   <form method="post" action="pesquisarPacienteServlet">
 					<div class="input-group">
 					      <input type="text" class="form-control" placeholder="Nome do Paciente" name="nomePesquisaPaciente" required>
@@ -80,7 +89,7 @@
 				   </form>
 				  </div><!-- /.col-lg-6 -->
 				</div><!-- /.row -->
-	            
+	           </div>
 	        </div>
 	    </div>
 	</div>

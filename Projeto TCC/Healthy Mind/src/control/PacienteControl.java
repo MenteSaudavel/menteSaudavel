@@ -135,14 +135,15 @@ public class PacienteControl {
 		try{
 			idConvertido = Integer.parseInt(id);
 			
-			PacienteDao pacienteDao = new PacienteDao();
-			
-			return pacienteDao.buscarPaciente(idConvertido);
 		} catch(NumberFormatException e){
 			return null;
 		}
+		
+		PacienteDao pacienteDao = new PacienteDao();
+		
+		return pacienteDao.buscarPaciente(idConvertido);
 	}
-	
+
 	public boolean apagarPaciente(String id){
 		
 		int idConvertido;
@@ -162,13 +163,19 @@ public class PacienteControl {
 		return true;
 	}
 	
-	public List<Paciente> pesquisarConvenioPaciente(String email){
+	public Paciente pesquisarConvenioPaciente(String id){
+		
+		int idConvertido;
+		
+		try{
+			idConvertido = Integer.parseInt(id);
+		} catch(NumberFormatException e){
+			return null;
+		}
 		
 		PacienteDao pacienteDao = new PacienteDao();
 		
-		List<Paciente> lista = pacienteDao.pesquisarConvenioPaciente(email);
-		
-		return lista;
+		return pacienteDao.pesquisarConvenioPaciente(idConvertido);
 	}
 	
 	public List<Paciente> pesquisarPacienteEmail(String email){

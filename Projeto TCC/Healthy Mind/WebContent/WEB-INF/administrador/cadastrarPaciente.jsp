@@ -7,47 +7,61 @@
 	
 					<div class="form-group">
 						<label class="control-label"> Nome do paciente </label>
-						<input type="text" name="nome" required class="form-control" data-toggle="tooltip" data-placement="right" title="Nome completo do paciente">
+						<div class="form-group has-error">
+							<input type="text" name="nome" required class="form-control" data-toggle="tooltip" data-placement="right" title="Nome completo do paciente">
+						</div>
 					</div>
 					
 					<div class="form-group">
 						<label class="control-label"> Telefone </label>
-						<input type="text" name="telefone" required class="form-control" data-toggle="tooltip" data-placement="right" title="Se o paciente não tiver telefone, preencher em escrio (Não possui). O telefone deve ser preenchido no formato: (00) 0000-0000">
+						<div class="form-group has-error">
+							<input type="text" name="telefone" required class="form-control" data-toggle="tooltip" data-placement="right" title="Se o paciente não tiver telefone, preencher em escrio (Não possui). O telefone deve ser preenchido no formato: (00) 0000-0000">
+						</div>
 					</div>
 					
 					<div class="form-group">
 						<label class="control-label"> CPF </label>
-						<input type="text" name="cpf" required class="form-control" data-toggle="tooltip" data-placement="right" title="O CPF do paciente deve ser preenchido no formato: 000.000.000-00">
+						<div class="form-group has-error">
+							<input type="text" name="cpf" required class="form-control" data-toggle="tooltip" data-placement="right" title="O CPF do paciente deve ser preenchido no formato: 000.000.000-00">
+						</div>
 					</div>
 					
 					<div class="form-group">
 						<label class="control-label"> Convênio </label>
-							<select name="idConvenio" class="form-control">
-								<option></option>
-									<c:forEach var="convenio" items="${lista}">	
-										<option value="${convenio.id }">${convenio.nome }</option>
-									</c:forEach>	
-							</select> 	
+							<div class="form-group has-error">
+								<select name="idConvenio" class="form-control">
+									<option></option>
+										<c:forEach var="convenio" items="${lista}">	
+											<option value="${convenio.id }">${convenio.nome }</option>
+										</c:forEach>	
+								</select>
+							</div> 	
 					</div>
 					
 					<div class="form-group">
 						<label class="control-label"> Número da carteirinha do convênio </label>
-						<input type="text" name="numeroCarteirinha" required class="form-control" data-toggle="tooltip" data-placement="right" title="Número da carteirinha do convênio.">
+						<div class="form-group has-error">
+							<input type="text" name="numeroCarteirinha" required class="form-control" data-toggle="tooltip" data-placement="right" title="Número da carteirinha do convênio.">
+						</div>
 					</div>
 					
 					<div class="form-group">
 						<label class="control-label">Confirmar número da carteirinha do convênio </label>
-						<input type="text" name="confNumCarteirinha" required class="form-control" data-toggle="tooltip" data-placement="right" title="Confirmar número da carteirinha do convênio">
+						<div class="form-group has-error">
+							<input type="text" name="confNumCarteirinha" required class="form-control" data-toggle="tooltip" data-placement="right" title="Confirmar número da carteirinha do convênio">
+						</div>
 					</div>
 					
 					<div class="form-group">
 						<label class="control-label"> E-mail </label>
-						<input type="email" name="email" required class="form-control" data-toggle="tooltip" data-placement="right" title="Email do paciente que será utilizado para acessar o sistema">
+						<div class="form-group has-error">
+							<input type="email" name="email" required class="form-control" data-toggle="tooltip" data-placement="right" title="Email do paciente que será utilizado para acessar o sistema">
+						</div>
 					</div>
 					
 					<div class="form-group">
 						<div class="control-label pull-right"> <button type="reset" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Este botão limpa o valor cadastrado em todos os campos"> Limpar <span class="glyphicon glyphicon-erase" aria-hidden="true"></span> </button>
-						 <button type="submit" class="btn btn-success"> Cadastrar <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> </button> </div>
+						 <button type="submit" class="btn btn-success" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Todos os campos em vermelho são obrigatórios, certifique-se de preenchê-los"> Cadastrar <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> </button> </div>
 					</div>
 								
 			</form>

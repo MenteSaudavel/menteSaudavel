@@ -1,11 +1,12 @@
 <%@ include file="topAdm.jsp" %>
-
+	
+	<div class="container-fluid">
 		<div class="panel panel-primary">
 		  <!-- Default panel contents -->
 		  <div class="panel-heading"><span class="glyphicon glyphicon-th-list"></span> <b>Lista de Administradores</b></div>
 		
 		  <!-- Table -->
-		  <table class="table table-hover">
+		  <table class="table table-hover table-condensed">
 		  	<thead>
 		    	<tr class="info">
 					<td class="text-center"> <b> Nome do Administrador </b></td>
@@ -43,7 +44,7 @@
 			</tbody>
 		  </table>
 		</div>
-	 
+	 </div>
 	 <form method="get" action="menuAdministradorServlet" class="form-group">
 		<div class="form-group">
 			<div class="col-sm-7 control-label"> <button type="submit" class="btn btn-primary">  <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Voltar </button> </div>

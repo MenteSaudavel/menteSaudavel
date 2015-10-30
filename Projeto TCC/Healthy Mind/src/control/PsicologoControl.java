@@ -286,6 +286,23 @@ public class PsicologoControl {
 		}
 	}
 	
+	public Psicologo buscarPsicologoUsuario(String id){
+		
+		int idConvertido;
+		
+		try{
+			
+			idConvertido = Integer.parseInt(id);
+			
+			PsicologoDao psicologoDao = new PsicologoDao();
+			
+			return psicologoDao.buscarPsicologoUsuario(idConvertido);
+			
+		}catch(NumberFormatException e){
+			return null;
+		}
+	}
+	
 	public boolean apagarPsicologo(String id){
 		
 		int idConverido;
