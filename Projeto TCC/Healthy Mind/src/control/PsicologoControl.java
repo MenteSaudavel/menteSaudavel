@@ -6,6 +6,7 @@ import java.util.List;
 
 import model.dao.PsicologoDao;
 import model.dao.UsuarioDao;
+import model.vo.Consulta;
 import model.vo.Convenio;
 import model.vo.Psicologo;
 import model.vo.UF;
@@ -387,6 +388,25 @@ public class PsicologoControl {
 		PsicologoDao psicologoDao = new PsicologoDao();
 		
 		lista = psicologoDao.listarUsuario(idConvertido);
+		
+		return lista;
+	}
+	
+	public List<Consulta> visualizarConsultasAgendadas(String idPsicologo){
+		
+		List<Consulta> lista;
+		
+		int idPsicologoConvertido;
+		
+		try{
+			idPsicologoConvertido = Integer.parseInt(idPsicologo);
+		} catch(NumberFormatException e){
+			return null;
+		}
+		
+		PsicologoDao psicologoDao = new PsicologoDao();
+		
+		lista = psicologoDao.visualizarConsultasAgendadas(idPsicologoConvertido);
 		
 		return lista;
 	}

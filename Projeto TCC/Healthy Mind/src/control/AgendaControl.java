@@ -193,4 +193,101 @@ public class AgendaControl {
 		return lista;
 	}
 	
+	public Agenda buscarAgenda(String idPsicologo, String dataAtendimento){
+		
+		int idPsicologoConvertido;
+		Date dataAtendimentoConvertida;
+		
+		try{
+			idPsicologoConvertido = Integer.parseInt(idPsicologo);
+		}catch(NumberFormatException e){
+			return null;
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+		
+		try{
+			dataAtendimentoConvertida = sdf.parse(dataAtendimento);
+		}catch(ParseException e){
+			try{
+				dataAtendimentoConvertida = sdf2.parse(dataAtendimento);
+			}catch(ParseException e1){
+				return null;
+			}
+		}
+		
+		AgendaDao agendaDao = new AgendaDao();
+		
+		return agendaDao.buscarAgenda(idPsicologoConvertido, dataAtendimentoConvertida);
+	}
+	
+	public boolean editarTurnos(String idTurno, String idTurno2, String idTurno3, String id){
+		
+		int idTurnoConvertido;
+		int idTurno2Convertido;
+		int idTurno3Convertido;
+		int idConvertido;
+		
+		try{
+			idConvertido = Integer.parseInt(id);
+		} catch(NumberFormatException e){
+			return false;
+		}
+		
+		Agenda agenda = new Agenda();
+		
+		agenda.setId(idConvertido);
+		
+		Turno turno = new Turno();
+		
+		if(idTurno==null){
+			agenda.setTurno1(null);
+		}else{
+			try{
+				idTurnoConvertido = Integer.parseInt(idTurno);
+			}catch(NumberFormatException e){
+				return false;
+			}
+			
+			turno.setId(idTurnoConvertido);
+			agenda.setTurno1(turno);
+		}
+		
+		Turno turno2 = new Turno();
+		
+		if(idTurno2==null){
+			agenda.setTurno2(null);
+		}else{
+			try{
+				idTurno2Convertido = Integer.parseInt(idTurno2);
+			}catch(NumberFormatException e){
+				return false;
+			}
+			
+			turno2.setId(idTurno2Convertido);
+			agenda.setTurno2(turno2);
+		}
+		
+		Turno turno3 = new Turno();
+		
+		if(idTurno3==null){
+			agenda.setTurno3(null);
+		}else{
+			try{
+				idTurno3Convertido = Integer.parseInt(idTurno3);
+			}catch(NumberFormatException e){
+				return false;
+			}
+			
+			turno3.setId(idTurno3Convertido);
+			agenda.setTurno3(turno3);
+		}
+		
+		AgendaDao agendaDao = new AgendaDao();
+		
+		agendaDao.editarTurnos(agenda);
+		
+		return true;
+	}
 }

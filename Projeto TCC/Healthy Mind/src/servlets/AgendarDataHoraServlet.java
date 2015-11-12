@@ -10,21 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import control.HorarioControl;
-import model.vo.Horario;
+import control.ConsultaControl;
+import control.PacienteControl;
+import model.vo.Consulta;
+import model.vo.Paciente;
 import model.vo.Usuario;
 
 /**
- * Servlet implementation class EditarHorarioServlet
+ * Servlet implementation class AgendarDataServlet
  */
-@WebServlet("/editarHorarioServlet")
-public class EditarHorarioServlet extends HttpServlet {
+@WebServlet("/agendarDataHoraServlet")
+public class AgendarDataHoraServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditarHorarioServlet() {
+    public AgendarDataHoraServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,28 +38,19 @@ public class EditarHorarioServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		HttpSession session = request.getSession();
-
+		
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
-
-		if (usuario != null) {
+		
+		if(usuario != null){
 			request.setAttribute("usuario", usuario);
 			
-			if(usuario.getTipoPerfil().equals("psicologo")){
+			if(usuario.getTipoPerfil().equals("paciente")){
 				
-				String idAgenda = request.getParameter("idAgenda");
-				
-				HorarioControl horarioControl = new HorarioControl();
-				
-				List<Horario> lista = horarioControl.listarHorario(idAgenda);
-				
-				request.setAttribute("listaHorario", lista);
-				
-				request.getRequestDispatcher("WEB-INF/psicologo/listarTurnoEditarHorario.jsp").forward(request, response);
-				
-			} else {
+			} else{
 				response.sendRedirect("loginServlet");
 			}
-				
+			
+			
 		} else {
 			response.sendRedirect("loginServlet");
 		}
@@ -70,28 +63,43 @@ public class EditarHorarioServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		HttpSession session = request.getSession();
-
+		
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
-
-		if (usuario != null) {
+		
+		if(usuario != null){
 			request.setAttribute("usuario", usuario);
 			
-			String id = request.getParameter("id");
-			String hora1 = request.getParameter("hora1");
-			String hora2 = request.getParameter("hora2");
-			String hora3 = request.getParameter("hora3");
-			String hora4 = request.getParameter("hora4");
+			String dataConsulta = request.getParameter("data");
+			String hora = request.getParameter("hora");
+			String tipoConsulta = request.getParameter("tipoConsulta");
 			
-			HorarioControl horarioControl = new HorarioControl();
+			String idUsuario = String.valueOf(usuario.getId());
+			PacienteControl pacienteControl = new PacienteControl();
+			Paciente paciente = pacienteControl.buscarPacienteUsuario(idUsuario);
 			
-			boolean ok = horarioControl.editarHorario(hora1, hora2, hora3, hora4, id);
+			String idPaciente = String.valueOf(paciente.getId());
+			
+			ConsultaControl consultaControl = new ConsultaControl();
+			
+			boolean ok = consultaControl.agendarDataHorario(dataConsulta, hora, tipoConsulta, idPaciente);
 			
 			if(ok){
-				request.setAttribute("horaEditada", true);
-				request.getRequestDispatcher("WEB-INF/psicologo/pesquisarData.jsp").forward(request, response);
+				request.setAttribute("consultaCadastrada", true);
+	
+				List<Consulta> lista = consultaControl.visualizarConsulta(idPaciente);
+	
+				request.setAttribute("listaConsulta", lista);
+				
+				request.getRequestDispatcher("WEB-INF/paciente/visualizarConsulta.jsp").forward(request, response);
 			} else {
-				request.setAttribute("horaEditada", false);
-				request.getRequestDispatcher("WEB-INF/psicologo/pesquisarData.jsp").forward(request, response);
+				
+				request.setAttribute("consultaCadastrada", false);
+	
+				List<Consulta> lista = consultaControl.visualizarConsulta(idPaciente);
+	
+				request.setAttribute("listaConsulta", lista);
+				
+				request.getRequestDispatcher("WEB-INF/paciente/visualizarConsulta.jsp").forward(request, response);
 			}
 			
 		} else {

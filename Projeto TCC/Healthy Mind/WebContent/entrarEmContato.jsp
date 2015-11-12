@@ -167,8 +167,8 @@
 				abaixo :<br><br>
 				<b>1)</b> Empresários que desejam negociar para que o sistema funcione
 				com seu convênio;<br>
-				<br><b>2)</b> Psicólogos que atendem 
-				em consultas particulares e desejam utilizar o sistema.<br>
+				<br><b>2)</b> Psicólogos que possuem sua própria clínica
+				e desejam utilizar o sistema.<br>
 				</p>
 				<br><h4><label class="label label-warning label-md"><b>(41) 5555-5555</b>
 				</label></h4>

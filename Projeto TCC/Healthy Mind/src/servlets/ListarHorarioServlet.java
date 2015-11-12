@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,21 +9,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import control.PsicologoControl;
-import model.vo.Psicologo;
+import model.vo.Horario;
 import model.vo.Usuario;
+import control.HorarioControl;
 
 /**
- * Servlet implementation class MenuPsicologoServlet
+ * Servlet implementation class ListarHorarioServlet
  */
-@WebServlet("/menuPsicologoServlet")
-public class MenuPsicologoServlet extends HttpServlet {
+@WebServlet("/listarHorarioServlet")
+public class ListarHorarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MenuPsicologoServlet() {
+    public ListarHorarioServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,22 +42,21 @@ public class MenuPsicologoServlet extends HttpServlet {
 			request.setAttribute("usuario", usuario);
 			
 			if(usuario.getTipoPerfil().equals("psicologo")){
-				
-				PsicologoControl psicologoContro = new PsicologoControl();
-				
-				String email = usuario.getEmail();
-				
-				List<Psicologo> lista = psicologoContro.pesquisarPsicologoEmail(email);
-				
-				request.setAttribute("listaPsicologo", lista);
-				
-				request.setAttribute("listaPsicologoUsuario", lista);
 		
-				request.getRequestDispatcher("WEB-INF/psicologo/menuPsicologo.jsp").forward(request, response);
+				String idAgenda = request.getParameter("idAgenda");
+				String idTurno = request.getParameter("idTurno");
+				
+				HorarioControl horarioControl = new HorarioControl();
+				Horario horario = horarioControl.buscarHorario(idAgenda, idTurno);
+				
+				request.setAttribute("horario", horario);
+				
+				request.getRequestDispatcher("WEB-INF/psicologo/editarHorario.jsp").forward(request, response);
+				
 			} else {
 				response.sendRedirect("loginServlet");
 			}
-			
+				
 		} else {
 			response.sendRedirect("loginServlet");
 		}
@@ -82,5 +80,4 @@ public class MenuPsicologoServlet extends HttpServlet {
 			response.sendRedirect("loginServlet");
 		}
 	}
-
 }

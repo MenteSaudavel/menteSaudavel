@@ -143,7 +143,23 @@ public class PacienteControl {
 		
 		return pacienteDao.buscarPaciente(idConvertido);
 	}
-
+	
+	public Paciente buscarPacienteUsuario(String idUsuario){
+		
+		int idUsuarioConvertido;
+		
+		try{
+			idUsuarioConvertido = Integer.parseInt(idUsuario);
+			
+			PacienteDao pacienteDao = new PacienteDao();
+			
+			return pacienteDao.buscarPacienteUsuario(idUsuarioConvertido);
+			
+		} catch(NumberFormatException e){
+			return null;
+		}
+	}
+	
 	public boolean apagarPaciente(String id){
 		
 		int idConvertido;

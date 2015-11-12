@@ -472,7 +472,7 @@
 				<a href="#">De volta ao topo</a>
 			</p> -->
 			<p>
-				&copy; 2015 Mente Saudável.  &middot; <a href="entrarEmContato.jsp">Fale Conosco</a> &middot;
+				&copy; 2015 Mente Saudável.  &middot; <a href="entrarEmContato.jsp">Fale Conosco</a> &middot; <a href="http://portal.crppr.org.br/">Site CRP-PR</a> &middot; <a href="http://site.cfp.org.br/">Site CFP</a>
 			</p>
 		</footer>
 

@@ -37,8 +37,8 @@
 						</tr>
 					</thead>
 						<c:if test="${empty listaPsicologo }">
-							<tr>
-								<td colspan="7" class="alert alert-warning"> Psicólogo Não Encontrado! </td>
+							<tr class="warning">
+								<td colspan="7"> Psicólogo Não Encontrado! </td>
 							</tr>
 						</c:if>
 					<tbody>

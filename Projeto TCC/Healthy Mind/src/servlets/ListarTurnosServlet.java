@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import control.AgendaControl;
+import control.HorarioControl;
 import control.PsicologoControl;
 import model.vo.Agenda;
+import model.vo.Horario;
 import model.vo.Psicologo;
 import model.vo.Turno;
 import model.vo.Usuario;
@@ -53,6 +55,7 @@ public class ListarTurnosServlet extends HttpServlet {
 				
 				String idPsicologo = String.valueOf(psicologo.getId());
 				String dataAtendimento = request.getParameter("dataAtendimento");
+				String idAgenda = request.getParameter("idAgenda");
 
 				AgendaControl agendaControl = new AgendaControl();
 				
@@ -61,6 +64,13 @@ public class ListarTurnosServlet extends HttpServlet {
 				
 				Agenda agenda = agendaControl.buscarIdAgenda(dataAtendimento);
 				request.setAttribute("idAgenda", String.valueOf(agenda.getId()));
+				
+				HorarioControl horarioControl = new HorarioControl();
+				Horario horario = horarioControl.buscarHorario(String.valueOf(agenda.getId()));
+				request.setAttribute("horario", horario);
+				
+				Agenda agenda2 = agendaControl.buscarAgenda(idPsicologo, dataAtendimento);
+				request.setAttribute("agenda", agenda2);
 				
 				request.getRequestDispatcher("WEB-INF/psicologo/cadastrarHorario.jsp").forward(request, response);
 				

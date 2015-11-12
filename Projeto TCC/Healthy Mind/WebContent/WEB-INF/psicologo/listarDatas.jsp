@@ -3,7 +3,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-7">
-				<label class="control-label">Clique no botão para cadastrar horários nas datas</label>
+				<label class="control-label">Clique no botão para mostrar os turnos cadastrados em cada data</label>
 				<ul class="list-group">
 					<c:if test="${empty listaData }">
 			  			<li class="list-group-item list-group-item-danger">Nenhuma data cadastrada</li>
@@ -11,7 +11,7 @@
 					<c:forEach var="agenda" items="${listaData }">
 						<input type="hidden" name="idAgenda" value="${agenda.id }">
 			  			<li class="list-group-item"><fmt:formatDate pattern="dd/MM/yyyy" value="${agenda.data }" />
-			  				<a class="btn btn-primary btn-sm pull-right" href="listarTurnosServlet?dataAtendimento=${agenda.data }"><span class="glyphicon glyphicon-plus-sign"></span></a>
+			  				<a class="btn btn-primary btn-sm pull-right" href="listarTurnosServlet?dataAtendimento=${agenda.data }&idAgenda=${agenda.id}"><span class="glyphicon glyphicon-plus-sign"></span></a>
 			  			</li>
 					</c:forEach>
 				</ul>
@@ -28,7 +28,7 @@
 	<c:if test="${horarioCadastrado == true }">
 		<div class="alert alert-success alert-dismissible">
 			<span class="glyphicon glyphicon-thumbs-up"></span>
-			Horário(s) cadastrado com sucesso.
+			Horário(s) disponibilizados para serem cadastrados nesse turno com sucesso.
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		</div>
 	</c:if>
@@ -36,7 +36,7 @@
 	<c:if test="${horarioCadastrado == false }">
 		<div class="alert alert-danger alert-dismissible">
 			<span class="glyphicon glyphicon-alert"></span>
-			Erro ao cadastrar, certifique-se de que tudo foi selecionado corretamente e tente de novo.
+			Erro ao disponibilizar.
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		</div>
 	</c:if>

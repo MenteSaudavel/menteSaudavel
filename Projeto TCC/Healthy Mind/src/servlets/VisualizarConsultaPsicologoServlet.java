@@ -11,20 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import control.PsicologoControl;
+import model.vo.Consulta;
 import model.vo.Psicologo;
 import model.vo.Usuario;
 
 /**
- * Servlet implementation class MenuPsicologoServlet
+ * Servlet implementation class VisualizarConsultaPsicologoServlet
  */
-@WebServlet("/menuPsicologoServlet")
-public class MenuPsicologoServlet extends HttpServlet {
+@WebServlet("/visualizarConsultaPsicologoServlet")
+public class VisualizarConsultaPsicologoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MenuPsicologoServlet() {
+    public VisualizarConsultaPsicologoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,17 +45,18 @@ public class MenuPsicologoServlet extends HttpServlet {
 			
 			if(usuario.getTipoPerfil().equals("psicologo")){
 				
-				PsicologoControl psicologoContro = new PsicologoControl();
+				String id = String.valueOf(usuario.getId());
+				PsicologoControl psicologoControl = new PsicologoControl();
+				Psicologo psicologo = psicologoControl.buscarPsicologoUsuario(id);
 				
-				String email = usuario.getEmail();
+				String idPsicologo = String.valueOf(psicologo.getId());
+								
+				List<Consulta> lista = psicologoControl.visualizarConsultasAgendadas(idPsicologo);
 				
-				List<Psicologo> lista = psicologoContro.pesquisarPsicologoEmail(email);
+				request.setAttribute("listaConsulta", lista);
 				
-				request.setAttribute("listaPsicologo", lista);
+				request.getRequestDispatcher("WEB-INF/psicologo/visualizarConsulta.jsp").forward(request, response);
 				
-				request.setAttribute("listaPsicologoUsuario", lista);
-		
-				request.getRequestDispatcher("WEB-INF/psicologo/menuPsicologo.jsp").forward(request, response);
 			} else {
 				response.sendRedirect("loginServlet");
 			}

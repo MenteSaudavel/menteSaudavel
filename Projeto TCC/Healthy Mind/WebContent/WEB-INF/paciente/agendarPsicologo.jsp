@@ -1,17 +1,28 @@
 <%@ include file="topPaciente.jsp" %>
 
-
-	<style>
-   		.oculto{
-   			display:none;
-   		}
-	</style>
-
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-7">
-				<form action="agendarConsultaServlet" method="post">
-										
+				
+				<div class="alert alert-info" role="alert" align="justify">
+					<h4><b>Atenção!</b></h4>
+					<p>
+							Enquanto estiver agendando uma consulta, não tilize as setas
+						do navegador para voltar e não saia da página de agendamento antes da
+						mensagem de confirmação do agendamento. Não agende mais de uma consulta
+						até tê-la realizado.
+						<b>Insistir em fazer os fatores listados acima causará problemas.</b>
+					</p>
+					<br>
+					<p>
+							Se desejar alterar as informações da sua consulta, desmarque-a
+						acessando "Visualizar Consulta" na barra de navegação e agende-a
+						novamente.
+					</p>
+				</div>
+				
+				<form action="agendarPsicologoServlet" method="post">
+					
 					<div class="form-group">
 						<label class="control-label"> Selecione um psicólogo </label>
 						<select name="idPsicologo" class="form-control" required>
@@ -23,33 +34,20 @@
 					</div>
 
 					<div class="form-group">
-						<label class="control-label"> Data da Consulta </label>
-						<input type="date" name="dataConsulta" class="form-control" required>
-					</div>
-
-					<div class="form-group">
-						<label class="control-label"> Hora da Consulta </label>
-						<input type="time" name="horaConsulta" class="form-control" required>
-					</div>
-
-					<div class="form-group">
 						<div class="control-label pull-right">
-							<button type="reset" class="btn btn-danger">
-								Limpar <span class="glyphicon glyphicon-erase"
-									aria-hidden="true"></span>
-							</button>
 							<button type="submit" class="btn btn-success">
-								Agendar <span class="glyphicon glyphicon-ok-sign"
+								Próximo <span class="glyphicon glyphicon-circle-arrow-right"
 									aria-hidden="true"></span>
 							</button>
 						</div>
 					</div>
 
 				</form>
+			
 			</div>
 		</div>
 	</div>
-
+		<br>	
 	<form method="get" action="menuPacienteServlet" class="form-group">
 		<div class="form-group">
 			<div class="col-sm-7 control-label">
@@ -60,12 +58,5 @@
 			</div>
 		</div>
 	</form>
-
-	<br>
-	<br>
-	<c:if test="${agendado == true }">
-		<div class="alert alert-success" role="alert">Consulta agendada
-			com sucesso!</div>
-	</c:if>
 
 <jsp:include page="footerPaciente.jsp"></jsp:include>

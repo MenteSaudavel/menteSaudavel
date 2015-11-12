@@ -18,7 +18,7 @@
 			</div>
 			
 			<div class="form-group">
-				<label class="control-label"> Selecione até três turnos  </label>
+				<label class="control-label"> Selecione até três turnos para esta data  </label>
 				<ul class="list-group">
   					<li class="list-group-item">Manhã <input type="checkbox" class="pull-right" value="1" name="idTurno1"></li>
   					<li class="list-group-item">Tarde <input type="checkbox" class="pull-right" value="2" name="idTurno2"></li>
@@ -53,7 +53,7 @@
 	<c:if test="${cadastrado == true }">
 		<div class="alert alert-info">
 			<span class="glyphicon glyphicon-hourglass"></span>
-			Data cadastrada, vá para <a href="listarDatasServlet">cadastrar horários</a> para concluir o cadastramento ou cadastre mais datas antes.
+			Data cadastrada, vá para <a href="listarDatasServlet" class="alert-link">disponibilizar horários</a> para concluir o cadastramento ou cadastre mais datas antes.
 		</div>
 	</c:if>
 

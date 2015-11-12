@@ -36,7 +36,7 @@
 					<div class="form-group">
 						<label class="control-label"> Senha </label>
 						<div class="form-group has-error">
-							<input type="password" name="senha" required class="form-control" data-toggle="tooltip" data-placement="right" title="Para sua segurança, escolha uma senha que 
+							<input type="password" name="senha" required class="form-control" data-toggle="tooltip" data-placement="right" title="Para maior segurança, escolha uma senha que 
 							contenha no mínimo 8(oito) caracteres">
 						</div>
 					</div>
@@ -44,7 +44,7 @@
 					<div class="form-group">
 						<label class="control-label"> Confirmar Senha </label>
 						<div class="form-group has-error">
-							<input type="password" name="confirmarSenha" required class="form-control" data-toggle="tooltip" data-placement="right" title="Confirme sua senha">
+							<input type="password" name="confirmarSenha" required class="form-control" data-toggle="tooltip" data-placement="right" title="Confirme a senha">
 						</div>
 					</div>
 										

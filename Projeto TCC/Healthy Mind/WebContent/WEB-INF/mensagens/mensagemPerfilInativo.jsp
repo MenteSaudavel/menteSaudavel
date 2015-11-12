@@ -145,7 +145,7 @@
 	
 <div class="container"> 
 	
-	<div class="alert alert-danger alert-dismissible" role="alert" align=center>
+	<div class="alert alert-danger" role="alert" align=center>
       <h2><strong>Ops, algo deu errado!</strong></h2>
       <p><strong>Se você foi encaminhado para esta página, significa que seu perfil de acesso foi inativado, entre em contato com seu convênio para verificar sua situação. Se o problema persistir, entre em contato conosco.</strong></p>
       <p>

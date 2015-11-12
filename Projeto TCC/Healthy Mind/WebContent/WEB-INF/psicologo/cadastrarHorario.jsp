@@ -1,14 +1,42 @@
 <%@ include file="topPsicologo.jsp" %>
 
+<style>
+	 .hoverOpcao:hover{
+		color: #127a9c;
+	}
+</style>
+
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-7">
+				
+					<div class="form-group">
+						<label class="control-label">Clique em um dos turnos para disponibilizar seus respectivos horários</label>
+						<div class="input-group">
+								<c:forEach var="turno" items="${listaTurno }">
+									<form action="cadastrarHorarioServlet" method="post">
+										<input type="hidden" value="${turno.id }" name="idTurno">
+										<input type="hidden" name="idAgenda" value="${idAgenda }">
+
+											<button type="submit" class="btn btn-info">${turno.nome }</button>
+											
+									</form>
+									<hr>
+								</c:forEach>
+						</div>
+					</div>
+				
+				
+				
+				
+				
+				<!--  
 					<div class="form-group">
 						<label class="control-label">Selecione um dos turnos que cadastrou</label>
 						<div class="input-group">
 							<ul class="nav nav-tabs" role="tablist">
 								<c:forEach var="turno" items="${listaTurno }">
-									<li role="presentation"><a href='<c:if test="${turno.id==1 }">#morning</c:if><c:if test="${turno.id==2 }">#afternoon</c:if><c:if test="${turno.id==3 }">#evening</c:if>' data-toggle="tab" aria-expanded="false" class="btn btn-primary">${turno.nome }</a></li>
+									<li role="presentation"><a href='<c:if test="${turno.id==1 }">#morning</c:if><c:if test="${turno.id==2 }">#afternoon</c:if><c:if test="${turno.id==3 }">#evening</c:if>' data-toggle="tab" aria-expanded="false" class="btn btn-primary hoverOpcao">${turno.nome }</a></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -27,7 +55,7 @@
 						  					<li class="list-group-item">10:00<input type="checkbox" class="pull-right" name="hora3" value="10:00"></li>
 						  					<li class="list-group-item">11:00<input type="checkbox" class="pull-right" name="hora4" value="11:00"></li>
 										</ul>
-										<button type="submit" class="btn btn-success pull-right">OK</button>
+										<button type="submit" class="btn btn-success pull-right">OK <span class="glyphicon glyphicon-ok-sign"></span></button>
 									</div>
 								</form>
 							</div>
@@ -43,7 +71,7 @@
 						  					<li class="list-group-item">16:00<input type="checkbox" class="pull-right" name="hora3" value="16:00"></li>
 						  					<li class="list-group-item">17:00<input type="checkbox" class="pull-right" name="hora4" value="17:00"></li>
 										</ul>
-										<button type="submit" class="btn btn-success pull-right">OK</button>
+										<button type="submit" class="btn btn-success pull-right">OK <span class="glyphicon glyphicon-ok-sign"></span></button>
 									</div>
 								</form>
 							</div>
@@ -59,11 +87,13 @@
 						  					<li class="list-group-item">21:00<input type="checkbox" class="pull-right" name="hora3" value="21:00"></li>
 						  					<li class="list-group-item">22:00<input type="checkbox" class="pull-right" name="hora4" value="22:00"></li>
 										</ul>
-										<button type="submit" class="btn btn-success pull-right">OK</button>
+										<button type="submit" class="btn btn-success pull-right">OK <span class="glyphicon glyphicon-ok-sign"></span></button>
 									</div>
 								</form>
 							</div>
-						</div>					
+						</div>
+					-->	
+										
 				</div>
 			</div>
 		</div>	

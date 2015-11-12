@@ -199,4 +199,89 @@ public class AgendaDao {
 		
 		return lista;
 	}
+	
+	public Agenda buscarAgenda(int idPsicologo, java.util.Date dataAtendimento){
+		
+		Agenda agenda = new Agenda();
+		
+		Psicologo psicologo = new Psicologo();
+		
+		Turno turno1 = new Turno();
+		
+		Turno turno2 = new Turno();
+		
+		Turno turno3 = new Turno();
+		
+		String sql = "select * from agenda where idPsicologo=? and dataAtendimento like ?";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setInt(1, idPsicologo);
+			stmt.setDate(2, new Date(dataAtendimento.getTime()));
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			rs.next();
+			
+			agenda.setId(rs.getInt("id"));
+			
+			psicologo.setId(rs.getInt("idPsicologo"));
+			agenda.setPsicologo(psicologo);
+			
+			agenda.setData(rs.getDate("dataAtendimento"));
+			
+			turno1.setId(rs.getInt("idTurno1"));
+			agenda.setTurno1(turno1);
+			
+			turno2.setId(rs.getInt("idTurno2"));
+			agenda.setTurno2(turno2);
+			
+			turno3.setId(rs.getInt("idTurno3"));
+			agenda.setTurno3(turno3);
+			
+			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return agenda;
+	}
+	
+	public void editarTurnos(Agenda agenda){
+		
+		String sql = "update agenda set idTurno1=?, idTurno2=?, idTurno3=? where id=?";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			if(agenda.getTurno1()==null){
+				stmt.setNull(1, 0);
+			} else {
+				stmt.setInt(1, agenda.getTurno1().getId());
+			}
+			
+			if(agenda.getTurno2()==null){
+				stmt.setNull(2, 0);
+			} else {
+				stmt.setInt(2, agenda.getTurno2().getId());
+			}
+			
+			if(agenda.getTurno3()==null){
+				stmt.setNull(3, 0);
+			} else {
+				stmt.setInt(3, agenda.getTurno3().getId());
+			}
+			stmt.setInt(4, agenda.getId());
+			
+			stmt.execute();
+			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

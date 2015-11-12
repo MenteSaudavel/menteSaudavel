@@ -3,12 +3,13 @@ package control;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import model.dao.ConsultaDao;
 import model.vo.Consulta;
+import model.vo.Horario;
+import model.vo.Paciente;
 import model.vo.Psicologo;
 
 
@@ -61,11 +62,14 @@ public class ConsultaControl {
 		
 		Psicologo psicologo = new Psicologo();
 		psicologo.setId(idPsicologoConvertido);
-		
 		consulta.setPsicologo(psicologo);
-		consulta.setIdPaciente(idPacienteConvertido);
+		
+		Paciente paciente = new Paciente();
+		paciente.setId(idPacienteConvertido);
+		consulta.setPaciente(paciente);
+		
 		consulta.setDataConsulta(dataConsultaConvertida);
-		consulta.setHoraConsulta(horaConvertida);
+		consulta.setHora(horaConvertida);
 		
 		ConsultaDao consultaDao = new ConsultaDao();
 		consultaDao.agendarConsulta(consulta);
@@ -109,8 +113,8 @@ public class ConsultaControl {
 		
 		consulta.setPsicologo(psicologo);
 		consulta.setDataConsulta(dataConsultaConvertida);
-		consulta.setHoraConsulta(horaConvertida);
-		consulta.setIdConsulta(idConsultaConvertido);
+		consulta.setHora(horaConvertida);
+		consulta.setId(idConsultaConvertido);
 		
 		ConsultaDao consultaDao = new ConsultaDao();
 		consultaDao.remarcarConsulta(consulta);
@@ -129,7 +133,7 @@ public class ConsultaControl {
 		}
 		
 		Consulta consulta = new Consulta();
-		consulta.setIdConsulta(idConvertido);
+		consulta.setId(idConvertido);
 		
 		ConsultaDao consultaDao = new ConsultaDao();
 		consultaDao.desmarcarConsulta(consulta);
@@ -137,11 +141,19 @@ public class ConsultaControl {
 		return true;
 	}
 	
-	public List<Consulta> visualizarConsulta(){
+	public List<Consulta> visualizarConsulta(String idPaciente){
+		
+		int idPacienteConvertido;
+		
+		try{
+			idPacienteConvertido = Integer.parseInt(idPaciente);
+		} catch (NumberFormatException e){
+			return null;
+		} 
 		
 		ConsultaDao consultaDao = new ConsultaDao();
 		
-		List<Consulta> lista = consultaDao.visualizarConsulta();
+		List<Consulta> lista = consultaDao.visualizarConsulta(idPacienteConvertido);
 		
 		return lista;
 	}
@@ -161,16 +173,106 @@ public class ConsultaControl {
 		}
 	}
 	
-	/*public void teste(){
+	public boolean agendarPsicologo(String idPaciente, String idPsicologo){
+
+		int idPsicologoConvertido;
+		int idPacienteConvertido;
 		
-		Calendar cal = Calendar.getInstance();
+		try{
+			idPacienteConvertido = Integer.parseInt(idPaciente);
+			idPsicologoConvertido = Integer.parseInt(idPsicologo);
+		} catch(NumberFormatException e){
+			return false;
+		}
 		
-		cal.set(Calendar.YEAR, 2015);
-		cal.set(Calendar.MONDAY, Calendar.FEBRUARY);
-		cal.set(Calendar.DAY_OF_MONTH, 2);
+		Consulta consulta = new Consulta();
 		
-		System.out.println(cal);
+		Psicologo psicologo = new Psicologo();
+		psicologo.setId(idPsicologoConvertido);
+		consulta.setPsicologo(psicologo);
 		
-	}*/
+		Paciente paciente = new Paciente();
+		paciente.setId(idPacienteConvertido);
+		consulta.setPaciente(paciente);
+		
+		ConsultaDao consultaDao = new ConsultaDao();
+		
+		consultaDao.agendarPsicologo(consulta);
+		
+		return true;
+	}
+	
+	public boolean agendarDataHorario(String dataConsulta, String hora, String tipoConsulta, String idPaciente){
+		
+		int idPacienteConvertido;
+		
+		try{
+			idPacienteConvertido = Integer.parseInt(idPaciente);
+		} catch (NumberFormatException e){
+			return false;
+		}
+		
+		Date dataConsultaConvertida;
+		Time horaConvertida;
+		
+		SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm");
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+ 		
+ 		
+		try{
+			dataConsultaConvertida = sdf.parse(dataConsulta);
+		}
+		catch(ParseException e){
+			try{
+				dataConsultaConvertida = sdf2.parse(dataConsulta);
+			}
+			catch(ParseException e1){
+				return false;
+			}
+		}
+		
+		try{
+			horaConvertida = new Time( sdfHora.parse(hora).getTime() );
+			
+		} catch(ParseException e){
+			
+			return false;
+		}
+		
+		Consulta consulta = new Consulta();
+		
+		consulta.setDataConsulta(dataConsultaConvertida);
+		consulta.setHora(horaConvertida);
+		consulta.setTipoConsulta(tipoConsulta);
+		
+		Paciente paciente = new Paciente();
+		paciente.setId(idPacienteConvertido);
+		consulta.setPaciente(paciente);
+		
+		ConsultaDao consultaDao = new ConsultaDao();
+		
+		consultaDao.agendarDataHorario(consulta);
+		
+		return true;
+	}
+	
+	public List<Horario> visualizarDataHoraDisponível(String idPsicologo){
+		
+		int idPsicologoConvertido;
+		
+		try{
+			idPsicologoConvertido = Integer.parseInt(idPsicologo);
+		} catch(NumberFormatException e){
+			return null;
+		}
+		
+		ConsultaDao consultaDao = new ConsultaDao();
+		
+		List<Horario> lista = consultaDao.visualizarDataHoraDisponível(idPsicologoConvertido);
+		
+		return lista;
+	}
 
 }

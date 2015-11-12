@@ -41,8 +41,8 @@
 							
 							<tbody>
 								<c:if test="${empty listaPaciente }">
-									<tr>
-										<td colspan="7" class="alert alert-warning"> Paciente Não Encontrado! </td>
+									<tr class="warning">
+										<td colspan="7"> Paciente Não Encontrado! </td>
 									</tr>
 								</c:if>
 										

@@ -203,6 +203,33 @@ public class PacienteDao {
 		return paciente;
 	}
 	
+	public Paciente buscarPacienteUsuario(int idUsuario){
+		
+		Paciente p = new Paciente();
+		
+		String sql = "select p.idPaciente from paciente as p where p.idUsuario=?";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setInt(1, idUsuario);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			rs.next();
+			
+			p.setId(rs.getInt("p.idPaciente"));
+			
+			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return p;
+	}
+	
 	public void apagarPaciente(Paciente paciente){
 		
 		String sql = "delete from paciente where idPaciente=?";

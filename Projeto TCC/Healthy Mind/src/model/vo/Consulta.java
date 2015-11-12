@@ -5,41 +5,68 @@ import java.util.Date;
 
 public class Consulta {
 	
-	private int idConsulta;
-	private Psicologo psicologo;
-	private int idPaciente;
+	private int id;
+	private Paciente Paciente;
+	private Psicologo Psicologo;
 	private Date dataConsulta;
-	private Time horaConsulta;
-	public int getIdConsulta() {
-		return idConsulta;
+	private Time hora;
+	private String tipoConsulta;
+	private boolean statusConsulta;
+	
+	public int getId() {
+		return id;
 	}
-	public void setIdConsulta(int idConsulta) {
-		this.idConsulta = idConsulta;
+	
+	public void setId(int id) {
+		this.id = id;
 	}
+	
+	public Paciente getPaciente() {
+		return Paciente;
+	}
+	
+	public void setPaciente(Paciente paciente) {
+		Paciente = paciente;
+	}
+	
 	public Psicologo getPsicologo() {
-		return psicologo;
+		return Psicologo;
 	}
+	
 	public void setPsicologo(Psicologo psicologo) {
-		this.psicologo = psicologo;
+		Psicologo = psicologo;
 	}
-	public int getIdPaciente() {
-		return idPaciente;
-	}
-	public void setIdPaciente(int idPaciente) {
-		this.idPaciente = idPaciente;
-	}
+	
 	public Date getDataConsulta() {
 		return dataConsulta;
 	}
+	
 	public void setDataConsulta(Date dataConsulta) {
 		this.dataConsulta = dataConsulta;
 	}
-	public Time getHoraConsulta() {
-		return horaConsulta;
-	}
-	public void setHoraConsulta(Time horaConsulta) {
-		this.horaConsulta = horaConsulta;
+	
+	public Time getHora() {
+		return hora;
 	}
 	
+	public void setHora(Time hora) {
+		this.hora = hora;
+	}
+
+	public String getTipoConsulta() {
+		return tipoConsulta;
+	}
+
+	public void setTipoConsulta(String tipoConsulta) {
+		this.tipoConsulta = tipoConsulta;
+	}
+
+	public boolean isStatusConsulta() {
+		return statusConsulta;
+	}
+
+	public void setStatusConsulta(boolean statusConsulta) {
+		this.statusConsulta = statusConsulta;
+	}
 	
 }

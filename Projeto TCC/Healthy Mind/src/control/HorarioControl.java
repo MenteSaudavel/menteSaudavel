@@ -12,7 +12,7 @@ import model.vo.Turno;
 
 public class HorarioControl {
 	
-	public boolean cadastrarHorario(String idAgenda, String idTurno, String hora1, String hora2, String hora3, String hora4){
+	public boolean cadastrarHorario(String idAgenda, String idTurno){
 		
 		int idTurnoConvertido;
 		int idAgendaConvertido;
@@ -24,13 +24,6 @@ public class HorarioControl {
 			return false;
 		}
 		
-		Time hora1Convertida;
-		Time hora2Convertida;
-		Time hora3Convertida;
-		Time hora4Convertida;
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-		
 		Horario horario = new Horario();
 		
 		Turno turno = new Turno();
@@ -40,54 +33,6 @@ public class HorarioControl {
 		Agenda agenda = new Agenda();
 		agenda.setId(idAgendaConvertido);
 		horario.setAgenda(agenda);
-		
-		if(hora1==null){
-			horario.setHora1(null);
-		} else {
-			try{
-				hora1Convertida = new Time(sdf.parse(hora1).getTime());
-			} catch(ParseException e){
-				return false;
-			}
-			
-			horario.setHora1(hora1Convertida);
-		}
-		
-		if(hora2==null){
-			horario.setHora2(null);
-		} else {
-			try{
-				hora2Convertida = new Time(sdf.parse(hora2).getTime());
-			} catch(ParseException e){
-				return false;
-			}
-			
-			horario.setHora2(hora2Convertida);
-		}
-		
-		if(hora3==null){
-			horario.setHora3(null);
-		} else {
-			try{
-				hora3Convertida = new Time(sdf.parse(hora3).getTime());
-			} catch(ParseException e){
-				return false;
-			}
-			
-			horario.setHora3(hora3Convertida);
-		}
-		
-		if(hora4==null){
-			horario.setHora4(null);
-		} else {
-			try{
-				hora4Convertida = new Time(sdf.parse(hora4).getTime());
-			} catch(ParseException e){
-				return false;
-			}
-			
-			horario.setHora4(hora4Convertida);
-		}
 				
 		HorarioDao horarioDao = new HorarioDao();
 		
@@ -169,6 +114,23 @@ public class HorarioControl {
 		horarioDao.editarHorario(horario);
 		
 		return true;
+	}
+	
+	public Horario buscarHorario(String idAgenda, String idTurno){
+		
+		int idAgendaConvertido;
+		int idTurnoConvertido;
+		
+		try{
+			idAgendaConvertido = Integer.parseInt(idAgenda);
+			idTurnoConvertido = Integer.parseInt(idTurno);
+		} catch(NumberFormatException e){
+			return null;
+		}
+		
+		HorarioDao horarioDao = new HorarioDao();
+		
+		return horarioDao.buscarHorario(idAgendaConvertido, idTurnoConvertido);
 	}
 	
 	public Horario buscarHorario(String idAgenda){

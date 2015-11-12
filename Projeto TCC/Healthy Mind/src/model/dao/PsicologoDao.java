@@ -7,7 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.vo.Consulta;
 import model.vo.Convenio;
+import model.vo.Paciente;
 import model.vo.Psicologo;
 import model.vo.UF;
 import model.vo.Usuario;
@@ -161,6 +163,10 @@ public class PsicologoDao {
 				p.setConvenio(c);
 				p.setCrp(rs.getString("crp"));
 				p.setEmail(rs.getString("email"));
+				
+				Usuario usuario  = new Usuario();
+				usuario.setId(rs.getInt("idUsuario"));
+				p.setUsuario(usuario);
 				
 				lista.add(p);
 			}
@@ -435,6 +441,51 @@ public class PsicologoDao {
 			}
 			
 			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return lista;
+	}
+	
+	public List<Consulta> visualizarConsultasAgendadas(int idPsicologo){
+		
+		List<Consulta> lista = new ArrayList<Consulta>();
+		
+		String sql = "select c.idConsulta, c.idPsicologo, c.idPaciente, p.nome, p.telefone, c.dataConsulta, c.hora, c.tipoConsulta, c.statusConsulta from consulta as c join paciente as p on c.idPaciente=p.idPaciente where c.idPsicologo=? having c.statusConsulta=1";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			
+			stmt.setInt(1, idPsicologo);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				
+				Consulta consulta = new Consulta();
+				
+				consulta.setId(rs.getInt("c.idConsulta"));
+				
+				Psicologo psicologo = new Psicologo();
+				psicologo.setId(rs.getInt("c.idPsicologo"));
+				consulta.setPsicologo(psicologo);
+				
+				Paciente paciente = new Paciente();
+				paciente.setId(rs.getInt("c.idPaciente"));
+				paciente.setNome(rs.getString("p.nome"));
+				paciente.setTelefone(rs.getString("p.telefone"));
+				consulta.setPaciente(paciente);
+				
+				consulta.setDataConsulta(rs.getDate("c.dataConsulta"));
+				consulta.setHora(rs.getTime("c.hora"));
+				consulta.setTipoConsulta(rs.getString("c.tipoConsulta"));
+				consulta.setStatusConsulta(rs.getBoolean("c.statusConsulta"));
+				
+				lista.add(consulta);
+			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

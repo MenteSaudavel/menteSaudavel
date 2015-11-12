@@ -331,6 +331,10 @@
   .carousel-indicators {
     bottom: 20px;
   }
+  
+  .table-hover > tbody > tr:hover {
+  	background-color: #d9edf7;
+  }
 }
 
 </style>
@@ -358,11 +362,13 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				
-				<li><a href="agendarConsultaServlet">Agendar Consulta</a></li>
-				
-				<li><a href="visualizarConsultaServlet">Visualizar
-								Consulta</a></li>
-				<li><a href="realizarConsultaServlet">Realizar Consulta</a></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consulta <span class="caret"></span></a>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenuDivider">
+						<li><a href="agendarPsicologoServlet"><span class="glyphicon glyphicon-calendar"></span> Agendar Consulta</a></li>
+						<li><a href="visualizarConsultaServlet"><span class="glyphicon glyphicon-eye-open"></span> Visualizar Consulta</a></li>
+						<li><a href="realizarConsultaServlet"><span class="glyphicon glyphicon-facetime-video"></span> Realizar Consulta</a></li>
+					</ul>
+				</li>	
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">

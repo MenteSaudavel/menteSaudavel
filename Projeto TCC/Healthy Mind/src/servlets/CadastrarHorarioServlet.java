@@ -73,14 +73,10 @@ public class CadastrarHorarioServlet extends HttpServlet {
 			
 			String idAgenda = request.getParameter("idAgenda");
 			String idTurno = request.getParameter("idTurno");
-			String hora1 = request.getParameter("hora1");
-			String hora2 = request.getParameter("hora2");
-			String hora3 = request.getParameter("hora3");
-			String hora4 = request.getParameter("hora4");
 			
 			HorarioControl horarioControl = new HorarioControl();
 			
-			boolean ok = horarioControl.cadastrarHorario(idAgenda, idTurno, hora1, hora2, hora3, hora4);
+			boolean ok = horarioControl.cadastrarHorario(idAgenda, idTurno);
 			
 			if(ok){
 				request.setAttribute("horarioCadastrado", true);

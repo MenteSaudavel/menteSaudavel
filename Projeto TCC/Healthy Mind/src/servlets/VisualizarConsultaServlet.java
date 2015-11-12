@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.vo.Consulta;
+import model.vo.Paciente;
 import model.vo.Usuario;
 import control.ConsultaControl;
+import control.PacienteControl;
 
 /**
  * Servlet implementation class VisualizarConsultaServlet
@@ -45,10 +47,16 @@ public class VisualizarConsultaServlet extends HttpServlet {
 			request.setAttribute("usuario", usuario);
 			
 			if(usuario.getTipoPerfil().equals("paciente")){
-			
+				
+				String idUsuario = String.valueOf(usuario.getId());
+				PacienteControl pacienteControl = new PacienteControl();
+				Paciente paciente = pacienteControl.buscarPacienteUsuario(idUsuario);
+				
+				String idPaciente = String.valueOf(paciente.getId());
+				
 				ConsultaControl consultaControl = new ConsultaControl();
 	
-				List<Consulta> lista = consultaControl.visualizarConsulta();
+				List<Consulta> lista = consultaControl.visualizarConsulta(idPaciente);
 	
 				request.setAttribute("listaConsulta", lista);
 	

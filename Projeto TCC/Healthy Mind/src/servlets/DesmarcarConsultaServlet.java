@@ -11,8 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.vo.Consulta;
+import model.vo.Paciente;
+import model.vo.Psicologo;
 import model.vo.Usuario;
 import control.ConsultaControl;
+import control.PacienteControl;
+import control.PsicologoControl;
 
 /**
  * Servlet implementation class DesmarcarConsultaServlet
@@ -54,18 +58,99 @@ public class DesmarcarConsultaServlet extends HttpServlet {
 	
 				if (ok) {
 					request.setAttribute("desmarcado", true);
+					
+					String idUsuario = String.valueOf(usuario.getId());
+					PacienteControl pacienteControl = new PacienteControl();
+					Paciente paciente = pacienteControl.buscarPacienteUsuario(idUsuario);
+					
+					String idPaciente = String.valueOf(paciente.getId());
+					
+					List<Consulta> lista = consultaControl.visualizarConsulta(idPaciente);
+		
+					request.setAttribute("listaConsulta", lista);
+					
 					request.getRequestDispatcher(
 							"WEB-INF/paciente/visualizarConsulta.jsp").forward(
 							request, response);
 	
 				} else {
 					request.setAttribute("desmarcado", false);
+					
+					String idUsuario = String.valueOf(usuario.getId());
+					PacienteControl pacienteControl = new PacienteControl();
+					Paciente paciente = pacienteControl.buscarPacienteUsuario(idUsuario);
+					
+					String idPaciente = String.valueOf(paciente.getId());
+					
+					List<Consulta> lista = consultaControl.visualizarConsulta(idPaciente);
+		
+					request.setAttribute("listaConsulta", lista);
+					
 					request.getRequestDispatcher(
 							"WEB-INF/paciente/visualizarConsulta.jsp").forward(
 							request, response);
 				}
+				
+				String idUsuario = String.valueOf(usuario.getId());
+				PacienteControl pacienteControl = new PacienteControl();
+				Paciente paciente = pacienteControl.buscarPacienteUsuario(idUsuario);
+				
+				String idPaciente = String.valueOf(paciente.getId());
+				
+				List<Consulta> lista = consultaControl.visualizarConsulta(idPaciente);
 	
-				List<Consulta> lista = consultaControl.visualizarConsulta();
+				request.setAttribute("listaConsulta", lista);
+				
+			} else if (usuario.getTipoPerfil().equals("psicologo")){
+				
+				String idConsulta = request.getParameter("idConsulta");
+				
+				ConsultaControl consultaControl = new ConsultaControl();
+	
+				boolean ok = consultaControl.desmarcarConsulta(idConsulta);
+	
+				if (ok) {
+					request.setAttribute("desmarcado", true);
+					
+					String idUsuario = String.valueOf(usuario.getId());
+					PsicologoControl psicologoControl = new PsicologoControl();
+					Psicologo psicologo = psicologoControl.buscarPsicologoUsuario(idUsuario);
+					
+					String idPsicologo = String.valueOf(psicologo.getId());
+					
+					List<Consulta> lista = psicologoControl.visualizarConsultasAgendadas(idPsicologo);
+		
+					request.setAttribute("listaConsulta", lista);
+					
+					request.getRequestDispatcher(
+							"WEB-INF/psicologo/visualizarConsulta.jsp").forward(
+							request, response);
+	
+				} else {
+					request.setAttribute("desmarcado", false);
+					
+					String idUsuario = String.valueOf(usuario.getId());
+					PsicologoControl psicologoControl = new PsicologoControl();
+					Psicologo psicologo = psicologoControl.buscarPsicologoUsuario(idUsuario);
+					
+					String idPsicologo = String.valueOf(psicologo.getId());
+					
+					List<Consulta> lista = psicologoControl.visualizarConsultasAgendadas(idPsicologo);
+		
+					request.setAttribute("listaConsulta", lista);
+					
+					request.getRequestDispatcher(
+							"WEB-INF/psicologo/visualizarConsulta.jsp").forward(
+							request, response);
+				}
+				
+				String idUsuario = String.valueOf(usuario.getId());
+				PsicologoControl psicologoControl = new PsicologoControl();
+				Psicologo psicologo = psicologoControl.buscarPsicologoUsuario(idUsuario);
+				
+				String idPsicologo = String.valueOf(psicologo.getId());
+				
+				List<Consulta> lista = psicologoControl.visualizarConsultasAgendadas(idPsicologo);
 	
 				request.setAttribute("listaConsulta", lista);
 				

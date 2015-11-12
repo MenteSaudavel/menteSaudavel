@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.vo.Consulta;
+import model.vo.Paciente;
 import model.vo.Psicologo;
 import model.vo.Usuario;
 import control.ConsultaControl;
+import control.PacienteControl;
 import control.PsicologoControl;
 
 /**
@@ -118,9 +120,15 @@ public class RemarcarConsultaServlet extends HttpServlet {
 						request, response);
 
 			}
-
+			
+			String idUsuario = String.valueOf(usuario.getId());
+			PacienteControl pacienteControl = new PacienteControl();
+			Paciente paciente = pacienteControl.buscarPacienteUsuario(idUsuario);
+			
+			String idPaciente = String.valueOf(paciente.getId());
+			
 			request.setAttribute("listaConsulta",
-					consultaControl.visualizarConsulta());
+					consultaControl.visualizarConsulta(idPaciente));
 
 		} else {
 			response.sendRedirect("loginServlet");

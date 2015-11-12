@@ -9,7 +9,7 @@
 				<div class="form-group">
 					<div>
 						<input type="hidden" name="idConsulta"
-							value="${consulta.idConsulta }">
+							value="${consulta.id }">
 					</div>
 				</div>
 		
@@ -35,7 +35,7 @@
 				<div class="form-group">
 					<label class="control-label"> Hora da Consulta </label>
 					<input type="time" name="horaConsulta" class="form-control" required
-							value="${consulta.horaConsulta }">
+							value="${consulta.hora }">
 				</div>
 		
 				<div class="form-group">
