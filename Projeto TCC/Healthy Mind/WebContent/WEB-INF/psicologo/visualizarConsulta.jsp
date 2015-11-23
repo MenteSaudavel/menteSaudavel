@@ -33,8 +33,8 @@
 				    			<td class="text-center"><fmt:formatDate pattern="dd/MM/yyyy" value="${consulta.dataConsulta }"/></td>
 				    			<td class="text-center"><fmt:formatDate pattern="HH:mm" value="${consulta.hora }"/></td>
 				    			<td class="text-center">${consulta.tipoConsulta }</td>
-				    			<td class="text-center"><c:if test="${consulta.statusConsulta==false }"><label class="alert-danger">Desmarcada</label></c:if><c:if test="${consulta.statusConsulta==true }"><span class="success"><label class="alert-success">Agendada</label></span></c:if></td>
-				    			<td class="text-center"><a href="<c:if test="${consulta.statusConsulta==true }">desmarcarConsultaServlet?idConsulta=${consulta.id }</c:if> <c:if test="${consulta.statusConsulta==false }">#</c:if>" class="btn btn-sm btn-danger" <c:if test="${consulta.statusConsulta==false }">disabled="disabled"</c:if> ><span class="glyphicon glyphicon-remove-sign"></span></a></td>
+				    			<td class="text-center"><c:if test="${consulta.statusConsulta==false }"><label class="alert-danger">Desmarcada</label></c:if><c:if test="${consulta.statusConsulta==true }"><span class="success"><label class="alert-success">Agendada</label></span></c:if><c:if test="${consulta.statusConsulta==true }"><span class="info"><label class="alert-info">Realizada</label></span></c:if></td>
+				    			<td class="text-center"><a href="<c:if test="${consulta.statusConsulta==true }">desmarcarConsultaServlet?idConsulta=${consulta.id }</c:if> <c:if test="${consulta.statusConsulta==false }">#</c:if><c:if test="${consulta.statusConsulta==null }">#</c:if>" class="btn btn-sm btn-danger" <c:if test="${consulta.statusConsulta==false }">disabled="disabled"</c:if> <c:if test="${consulta.statusConsulta==null }">disabled="disabled"</c:if> ><span class="glyphicon glyphicon-remove-sign"></span></a></td>
 				    		</tr>
 			    		</c:forEach>
 			    	</tbody>

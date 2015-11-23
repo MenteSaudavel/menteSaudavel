@@ -415,3 +415,10 @@
 	</div>
 	<!-- /.container-fluid --> 
 </nav>
+
+<!--  
+<script>
+	var io = require('socket.io')(server);
+	var p2p = require('socket.io-p2p-server').Server;
+	io.use(p2p); -->
+</script>

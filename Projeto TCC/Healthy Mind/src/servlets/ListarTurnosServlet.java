@@ -71,7 +71,7 @@ public class ListarTurnosServlet extends HttpServlet {
 				
 				Agenda agenda2 = agendaControl.buscarAgenda(idPsicologo, dataAtendimento);
 				request.setAttribute("agenda", agenda2);
-				
+
 				request.getRequestDispatcher("WEB-INF/psicologo/cadastrarHorario.jsp").forward(request, response);
 				
 			} else {

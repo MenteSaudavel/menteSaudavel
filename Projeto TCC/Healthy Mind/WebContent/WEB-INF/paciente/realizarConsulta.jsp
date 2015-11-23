@@ -67,9 +67,9 @@
     <video id="localVideo" autoplay muted></video>
     
     <div>
-      <button id="startButton">Start</button>
-      <button id="callButton">Call</button>
-      <button id="hangupButton">Hang Up</button>
+      <button id="startButton" class="btn btn-primary">Iniciar Imagem <span class="glyphicon glyphicon-facetime-video"></span></button>
+      <button id="callButton" class="btn btn-success">Ligar <span class="glyphicon glyphicon-earphone"></span></button>
+      <button id="hangupButton" class="btn btn-danger">Desligar <span class="glyphicon glyphicon-earphone"></span></button>
     </div>
     
     <script src="js1/adapter.js"></script>

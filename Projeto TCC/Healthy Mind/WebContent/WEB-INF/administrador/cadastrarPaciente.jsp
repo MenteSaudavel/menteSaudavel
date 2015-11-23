@@ -8,21 +8,21 @@
 					<div class="form-group">
 						<label class="control-label"> Nome do paciente </label>
 						<div class="form-group has-error">
-							<input type="text" name="nome" required class="form-control" data-toggle="tooltip" data-placement="right" title="Nome completo do paciente">
+							<input type="text" name="nome" maxlength="100" required class="form-control" data-toggle="tooltip" data-placement="right" title="Nome completo do paciente">
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label class="control-label"> Telefone </label>
 						<div class="form-group has-error">
-							<input type="text" name="telefone" required class="form-control" data-toggle="tooltip" data-placement="right" title="Se o paciente não tiver telefone, preencher em escrio (Não possui). O telefone deve ser preenchido no formato: (00) 0000-0000">
+							<input type="text" name="telefone" maxlength="20" required class="form-control" data-toggle="tooltip" data-placement="right" title="Se o paciente não tiver telefone, preencher em escrio (Não possui). O telefone deve ser preenchido no formato: (00) 0000-0000">
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label class="control-label"> CPF </label>
 						<div class="form-group has-error">
-							<input type="text" name="cpf" required class="form-control" data-toggle="tooltip" data-placement="right" title="O CPF do paciente deve ser preenchido no formato: 000.000.000-00">
+							<input type="text" name="cpf" maxlength="14" required class="form-control" data-toggle="tooltip" data-placement="right" title="O CPF do paciente deve ser preenchido no formato: 000.000.000-00">
 						</div>
 					</div>
 					
@@ -41,21 +41,21 @@
 					<div class="form-group">
 						<label class="control-label"> Número da carteirinha do convênio </label>
 						<div class="form-group has-error">
-							<input type="text" name="numeroCarteirinha" required class="form-control" data-toggle="tooltip" data-placement="right" title="Número da carteirinha do convênio.">
+							<input type="text" name="numeroCarteirinha" maxlength="20" required class="form-control" data-toggle="tooltip" data-placement="right" title="Número da carteirinha do convênio.">
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label class="control-label">Confirmar número da carteirinha do convênio </label>
 						<div class="form-group has-error">
-							<input type="text" name="confNumCarteirinha" required class="form-control" data-toggle="tooltip" data-placement="right" title="Confirmar número da carteirinha do convênio">
+							<input type="text" name="confNumCarteirinha" maxlength="20" required class="form-control" data-toggle="tooltip" data-placement="right" title="Confirmar número da carteirinha do convênio">
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label class="control-label"> E-mail </label>
 						<div class="form-group has-error">
-							<input type="email" name="email" required class="form-control" data-toggle="tooltip" data-placement="right" title="Email do paciente que será utilizado para acessar o sistema">
+							<input type="email" name="email" maxlength="50" required class="form-control" data-toggle="tooltip" data-placement="right" title="Email do paciente que será utilizado para acessar o sistema">
 						</div>
 					</div>
 					

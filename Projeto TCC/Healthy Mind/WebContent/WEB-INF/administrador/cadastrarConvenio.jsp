@@ -8,14 +8,14 @@
 				<div class="form-group">
 					<label class="control-label">Nome do Convênio</label>
 					<div class="form-group has-error">
-						<input type="text" name="nome" required class="form-control" data-toggle="tooltip" data-placement="right" title="Nome comercial do convênio">
+						<input type="text" name="nome" maxlength="30" required class="form-control" data-toggle="tooltip" data-placement="right" title="Nome comercial do convênio">
 					</div>
 				</div>
 			
 				<div class="form-group">
 					<label class="control-label">Nome do Presidente</label>
 					<div class="form-group has-error">
-						<input type="text" name="presidente" required class="form-control" data-toggle="tooltip" data-placement="right" title="Nome do presidente do convênio">
+						<input type="text" name="presidente" maxlength="30" required class="form-control" data-toggle="tooltip" data-placement="right" title="Nome do presidente do convênio">
 					</div>
 				</div>
 					
@@ -23,7 +23,7 @@
 				<div class="form-group">
 					<label class="control-label">CNPJ</label>
 					<div class="form-group has-error">
-						<input type="text" name="cnpj" required class="form-control" data-toggle="tooltip" data-placement="right" title="Número do CPNJ do convênio. Deve ser preenchido no formato: 00.000.000/0000-00">
+						<input type="text" name="cnpj" maxlength="18" required class="form-control" data-toggle="tooltip" data-placement="right" title="Número do CPNJ do convênio. Deve ser preenchido no formato: 00.000.000/0000-00">
 					</div>
 				</div>
 					
@@ -31,14 +31,14 @@
 				<div class="form-group">
 					<label class="control-label">Telefone</label>
 					<div class="form-group has-error">
-						<input type="text" name="telefone" required class="form-control" data-toggle="tooltip" data-placement="right" title="O telefone deve ser preenchido no formato: (00) 0000-0000">
+						<input type="text" name="telefone" maxlength="20" required class="form-control" data-toggle="tooltip" data-placement="right" title="O telefone deve ser preenchido no formato: (00) 0000-0000">
 					</div>
 				</div>
 					
 				<div class="form-group">
 					<label class="control-label">Endereço</label>
 					<div class="form-group has-error">	
-						<input type="text" name="endereco" required class="form-control" data-toggle="tooltip" data-placement="right" title="Endereço da sede do convênio">
+						<input type="text" name="endereco" maxlength="50" required class="form-control" data-toggle="tooltip" data-placement="right" title="Endereço da sede do convênio">
 					</div>
 				</div>
 					
@@ -46,7 +46,7 @@
 				<div class="form-group">
 					<label class="control-label">CEP</label>
 					<div class="form-group has-error">
-						<input type="text" name="cep" required class="form-control" data-toggle="tooltip" data-placement="right" title="CEP da sede do convênio. Deve ser preenchido no formato: 00000-000">
+						<input type="text" name="cep" maxlength="9" required class="form-control" data-toggle="tooltip" data-placement="right" title="CEP da sede do convênio. Deve ser preenchido no formato: 00000-000">
 					</div>
 				</div>
 					
@@ -54,7 +54,7 @@
 				<div class="form-group">
 					<label class="control-label">Cidade</label>
 					<div class="form-group has-error">
-						<input type="text" name="cidade" required class="form-control" data-toggle="tooltip" data-placement="right" title="Cidade na qual reside a sede do convênio">
+						<input type="text" name="cidade" maxlength="20" required class="form-control" data-toggle="tooltip" data-placement="right" title="Cidade na qual reside a sede do convênio">
 					</div>
 				</div>
 				

@@ -190,7 +190,7 @@
 		<p>
 			&copy; 2015 Mente Saudável. &middot; <a href="#"
 				class="btn btn-info btn-md pull-right"><span
-				class="glyphicon glyphicon-circle-arrow-up"></span></a>
+				class="glyphicon glyphicon-circle-arrow-up"></span></a><a href="http://portal.crppr.org.br/">Site CRP-PR</a> &middot; <a href="http://site.cfp.org.br/">Site CFP</a>
 		</p>
 		</footer>
 	</div>

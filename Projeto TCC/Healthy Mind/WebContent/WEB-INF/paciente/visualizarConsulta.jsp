@@ -29,7 +29,7 @@
 						<td class="text-center"><fmt:formatDate pattern="HH:mm" value="${consulta.hora }"/></td>
 						<td class="text-center">${consulta.tipoConsulta }</td>
 						<td class="text-center"><c:if test="${consulta.statusConsulta==false }"><label class="alert-danger">Desmarcada</label></c:if><c:if test="${consulta.statusConsulta==true }"><label class="alert-success">Agendada</label></c:if></td>
-						<td class="text-center"> <a href="<c:if test="${consulta.statusConsulta==true }">desmarcarConsultaServlet?idConsulta=${consulta.id }</c:if> <c:if test="${consulta.statusConsulta==false }">#</c:if>" class="btn btn-sm btn-danger" <c:if test="${consulta.statusConsulta==false }">disabled="disabled"</c:if> ><span class="glyphicon glyphicon-remove-sign"></span></a> </td>
+				    	<td class="text-center"><a href="<c:if test="${consulta.statusConsulta==true }">desmarcarConsultaServlet?idConsulta=${consulta.id }</c:if> <c:if test="${consulta.statusConsulta==false }">#</c:if><c:if test="${empty consulta.statusConsulta }">#</c:if>" class="btn btn-sm btn-danger" <c:if test="${consulta.statusConsulta==false }">disabled="disabled"</c:if> <c:if test="${empty consulta.statusConsulta }">disabled="disabled"</c:if> ><span class="glyphicon glyphicon-remove-sign"></span></a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

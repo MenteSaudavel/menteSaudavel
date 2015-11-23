@@ -142,31 +142,39 @@ public class PsicologoDao {
 		
 		List<Psicologo> lista = new ArrayList<Psicologo>();
 		
-		String sql = "select * from psicologo where nome like ?";
+		String sql = "select p.idPsicologo, p.nome, p.telefoneConsultorio, p.idConvenio, p.idConvenio2, p.idConvenio3, p.idConvenio4, p.idConvenio5, p.crp, p.email, p.idUsuario, p.idUf, uf.sigla, group_concat(distinct c.nome order by p.nome asc separator ', ') as Convenios from psicologo as p join convenio as c on p.idConvenio = c.idConvenio or p.idConvenio2 = c.idConvenio or p.idConvenio3 = c.idConvenio or p.idConvenio4 = c.idConvenio or p.idConvenio5 = c.idConvenio join uf on p.idUf = uf.idUf where p.nome like ? group by p.idPsicologo";
 		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			
-			stmt.setString(1, "%"+nome+"%");
+			stmt.setString(1, nome+"%");
 			
 			ResultSet rs = stmt.executeQuery();
-			ConvenioDao convenioDao = new ConvenioDao();
 			
 			while(rs.next()){
 				
 				Psicologo p = new Psicologo();
-				Convenio c = convenioDao.buscarConvenio(rs.getInt("idConvenio"));
 				
-				p.setId(rs.getInt("idPsicologo"));
-				p.setNome(rs.getString("nome"));
-				p.setTelefoneConsultorio(rs.getString("telefoneConsultorio"));
+				p.setId(rs.getInt("p.idPsicologo"));
+				p.setNome(rs.getString("p.nome"));
+				p.setTelefoneConsultorio(rs.getString("p.telefoneConsultorio"));
+				
+				Convenio c = new Convenio();
+				c.setNome(rs.getString("Convenios"));
 				p.setConvenio(c);
-				p.setCrp(rs.getString("crp"));
-				p.setEmail(rs.getString("email"));
 				
-				Usuario usuario  = new Usuario();
-				usuario.setId(rs.getInt("idUsuario"));
-				p.setUsuario(usuario);
+				p.setCrp(rs.getString("p.crp"));
+				
+				UF uf = new UF();
+				uf.setId(rs.getInt("p.idUf"));
+				uf.setSigla(rs.getString("uf.sigla"));
+				p.setUf(uf);
+				
+				p.setEmail(rs.getString("p.email"));
+				
+				Usuario u = new Usuario();
+				u.setId(rs.getInt("p.idUsuario"));
+				p.setUsuario(u);
 				
 				lista.add(p);
 			}

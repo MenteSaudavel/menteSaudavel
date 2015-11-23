@@ -13,16 +13,56 @@
 					<div class="form-group">
 						<label class="control-label">Clique em um dos turnos para disponibilizar seus respectivos horários</label>
 						<div class="input-group">
+								
 								<c:forEach var="turno" items="${listaTurno }">
+									<br>
 									<form action="cadastrarHorarioServlet" method="post">
 										<input type="hidden" value="${turno.id }" name="idTurno">
 										<input type="hidden" name="idAgenda" value="${idAgenda }">
 
-											<button type="submit" class="btn btn-info">${turno.nome }</button>
-											
+										<button type="submit" class="btn btn-info">${turno.nome }</button>
 									</form>
-									<hr>
 								</c:forEach>
+								
+								<!--  
+								
+								<form action="cadastrarHorarioServlet" method="post">
+									<input type="hidden" value="${agenda.turno1.id }" name="idTurno">
+									<input type="hidden" name="idAgenda" value="${idAgenda }">
+									<button type="submit" class="btn btn-info"
+											<c:if test="${disabled1==true}">
+												disabled="disabled"
+											</c:if>
+									>
+										<c:if test="${agenda.turno1.id==1 }">Manhã</c:if>
+									</button>
+								</form>
+								<hr>
+								<form action="cadastrarHorarioServlet" method="post">
+									<input type="hidden" value="${agenda.turno2.id }" name="idTurno">
+									<input type="hidden" name="idAgenda" value="${idAgenda }">
+									<button type="submit" class="btn btn-info"
+											<c:if test="${disabled2==true}">
+												disabled="disabled"
+											</c:if>
+									>
+										<c:if test="${agenda.turno2.id==2 }">Tarde</c:if>
+									</button>
+								</form>
+								<hr>
+								<form action="cadastrarHorarioServlet" method="post">
+									<input type="hidden" value="${agenda.turno3.id }" name="idTurno">
+									<input type="hidden" name="idAgenda" value="${idAgenda }">
+									<button type="submit" class="btn btn-info"
+											<c:if test="${disabled3==true}">
+												disabled="disabled"
+											</c:if>
+									>
+										<c:if test="${agenda.turno3.id==3 }">Noite</c:if>
+									</button>
+								</form>
+								
+								-->
 						</div>
 					</div>
 				

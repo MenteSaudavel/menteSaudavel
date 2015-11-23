@@ -123,7 +123,7 @@ public class HorarioDao {
 		return horario;
 	}
 	
-	public Horario buscarHorario(int idAgenda){
+public Horario buscarHorario(int idAgenda){
 		
 		Horario horario = new Horario();
 		
@@ -141,25 +141,29 @@ public class HorarioDao {
 			ResultSet rs = stmt.executeQuery();
 			
 			rs.next();
-			
-			horario.setId(rs.getInt("id"));
-			
-			agenda.setId(rs.getInt("idAgenda"));
-			horario.setAgenda(agenda);
-			
-			turno.setId(rs.getInt("idTurno"));
-			horario.setTurno(turno);
-			
-			horario.setHora1(rs.getTime("hora1"));
-			horario.setHora2(rs.getTime("hora2"));
-			horario.setHora3(rs.getTime("hora3"));
-			horario.setHora4(rs.getTime("hora4"));
-			
+			try{
+				horario.setId(rs.getInt("id"));
+				
+				agenda.setId(rs.getInt("idAgenda"));
+				horario.setAgenda(agenda);
+				
+				turno.setId(rs.getInt("idTurno"));
+				horario.setTurno(turno);
+				
+				horario.setHora1(rs.getTime("hora1"));
+				horario.setHora2(rs.getTime("hora2"));
+				horario.setHora3(rs.getTime("hora3"));
+				horario.setHora4(rs.getTime("hora4"));
+				
+			}catch(SQLException e){
+				horario=null;
+			}
+
 			stmt.close();
 			
-		} catch (SQLException e) {
+		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
 		
 		return horario;

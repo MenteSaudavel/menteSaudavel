@@ -8,28 +8,28 @@
 					<div class="form-group">
 						<label class="control-label"> Nome do administrador </label>
 						<div class="form-group has-error">
-							<input type="text" name="nome" required class="form-control"  data-toggle="tooltip" data-placement="right" title="Nome completo do administrador">
+							<input type="text" name="nome" maxlength="50" required class="form-control"  data-toggle="tooltip" data-placement="right" title="Nome completo do administrador">
 						</div>
 					</div>
 				
 					<div class="form-group">
 						<label class="control-label"> Telefone </label>
 						<div class="form-group has-error">
-							<input type="text" name="telefone" required class="form-control" data-toggle="tooltip" data-placement="right" title="Se o administrador não tiver telefone, preencher em escrio (Não possui). O telefone deve ser preenchido no formato: (00) 0000-0000">
+							<input type="text" name="telefone" maxlength="20" required class="form-control" data-toggle="tooltip" data-placement="right" title="Se o administrador não tiver telefone, preencher em escrio (Não possui). O telefone deve ser preenchido no formato: (00) 0000-0000">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label class="control-label"> Função </label>
 						<div class="form-group has-error">
-							<input type="text" name="funcao" required class="form-control" data-toggle="tooltip" data-placement="right" title="Função que o administrador exerce na instituição">
+							<input type="text" name="funcao" maxlength="50" required class="form-control" data-toggle="tooltip" data-placement="right" title="Função que o administrador exerce na instituição">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label class="control-label"> E-mail </label>
 						<div class="form-group has-error">
-							<input type="email" name="email" required class="form-control" data-toggle="tooltip" data-placement="right" title="Email do administrador que será utilizado para acessar o sistema">
+							<input type="email" name="email" maxlength="50" required class="form-control" data-toggle="tooltip" data-placement="right" title="Email do administrador que será utilizado para acessar o sistema">
 						</div>
 					</div>
 					

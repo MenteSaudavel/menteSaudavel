@@ -96,7 +96,7 @@ public class PacienteDao {
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			
-			stmt.setString(1, "%"+nome+"%");
+			stmt.setString(1, nome+"%");
 			
 			ResultSet rs = stmt.executeQuery();
 			ConvenioDao convenioDao = new ConvenioDao();
